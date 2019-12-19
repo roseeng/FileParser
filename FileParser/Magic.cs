@@ -18,20 +18,29 @@ namespace FileParser
 
         public override void Read(FileReader rdr)
         {
+            IsValid = true;
+            var buf = new byte[_magic.Length];
+
             for (int i = 0; i < _magic.Length; i++)
             {
-                byte b = rdr.GetByte();
-                if (b != _magic[i])
-                    Fail();
+                buf[i] = rdr.GetByte();
+                if (buf[i] != _magic[i])
+                    IsValid = false;
             }
-            IsValid = true;
-            Console.WriteLine("Magic OK!");
+            if (IsValid.HasValue && IsValid.Value)
+            {
+                Console.WriteLine("Magic OK!");
+            }
+            else
+            {
+                var s = $"Bad Magic! Expected {BitConverter.ToString(_magic)}, got {BitConverter.ToString(buf)}";
+                Console.WriteLine(s);
+                throw new BadMagicException(s);
+            }
         }
 
-        private void Fail()
-        {
-            IsValid = false;
-            throw new ApplicationException();
+        public override void StartNew()
+        {            
         }
     }
 }

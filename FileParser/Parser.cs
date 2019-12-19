@@ -4,6 +4,7 @@ using System.Text;
 
 namespace FileParser
 {
+    /*
     public class Parser<T> where T : FileChunk, new()
     {
         public T f;
@@ -11,6 +12,8 @@ namespace FileParser
         {
             f = new T();
         }
+
+        public FileReader Reader { get { return _reader; } }
 
         FileReader _reader = null;
         public void Open(string filename)
@@ -21,13 +24,9 @@ namespace FileParser
 
         public void Read(Chunk c)
         {
-            foreach (var f in c.Fields)
-            {
-                //Console.WriteLine("Reading a " + f.GetType().Name);
-                f.Read(_reader);
-            }
-
+            c.Read(_reader);
             c.AfterRead(_reader);
         }
     }
+    */
 }

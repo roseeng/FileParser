@@ -14,16 +14,29 @@ namespace FileParser
             Value = b;
             Console.WriteLine("Byte: " + b.ToString());
         }
+
+        public override void StartNew()
+        {
+            Value = 0;
+        }
+
     }
+
     public class Data16LE : ChunkField
     {
         public UInt16 Value;
         public override void Read(FileReader rdr)
         {
-            byte b0 = rdr.GetByte();
-            byte b1 = rdr.GetByte();
-            Value = Convert.ToUInt16(b1 * 256 + b0);
+            var buf = new byte[2];
+            buf[0] = rdr.GetByte();
+            buf[1] = rdr.GetByte();
+            Value = BitConverter.ToUInt16(buf, 0);
             Console.WriteLine("UInt16: " + Value.ToString());
+        }
+
+        public override void StartNew()
+        {
+            Value = 0;
         }
     }
 
@@ -32,14 +45,19 @@ namespace FileParser
         public UInt32 Value;
         public override void Read(FileReader rdr)
         {
-            byte b0 = rdr.GetByte();
-            byte b1 = rdr.GetByte();
-            UInt16 i0 = Convert.ToUInt16(b1 * 256 + b0);
-            b0 = rdr.GetByte();
-            b1 = rdr.GetByte();
-            UInt16 i1 = Convert.ToUInt16(b1 * 256 + b0);
-            Value = Convert.ToUInt32(i1 * 65536 + i0);
+            var buf = new byte[4];
+            buf[0] = rdr.GetByte();
+            buf[1] = rdr.GetByte();
+            buf[2] = rdr.GetByte();
+            buf[3] = rdr.GetByte();
+            Value = BitConverter.ToUInt32(buf, 0);
+
             Console.WriteLine("UInt32: " + Value.ToString());
+        }
+
+        public override void StartNew()
+        {
+            Value = 0;
         }
     }
 
@@ -48,10 +66,16 @@ namespace FileParser
         public UInt16 Value;
         public override void Read(FileReader rdr)
         {
-            byte b0 = rdr.GetByte();
-            byte b1 = rdr.GetByte();
-            Value = Convert.ToUInt16(b0 * 256 + b1);
+            var buf = new byte[2];
+            buf[1] = rdr.GetByte();
+            buf[0] = rdr.GetByte();
+            Value = BitConverter.ToUInt16(buf, 0);
             Console.WriteLine("UInt16: " + Value.ToString());
+        }
+
+        public override void StartNew()
+        {
+            Value = 0;
         }
     }
 
@@ -60,29 +84,39 @@ namespace FileParser
         public UInt32 Value;
         public override void Read(FileReader rdr)
         {
-            byte b0 = rdr.GetByte();
-            byte b1 = rdr.GetByte();
-            UInt16 i0 = Convert.ToUInt16(b0 * 256 + b1);
-            b0 = rdr.GetByte();
-            b1 = rdr.GetByte();
-            UInt16 i1 = Convert.ToUInt16(b0 * 256 + b1);
-            Value = Convert.ToUInt32(i0 * 65536 + i1);
+            var buf = new byte[4];
+            buf[3] = rdr.GetByte();
+            buf[2] = rdr.GetByte();
+            buf[1] = rdr.GetByte();
+            buf[0] = rdr.GetByte();
+            Value = BitConverter.ToUInt32(buf, 0);
             Console.WriteLine("UInt32: " + Value.ToString());
+        }
+
+        public override void StartNew()
+        {
+            Value = 0;
         }
     }
 
     public class Chararray : ChunkField
     {
         public string Value;
-        public int Length = 0;
+        public UInt32 Length = 0;
+
         public override void Read(FileReader rdr)
         {
-            Console.WriteLine($"Reading {Length} bytes");
+            Console.WriteLine($"Chararray Reading {Length} bytes");
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < Length; i++)
                 sb.Append(Convert.ToChar(rdr.GetByte()));
             Value = sb.ToString();
-            Console.WriteLine("String: " + Value);
+        }
+
+        public override void StartNew()
+        {
+            Value = null;
+            Length = 0;
         }
     }
 }

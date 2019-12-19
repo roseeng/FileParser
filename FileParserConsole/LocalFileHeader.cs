@@ -35,8 +35,8 @@ namespace FileParserConsole
         Data32LE CRC = new Data32LE();
         Data32LE CompressedSize = new Data32LE();
         Data32LE UncompressedSize = new Data32LE();
-        Data16LE FileNameLen = new Data16LE();
-        Data16LE ExtraLen = new Data16LE();
+        Data16LE FilenameLen = new Data16LE();
+        Data16LE ExtraFieldLen = new Data16LE();
 
         public LocalFileHeader()
         {
@@ -51,20 +51,26 @@ namespace FileParserConsole
                 CRC,
                 CompressedSize,
                 UncompressedSize,
-                FileNameLen,
-                ExtraLen
+                FilenameLen,
+                ExtraFieldLen
             };
         }
 
         public Chararray Filename = new Chararray();
         public Chararray ExtraField = new Chararray();
 
+        public Chararray FileData = new Chararray();
+
         public override void AfterRead(FileReader rdr)
         {
-            Filename.Length = FileNameLen.Value;
+            Filename.Length = FilenameLen.Value;
             Filename.Read(rdr);
-            ExtraField.Length = ExtraLen.Value;
+            Console.WriteLine("Filename: " + Filename.Value);
+            ExtraField.Length = ExtraFieldLen.Value;
             ExtraField.Read(rdr);
+
+            FileData.Length = CompressedSize.Value;
+            FileData.Read(rdr);
         }
 
         public string VersionNeeded()

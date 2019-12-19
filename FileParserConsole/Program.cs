@@ -8,12 +8,26 @@ namespace FileParserConsole
     {
         static void Main(string[] args)
         {
-            var parser = new Parser<ZipFile>();
-            parser.Open("FileParser.zip");
-            parser.Read(parser.f.LocalFileHeader);
-            parser.Read(new LocalFileHeader());
-            parser.Read(new LocalFileHeader());
-            Console.WriteLine("Version Needed: " + parser.f.LocalFileHeader.VersionNeeded());
+            var zipFile = new ZipFile();
+            var reader = new FileReader();
+            reader.Open("FileParser.zip");
+            LocalFileHeader lfh;
+            try
+            {
+                while (true)
+                {
+                    reader.SetMilestone();
+                    lfh = zipFile.FileList.ReadOne(reader);
+                }
+            }
+            catch (BadMagicException) 
+            {
+                reader.GoToMilestone();
+            }
+            CentralFileHeader cfh = new CentralFileHeader();
+            cfh.Read(reader);
+            Console.WriteLine("Version Made By: " + cfh.VersionMadeBy());
+            Console.WriteLine("Version Needed: " + cfh.VersionNeeded());
         }
     }
 }

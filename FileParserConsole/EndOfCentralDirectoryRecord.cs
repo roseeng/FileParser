@@ -24,5 +24,36 @@ namespace FileParserConsole
           .ZIP file comment length        2 bytes
           .ZIP file comment       (variable size)
         */
+        Magic Signature;
+        Data16LE ThisDiskNumber = new Data16LE();
+        Data16LE CentralDirectoryDiskNumber = new Data16LE();
+        Data16LE EntriesInCDOnThisDisk = new Data16LE();
+        Data16LE EntriesInCD = new Data16LE();
+        Data32LE CentralDirectorySize = new Data32LE();
+        Data32LE CentralDirectoryOffset = new Data32LE();
+        Data16LE FileCommentLen = new Data16LE();
+        Chararray FileComment = new Chararray();
+
+        public EndOfCentralDirectoryRecord()
+        {
+            Signature = new Magic(new byte[] { 0x50, 0x4b, 0x05, 0x06 }); 
+            AutomaticFields = new List<ChunkField>() { 
+                Signature,
+                ThisDiskNumber,
+                CentralDirectoryDiskNumber, 
+                EntriesInCDOnThisDisk,
+                EntriesInCD,
+                CentralDirectorySize,
+                CentralDirectoryOffset,
+                FileCommentLen
+            };
+        }
+
+        public override void AfterRead(FileReader rdr)
+        {
+            FileComment.Length = FileCommentLen.Value;
+            FileComment.Read(rdr);
+            Console.WriteLine("Comment: " + FileComment.Value);
+        }
     }
 }

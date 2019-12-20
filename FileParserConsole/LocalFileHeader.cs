@@ -41,7 +41,7 @@ namespace FileParserConsole
         public LocalFileHeader()
         {
             Signature = new Magic(new byte[]{ 0x50, 0x4b, 0x03, 0x04 }); // 0x04, 0x03, 0x4b, 0x50 });
-            Fields = new List<ChunkField>() { Signature, 
+            AutomaticFields = new List<ChunkField>() { Signature, 
                 VersionNeededMajor, 
                 VersionNeededMinor,
                 BitFlag, 

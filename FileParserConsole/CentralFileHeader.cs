@@ -52,7 +52,7 @@ namespace FileParserConsole
         public CentralFileHeader()
         {
             Signature = new Magic(new byte[] { 0x50, 0x4b, 0x01, 0x02 }); 
-            Fields = new List<ChunkField>() { Signature,
+            AutomaticFields = new List<ChunkField>() { Signature,
                 VersionMadeByMajor,
                 VersionMadeByMinor,
                 VersionNeededMajor,

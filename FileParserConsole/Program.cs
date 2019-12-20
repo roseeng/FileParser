@@ -11,23 +11,21 @@ namespace FileParserConsole
             var zipFile = new ZipFile();
             var reader = new FileReader();
             reader.Open("FileParser.zip");
+
             LocalFileHeader lfh;
-            try
+            while ((lfh = zipFile.FileList.ReadOne(reader)) != null)  // (zipFile.FileList.HasData)
             {
-                while (true)
-                {
-                    reader.SetMilestone();
-                    lfh = zipFile.FileList.ReadOne(reader);
-                }
+                Console.WriteLine("LFH: " + lfh.Filename);
             }
-            catch (BadMagicException) 
+
+            CentralFileHeader cfh = null;
+            while ((cfh = zipFile.Directory.ReadOne(reader)) != null)
             {
-                reader.GoToMilestone();
+                Console.WriteLine("Version Made By: " + cfh.VersionMadeBy());
+                Console.WriteLine("Version Needed : " + cfh.VersionNeeded());
             }
-            CentralFileHeader cfh = new CentralFileHeader();
-            cfh.Read(reader);
-            Console.WriteLine("Version Made By: " + cfh.VersionMadeBy());
-            Console.WriteLine("Version Needed: " + cfh.VersionNeeded());
+
+            zipFile.EndOfCentralDirectoryRecord.Read(reader);
         }
     }
 }

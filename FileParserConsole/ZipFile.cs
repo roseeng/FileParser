@@ -33,11 +33,10 @@ namespace FileParserConsole
       [zip64 end of central directory locator] 
       [end of central directory record]
         */
-        public ChunkList<LocalFileHeader> FileList = new ChunkList<LocalFileHeader>();
+        public ChunkList<LocalFileHeader> FileList = new ChunkList<LocalFileHeader>(ChunkListRepeat.ByMagic);
 
-        public Chunk TableOfContents = new Chunk() { 
-            Position = new Position() { Type = Position.TypeEnum.RelativeToEOF },
-            Size = new Size() { Type = Size.TypeEnum.Calculated }
-        };
+        public ChunkList<CentralFileHeader> Directory = new ChunkList<CentralFileHeader>(ChunkListRepeat.ByMagic);
+
+        public EndOfCentralDirectoryRecord EndOfCentralDirectoryRecord = new EndOfCentralDirectoryRecord();
     }
 }

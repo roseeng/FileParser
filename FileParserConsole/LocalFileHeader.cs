@@ -28,19 +28,25 @@ namespace FileParserConsole
               extra field (variable size)        
         */
         Magic Signature;
-        Data8 VersionNeededMajor = new Data8();
-        Data8 VersionNeededMinor = new Data8();
-        Data16LE BitFlag = new Data16LE();
-        Data16LE Compression = new Data16LE();
-        Data32LE CRC = new Data32LE();
-        Data32LE CompressedSize = new Data32LE();
-        Data32LE UncompressedSize = new Data32LE();
-        Data16LE FilenameLen = new Data16LE();
-        Data16LE ExtraFieldLen = new Data16LE();
+        Data8 VersionNeededMajor;
+        Data8 VersionNeededMinor;
+        Data16LE BitFlag;
+        Data16LE Compression;
+        Data32LE CRC;
+        Data32LE CompressedSize;
+        Data32LE UncompressedSize;
+        Data16LE FilenameLen;
+        Data16LE ExtraFieldLen;
+        public Chararray Filename;
+        public Chararray ExtraField;
+
+        public Chararray FileData;
 
         public LocalFileHeader()
         {
-            Signature = new Magic(new byte[]{ 0x50, 0x4b, 0x03, 0x04 }); // 0x04, 0x03, 0x4b, 0x50 });
+            Signature = new Magic(new byte[]{ 0x50, 0x4b, 0x03, 0x04 });
+            SetupChunkFields();
+
             AutomaticFields = new List<ChunkField>() { Signature, 
                 VersionNeededMajor, 
                 VersionNeededMinor,
@@ -55,11 +61,6 @@ namespace FileParserConsole
                 ExtraFieldLen
             };
         }
-
-        public Chararray Filename = new Chararray();
-        public Chararray ExtraField = new Chararray();
-
-        public Chararray FileData = new Chararray();
 
         public override void AfterRead(FileReader rdr)
         {

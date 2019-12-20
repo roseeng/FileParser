@@ -32,26 +32,31 @@ namespace FileParserConsole
         file comment (variable size)
         */
         Magic Signature;
-        Data8 VersionMadeByMajor = new Data8();
-        Data8 VersionMadeByMinor = new Data8();
-        Data8 VersionNeededMajor = new Data8();
-        Data8 VersionNeededMinor = new Data8();
-        Data16LE BitFlag = new Data16LE();
-        Data16LE Compression = new Data16LE();
-        Data32LE CRC = new Data32LE();
-        Data32LE CompressedSize = new Data32LE();
-        Data32LE UncompressedSize = new Data32LE();
-        Data16LE FilenameLen = new Data16LE();
-        Data16LE ExtraFieldLen = new Data16LE();
-        Data16LE FileCommentLen = new Data16LE();
-        Data16LE DiskNumberStart = new Data16LE();
-        Data16LE InternalFileAttributes = new Data16LE();
-        Data32LE ExternalFileAttributes = new Data32LE();
-        Data32LE RelativeOffsetOfLocalHeader = new Data32LE();
+        Data8 VersionMadeByMajor;
+        Data8 VersionMadeByMinor;
+        Data8 VersionNeededMajor;
+        Data8 VersionNeededMinor;
+        Data16LE BitFlag;
+        Data16LE Compression;
+        Data32LE CRC;
+        Data32LE CompressedSize;
+        Data32LE UncompressedSize;
+        Data16LE FilenameLen;
+        Data16LE ExtraFieldLen;
+        Data16LE FileCommentLen;
+        Data16LE DiskNumberStart;
+        Data16LE InternalFileAttributes;
+        Data32LE ExternalFileAttributes;
+        Data32LE RelativeOffsetOfLocalHeader;
+        public Chararray Filename = new Chararray();
+        public Chararray ExtraField = new Chararray();
+        public Chararray FileComment = new Chararray();
 
         public CentralFileHeader()
         {
-            Signature = new Magic(new byte[] { 0x50, 0x4b, 0x01, 0x02 }); 
+            Signature = new Magic(new byte[] { 0x50, 0x4b, 0x01, 0x02 });
+            SetupChunkFields();
+
             AutomaticFields = new List<ChunkField>() { Signature,
                 VersionMadeByMajor,
                 VersionMadeByMinor,
@@ -73,10 +78,6 @@ namespace FileParserConsole
                 RelativeOffsetOfLocalHeader
             };
         }
-
-        public Chararray Filename = new Chararray();
-        public Chararray ExtraField = new Chararray();
-        public Chararray FileComment = new Chararray();
 
         public override void AfterRead(FileReader rdr)
         {

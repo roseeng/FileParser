@@ -38,5 +38,10 @@ namespace FileParserConsole
         public ChunkList<CentralFileHeader> Directory = new ChunkList<CentralFileHeader>(ChunkListRepeat.ByMagic);
 
         public EndOfCentralDirectoryRecord EndOfCentralDirectoryRecord = new EndOfCentralDirectoryRecord();
+
+        public ZipFile()
+        {
+
+        }
     }
 }

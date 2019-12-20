@@ -25,18 +25,20 @@ namespace FileParserConsole
           .ZIP file comment       (variable size)
         */
         Magic Signature;
-        Data16LE ThisDiskNumber = new Data16LE();
-        Data16LE CentralDirectoryDiskNumber = new Data16LE();
-        Data16LE EntriesInCDOnThisDisk = new Data16LE();
-        Data16LE EntriesInCD = new Data16LE();
-        Data32LE CentralDirectorySize = new Data32LE();
-        Data32LE CentralDirectoryOffset = new Data32LE();
-        Data16LE FileCommentLen = new Data16LE();
-        Chararray FileComment = new Chararray();
+        Data16LE ThisDiskNumber;
+        Data16LE CentralDirectoryDiskNumber;
+        Data16LE EntriesInCDOnThisDisk;
+        public Data16LE EntriesInCD;
+        Data32LE CentralDirectorySize;
+        Data32LE CentralDirectoryOffset;
+        Data16LE FileCommentLen;
+        public Chararray FileComment;
 
         public EndOfCentralDirectoryRecord()
         {
-            Signature = new Magic(new byte[] { 0x50, 0x4b, 0x05, 0x06 }); 
+            Signature = new Magic(new byte[] { 0x50, 0x4b, 0x05, 0x06 });
+            SetupChunkFields();
+
             AutomaticFields = new List<ChunkField>() { 
                 Signature,
                 ThisDiskNumber,

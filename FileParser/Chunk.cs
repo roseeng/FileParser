@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using System.IO;
-
+using System.Reflection;
 namespace FileParser
 {
     public class Chunk
@@ -32,6 +32,25 @@ namespace FileParser
             foreach (var f in AutomaticFields)
             {
                 f.Read(rdr);
+            }
+        }
+
+        public void SetupChunkFields()
+        {
+            Type type = this.GetType();
+
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.DeclaredOnly| BindingFlags.NonPublic | BindingFlags.Public); //.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (FieldInfo field in fields)
+            {
+                var otto = field.GetValue(this);
+                if (otto == null)
+                    if (field.FieldType.IsSubclassOf(typeof(ChunkField)))
+                    {
+                        Console.WriteLine("Fixing construction for: " + field.Name);
+                        var fieldType = field.FieldType;
+                        var kakan = fieldType.InvokeMember("", BindingFlags.CreateInstance, null, null, null);
+                        field.SetValue(this, kakan);
+                    }
             }
         }
     }
@@ -76,7 +95,7 @@ namespace FileParser
                     throw;
                 }
             }
-            catch (BadMagicException)
+            catch (BadMagicException ex)
             {
                 if (_repeat == ChunkListRepeat.ByMagic)
                 {
@@ -85,6 +104,7 @@ namespace FileParser
                 }
                 else
                 {
+                    Console.WriteLine(ex.Message);
                     throw;
                 }
             }

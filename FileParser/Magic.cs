@@ -29,12 +29,11 @@ namespace FileParser
             }
             if (IsValid.HasValue && IsValid.Value)
             {
-                Console.WriteLine("Magic OK!");
+                Console.WriteLine($"Magic OK: {BitConverter.ToString(_magic)}");
             }
             else
             {
                 var s = $"Bad Magic! Expected {BitConverter.ToString(_magic)}, got {BitConverter.ToString(buf)}";
-                Console.WriteLine(s);
                 throw new BadMagicException(s);
             }
         }

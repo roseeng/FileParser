@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileParserConsole", "FileParserConsole\FileParserConsole.csproj", "{D9ED9AF8-F923-4B73-A0D1-9933BBE52B1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileParserConsole", "FileParserConsole\FileParserConsole.csproj", "{D9ED9AF8-F923-4B73-A0D1-9933BBE52B1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileParser", "FileParser\FileParser.csproj", "{8E07F061-FFE0-4161-91A3-DC3A3923E2EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileParser", "FileParser\FileParser.csproj", "{8E07F061-FFE0-4161-91A3-DC3A3923E2EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0410CAF-9686-4936-B143-85666FC95DF0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

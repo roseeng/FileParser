@@ -16,6 +16,8 @@ namespace FileParserConsole
             while ((lfh = zipFile.FileList.ReadOne(reader)) != null)  // (zipFile.FileList.HasData)
             {
                 Console.WriteLine("LFH: " + lfh.Filename.Value);
+                zipFile.FileData.Length = lfh.CompressedSize.Value;
+                zipFile.FileData.Read(reader);
             }
 
             CentralFileHeader cfh = null;

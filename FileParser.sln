@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PngParser", "PngParser\PngParser.csproj", "{5C91ABAC-4997-4D6B-818E-3E95E8CCDE5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{8E07F061-FFE0-4161-91A3-DC3A3923E2EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E07F061-FFE0-4161-91A3-DC3A3923E2EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E07F061-FFE0-4161-91A3-DC3A3923E2EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C91ABAC-4997-4D6B-818E-3E95E8CCDE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C91ABAC-4997-4D6B-818E-3E95E8CCDE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C91ABAC-4997-4D6B-818E-3E95E8CCDE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C91ABAC-4997-4D6B-818E-3E95E8CCDE5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

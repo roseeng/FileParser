@@ -30,24 +30,23 @@ namespace FileParserConsole
         Magic Signature;
         Data8 VersionNeededMajor;
         Data8 VersionNeededMinor;
-        Data16LE BitFlag;
-        Data16LE Compression;
-        Data32LE CRC;
-        Data32LE CompressedSize;
-        Data32LE UncompressedSize;
+        public Data16LE BitFlag;
+        public Data16LE Compression;
+        public Data32LE CRC;
+        public Data32LE CompressedSize;
+        public Data32LE UncompressedSize;
         Data16LE FilenameLen;
         Data16LE ExtraFieldLen;
         public Chararray Filename;
         public Chararray ExtraField;
-
-        public Chararray FileData;
 
         public LocalFileHeader()
         {
             Signature = new Magic(new byte[]{ 0x50, 0x4b, 0x03, 0x04 });
             SetupChunkFields();
 
-            AutomaticFields = new List<ChunkField>() { Signature, 
+            AutomaticFields = new List<ChunkField>() { 
+                Signature, 
                 VersionNeededMajor, 
                 VersionNeededMinor,
                 BitFlag, 
@@ -62,16 +61,13 @@ namespace FileParserConsole
             };
         }
 
-        public override void AfterRead(FileReader rdr)
+        public override void AfterAutomaticRead(FileReader rdr)
         {
             Filename.Length = FilenameLen.Value;
             Filename.Read(rdr);
             Console.WriteLine("Filename: " + Filename.Value);
             ExtraField.Length = ExtraFieldLen.Value;
             ExtraField.Read(rdr);
-
-            FileData.Length = CompressedSize.Value;
-            FileData.Read(rdr);
         }
 
         public string VersionNeeded()

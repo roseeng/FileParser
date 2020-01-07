@@ -34,6 +34,7 @@ namespace FileParserConsole
       [end of central directory record]
         */
         public ChunkList<LocalFileHeader> FileList = new ChunkList<LocalFileHeader>(ChunkListRepeat.ByMagic);
+        public Chararray FileData = new Chararray();
 
         public ChunkList<CentralFileHeader> Directory = new ChunkList<CentralFileHeader>(ChunkListRepeat.ByMagic);
 

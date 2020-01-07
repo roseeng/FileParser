@@ -57,7 +57,8 @@ namespace FileParserConsole
             Signature = new Magic(new byte[] { 0x50, 0x4b, 0x01, 0x02 });
             SetupChunkFields();
 
-            AutomaticFields = new List<ChunkField>() { Signature,
+            AutomaticFields = new List<ChunkField>() { 
+                Signature,
                 VersionMadeByMajor,
                 VersionMadeByMinor,
                 VersionNeededMajor,
@@ -79,7 +80,7 @@ namespace FileParserConsole
             };
         }
 
-        public override void AfterRead(FileReader rdr)
+        public override void AfterAutomaticRead(FileReader rdr)
         {
             Filename.Length = FilenameLen.Value;
             Filename.Read(rdr);

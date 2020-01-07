@@ -33,7 +33,9 @@ namespace FileParser
             }
             else
             {
-                var s = $"Bad Magic! Expected {BitConverter.ToString(_magic)}, got {BitConverter.ToString(buf)}";
+                string expectedS = Encoding.ASCII.GetString(_magic);
+                string gotS = Encoding.ASCII.GetString(buf);
+                var s = $"Bad Magic! Expected {BitConverter.ToString(_magic)} ({expectedS}), got {BitConverter.ToString(buf)} ({gotS})";
                 throw new BadMagicException(s);
             }
         }

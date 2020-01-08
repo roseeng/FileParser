@@ -10,9 +10,25 @@ namespace FileParser
         public bool Decimal { get; set; } = false;
 
         private FileReader _reader;
+        private StringBuilder _buffer = new StringBuilder();
+
+        public bool Freeze { get; set; } = false;
+
         public HexDumperClassic(FileReader rdr)
         {
             _reader = rdr;
+        }
+
+        public void Restart()
+        {
+            _col = 0;
+            _buffer.Clear();
+        }
+
+        public void Flush()
+        {
+            Console.Write(_buffer.ToString());
+            _buffer.Clear();
         }
 
         public void OnByte(byte b)
@@ -20,18 +36,20 @@ namespace FileParser
             if (_col > 15)
             {
                 _col = 0;
-                Console.WriteLine("");
+                _buffer.Append("\n");
             }
 
             if (_col == 0) WritePos();
 
             if (Decimal)
-                Console.Write(b.ToString("D3"));
+                _buffer.Append(b.ToString("D3"));
             else
-                Console.Write(b.ToString("X2"));
-            Console.Write(" ");
+                _buffer.Append(b.ToString("X2"));
+            _buffer.Append(" ");
 
             _col++;
+
+            if (!Freeze) Flush();
         }
 
         public void WriteLine(string s)
@@ -40,10 +58,13 @@ namespace FileParser
 
             // Fill out to 16 cols
             while (_col++ <= 15)
-                Console.Write("   ");
+                _buffer.Append("   ");
 
-            Console.WriteLine(s);
+            _buffer.Append(s);
+            _buffer.Append("\n");
             _col = 0;
+
+            if (!Freeze) Flush();
         }
 
         public void NewItem()
@@ -51,7 +72,7 @@ namespace FileParser
             if (_col > 0)
             {
                 _col = 0;
-                Console.WriteLine("");
+                _buffer.Append("\n");
             }
         }
 
@@ -59,7 +80,7 @@ namespace FileParser
         {
             long pos = _reader.Position;
             string ps = pos.ToString("D6");
-            Console.Write($"{ps} : ");
+            _buffer.Append($"{ps} : ");
         }
     }
 }

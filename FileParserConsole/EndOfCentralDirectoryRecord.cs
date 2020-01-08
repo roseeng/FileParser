@@ -6,7 +6,7 @@ using FileParser;
 
 namespace FileParserConsole
 {
-    public class EndOfCentralDirectoryRecord : Chunk
+    public class EndOfCentralDirectoryRecord : SimpleChunk
     {
         /*
           end of central dir signature    4 bytes  (0x06054b50)

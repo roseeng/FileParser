@@ -50,9 +50,19 @@ namespace PngParser
         public gAMA Gamma = new gAMA();
         public pHYs Physical = new pHYs();
 
+        public PolyChunk Data;
+
         public PngFile()
         {
             FileMagic = new Magic(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 });
+
+            Data = new PolyChunk();
+            Data.RegisterType(typeof(PLTE));
+            Data.RegisterType(typeof(gAMA));
+            Data.RegisterType(typeof(pHYs));
+            Data.RegisterType(typeof(tEXt));
+            Data.RegisterType(typeof(IDAT));
+            Data.FallbackType = typeof(Unknown);
         }
     }
 }

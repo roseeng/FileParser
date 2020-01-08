@@ -6,7 +6,7 @@ using FileParser;
 
 namespace FileParserConsole
 {
-    public class CentralFileHeader : Chunk
+    public class CentralFileHeader : SimpleChunk
     {
         /*
         central file header signature   4 bytes  (0x02014b50)

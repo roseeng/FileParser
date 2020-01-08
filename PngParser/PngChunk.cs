@@ -23,7 +23,7 @@ namespace PngParser
     All integers that require more than one byte shall be in network byte order (as illustrated in figure 7.1): the most significant byte comes first
 
     */
-    public class PngChunk : Chunk
+    public class PngChunk : SimpleChunk
     {
         public Data32BE Length = new Data32BE();
         public Magic Type;
@@ -32,8 +32,9 @@ namespace PngParser
 
         public PngChunk()
         {
-            Console.WriteLine("PngChunk constructor");
+            if (Parser.Debug) Console.WriteLine("PngChunk constructor");
         }
+
         public void SetAutomaticFields(List<ChunkField> fields)
         {
             AutomaticFields.Clear();

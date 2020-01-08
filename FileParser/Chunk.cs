@@ -8,32 +8,22 @@ namespace FileParser
 {
     public class Chunk
     {
-        public Position Position;
-        public Size Size;
-
-        public List<ChunkField> AutomaticFields;
+        public Position Position; // Not yet used
+        public Size Size;           // dito.
 
         public Chunk()
         {
             if (Parser.Debug) Console.WriteLine("Chunk Constructor!");
-            AutomaticFields = new List<ChunkField>();
         }
 
-        public void StartNew()
-        {
-            foreach (var f in AutomaticFields) // TODO: Should be ALL Fields (or None. Right now it's unnecessary)
-                f.StartNew();
-        }
+        public virtual void StartNew()
+        { }
 
         public virtual void AfterAutomaticRead(FileReader rdr)
         { }
 
-        public void Read(FileReader rdr)
+        public virtual void Read(FileReader rdr)
         {
-            foreach (var f in AutomaticFields)
-            {
-                f.Read(rdr);
-            }
         }
 
         public void SetupChunkFields()
@@ -57,13 +47,41 @@ namespace FileParser
         }
     }
 
+    public class SimpleChunk : Chunk
+    {
+        public List<ChunkField> AutomaticFields;
+
+        public SimpleChunk()
+        {
+            if (Parser.Debug) Console.WriteLine("SimpleChunk Constructor!");
+            AutomaticFields = new List<ChunkField>();
+        }
+
+        public override void StartNew()
+        {
+            foreach (var f in AutomaticFields) // TODO: Should be ALL Fields (or None. Right now it's unnecessary)
+                f.StartNew();
+        }
+
+        public override void AfterAutomaticRead(FileReader rdr)
+        { }
+
+        public override void Read(FileReader rdr)
+        {
+            foreach (var f in AutomaticFields)
+            {
+                f.Read(rdr);
+            }
+        }
+    }
+
     public abstract class ChunkField
     {
         public abstract void StartNew();
         public abstract void Read(FileReader rdr);
     }
 
-    public class ChunkList<T> : ChunkField  where T : Chunk, new()
+    public class ChunkList<T> : Chunk  where T : SimpleChunk, new()
     {
         private T _chunk;
         private ChunkListRepeat _repeat;
@@ -123,7 +141,7 @@ namespace FileParser
             _chunk.StartNew();
         }
 
-        public override void Read(FileReader rdr)
+        public void ReadAll(FileReader rdr)
         {
             if (_repeat == ChunkListRepeat.ToCount)
             {
@@ -149,5 +167,71 @@ namespace FileParser
         ToEOF,
         ByMagic,
         ToCount
+    }
+
+    public class PolyChunk : Chunk
+    {
+        private List<Type> _validTypes = new List<Type>();
+        private Chunk _chunk = null;
+
+        public PolyChunk()
+        {
+
+        }
+
+        public void RegisterType(Type t)
+        {
+            _validTypes.Add(t);
+        }
+
+        public Type FallbackType { get; set; } = null;
+
+        public override void Read(FileReader rdr)
+        {
+            rdr.SetMilestone();
+            Parser.dumper.Freeze = true;
+            Parser.dumper.NewItem();
+            Parser.dumper.Flush();
+
+            foreach (var type in _validTypes)
+            {
+                _chunk = (Chunk) type.GetConstructor(Type.EmptyTypes).Invoke(null);
+
+                try
+                {
+                    _chunk.StartNew();
+                    _chunk.Read(rdr);
+                    _chunk.AfterAutomaticRead(rdr);
+
+                    Parser.dumper.Freeze = false;
+                    Parser.dumper.Flush();
+                    return;
+                }
+                catch (BadMagicException ex)
+                {
+                    string kalle = ex.Message;
+
+                    // Bad Magic is not an error, we just roll back and discard the dumper text
+                    rdr.GoToMilestone();
+                    Parser.dumper.Restart();
+                }
+            }
+
+            // Fallback type, must work or we´ll throw
+            Parser.dumper.Freeze = false;
+
+            if (FallbackType == null)
+                throw new BadMagicException("No valid chunk identified");
+
+            _chunk = (Chunk)FallbackType.GetConstructor(Type.EmptyTypes).Invoke(null);
+
+            _chunk.StartNew();
+            _chunk.Read(rdr);
+            _chunk.AfterAutomaticRead(rdr);
+        }
+
+        public Chunk Chunk => _chunk;
+
+        public Type Type => _chunk.GetType();
     }
 }

@@ -18,7 +18,6 @@ namespace FileParser
         {
             Value = 0;
         }
-
     }
 
     public class Data16LE : ChunkField
@@ -103,14 +102,19 @@ namespace FileParser
             //Console.WriteLine($"Chararray Reading {Length} bytes");
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < Length; i++)
-                sb.Append(Convert.ToChar(rdr.GetByte()));
+            {
+                var b = rdr.GetByte();
+                if (Parser.IsPrintable(b))
+                    sb.Append(Convert.ToChar(b));
+                else
+                    sb.Append(".");
+            }
             Value = sb.ToString();
         }
 
         public override void StartNew()
         {
             Value = null;
-            Length = 0;
         }
     }
 }

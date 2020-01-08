@@ -61,13 +61,13 @@ namespace PngParser
                 throw new FileParserException("PLTE: length not a multiple of 3");
 
             Entries = new ChunkList<RGBTriplet>(ChunkListRepeat.ToCount, Length.Value / 3);
-            Entries.Read(rdr);
+            Entries.ReadAll(rdr);
 
             CRC.Read(rdr);
         }
     }
 
-    public class RGBTriplet : Chunk
+    public class RGBTriplet : SimpleChunk
     {
         Data8 Red;
         Data8 Green;

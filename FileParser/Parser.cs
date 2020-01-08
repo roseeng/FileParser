@@ -47,7 +47,7 @@ namespace FileParser
             return Encoding.ASCII.GetString(safe);
         }
 
-        private static bool IsPrintable(byte b)
+        public static bool IsPrintable(byte b)
         {
             // Range of chars from space till ~ (tilda)
             return b >= 32 && b < 126;
@@ -61,7 +61,7 @@ namespace FileParser
         public static bool Debug { get; set; } = false;
 
         // ---
-
+        /*
         public FileReader Reader { get { return _reader; } }
 
         FileReader _reader = null;
@@ -76,6 +76,7 @@ namespace FileParser
             c.Read(_reader);
             c.AfterAutomaticRead(_reader);
         }
+        */
     }
  
     public enum DumpFormat

@@ -9,7 +9,7 @@ namespace FileParserConsole
     /// <summary>
     /// The header of a Zip
     /// </summary>
-    public class LocalFileHeader : Chunk
+    public class LocalFileHeader : SimpleChunk
     {
         /*
               local file header signature     4 bytes  (0x04034b50)

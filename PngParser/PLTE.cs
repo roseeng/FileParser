@@ -62,6 +62,8 @@ namespace PngParser
 
             Entries = new ChunkList<RGBTriplet>(ChunkListRepeat.ToCount, Length.Value / 3);
             Entries.Read(rdr);
+
+            CRC.Read(rdr);
         }
     }
 

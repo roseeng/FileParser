@@ -29,6 +29,19 @@ namespace PngParser
         public Magic Type;
         // Data
         public Data32BE CRC = new Data32BE();
+
+        public PngChunk()
+        {
+            Console.WriteLine("PngChunk constructor");
+        }
+        public void SetAutomaticFields(List<ChunkField> fields)
+        {
+            AutomaticFields.Clear();
+            AutomaticFields.Add(Length);
+            AutomaticFields.Add(Type);
+            AutomaticFields.AddRange(fields);
+            AutomaticFields.Add(CRC);
+        }
     }
 
 }

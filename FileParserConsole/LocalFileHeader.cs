@@ -65,7 +65,7 @@ namespace FileParserConsole
         {
             Filename.Length = FilenameLen.Value;
             Filename.Read(rdr);
-            Console.WriteLine("Filename: " + Filename.Value);
+            
             ExtraField.Length = ExtraFieldLen.Value;
             ExtraField.Read(rdr);
         }

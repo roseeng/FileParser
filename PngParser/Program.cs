@@ -10,6 +10,11 @@ namespace PngParser
             Console.WriteLine("Hello World!");
             var pngFile = new PngFile();
             var reader = new FileReader();
+            
+            var dumper = new HexDumperClassic(reader);
+            Parser.dumper = dumper;
+            Parser.DefaultDumpFormat = DumpFormat.Ascii;
+
             reader.Open("jag-200x200.png");
 
             pngFile.FileMagic.Read(reader);

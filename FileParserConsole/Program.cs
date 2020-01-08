@@ -12,10 +12,15 @@ namespace FileParserConsole
             var reader = new FileReader();
             reader.Open("FileParser.zip");
 
+            var dumper = new HexDumperClassic(reader);
+            //Parser.dumper = dumper;
+            Parser.DefaultDumpFormat = DumpFormat.Ascii;
+
             LocalFileHeader lfh;
             while ((lfh = zipFile.FileList.ReadOne(reader)) != null)  // (zipFile.FileList.HasData)
             {
-                Console.WriteLine("LFH: " + lfh.Filename.Value);
+                Parser.NewItem();
+                Parser.WriteLine("LFH: " + lfh.Filename.Value);
                 zipFile.FileData.Length = lfh.CompressedSize.Value;
                 zipFile.FileData.Read(reader);
             }
@@ -23,9 +28,10 @@ namespace FileParserConsole
             CentralFileHeader cfh = null;
             while ((cfh = zipFile.Directory.ReadOne(reader)) != null)
             {
-                Console.WriteLine("CFH                : " + cfh.Filename.Value);
-                Console.WriteLine("    Version Made By: " + cfh.VersionMadeBy());
-                Console.WriteLine("    Version Needed : " + cfh.VersionNeeded());
+                Parser.NewItem();
+                Parser.WriteLine("CFH                : " + cfh.Filename.Value);
+                Parser.WriteLine("    Version Made By: " + cfh.VersionMadeBy());
+                Parser.WriteLine("    Version Needed : " + cfh.VersionNeeded());
             }
 
             zipFile.EndOfCentralDirectoryRecord.Read(reader);

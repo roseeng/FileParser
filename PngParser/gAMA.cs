@@ -36,6 +36,7 @@ namespace PngParser
         {
             Type = new Magic(new byte[] { 103, 65, 77, 65 });
 
+            /*
             AutomaticFields = new List<ChunkField>()
             {
                 Length,
@@ -43,6 +44,11 @@ namespace PngParser
                 Gamma,
                 CRC
             };
+            */
+            SetAutomaticFields(new List<ChunkField>()
+            {
+                Gamma
+            });
         }
     }
 }

@@ -20,6 +20,7 @@ namespace FileParser
         {
             IsValid = true;
             var buf = new byte[_magic.Length];
+            Parser.NewItem();
 
             for (int i = 0; i < _magic.Length; i++)
             {
@@ -29,15 +30,26 @@ namespace FileParser
             }
             if (IsValid.HasValue && IsValid.Value)
             {
-                Console.WriteLine($"Magic OK: {BitConverter.ToString(_magic)}");
+                if (Parser.DefaultDumpFormat == DumpFormat.Ascii)
+                    Parser.WriteLine($"Magic: {AsAscii(_magic)}");
+                else
+                    Parser.WriteLine($"Magic: {AsHex(_magic)}");
             }
             else
             {
-                string expectedS = Encoding.ASCII.GetString(_magic);
-                string gotS = Encoding.ASCII.GetString(buf);
-                var s = $"Bad Magic! Expected {BitConverter.ToString(_magic)} ({expectedS}), got {BitConverter.ToString(buf)} ({gotS})";
+                var s = $"Bad Magic! Expected {AsHex(_magic)} ({AsAscii(_magic)}), got {AsHex(buf)} ({AsAscii(buf)})";
                 throw new BadMagicException(s);
             }
+        }
+
+        private string AsAscii(byte[] bytes)
+        {
+            return Parser.AsAscii(bytes);
+        }
+
+        private string AsHex(byte[] bytes)
+        {
+            return Parser.AsHex(bytes);
         }
 
         public override void StartNew()

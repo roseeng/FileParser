@@ -15,12 +15,13 @@ namespace FileParser
 
         public Chunk()
         {
-            Console.WriteLine("Chunk Constructor!");
+            if (Parser.Debug) Console.WriteLine("Chunk Constructor!");
+            AutomaticFields = new List<ChunkField>();
         }
 
         public void StartNew()
         {
-            foreach (var f in AutomaticFields)
+            foreach (var f in AutomaticFields) // TODO: Should be ALL Fields (or None. Right now it's unnecessary)
                 f.StartNew();
         }
 
@@ -38,6 +39,7 @@ namespace FileParser
         public void SetupChunkFields()
         {
             Type type = this.GetType();
+            if (Parser.Debug) Console.WriteLine($"SetupChunkFields for {type.Name}");
 
             FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.DeclaredOnly| BindingFlags.NonPublic | BindingFlags.Public); //.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (FieldInfo field in fields)
@@ -46,7 +48,7 @@ namespace FileParser
                 if (otto == null)
                     if (field.FieldType.IsSubclassOf(typeof(ChunkField)))
                     {
-                        Console.WriteLine("Fixing construction for: " + field.Name);
+                        if (Parser.Debug) Console.WriteLine("Fixing construction for: " + field.Name);
                         var fieldType = field.FieldType;
                         var kakan = fieldType.InvokeMember("", BindingFlags.CreateInstance, null, null, null);
                         field.SetValue(this, kakan);

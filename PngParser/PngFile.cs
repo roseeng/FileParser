@@ -60,11 +60,11 @@ namespace PngParser
             FileMagic = new Magic(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 });
 
             Data = new PolyChunk();
-            Data.RegisterType(typeof(PLTE));
-            Data.RegisterType(typeof(gAMA));
-            Data.RegisterType(typeof(pHYs));
-            Data.RegisterType(typeof(tEXt));
-            Data.RegisterType(typeof(IDAT));
+            //Data.RegisterType(typeof(PLTE));
+            //Data.RegisterType(typeof(gAMA));
+            //Data.RegisterType(typeof(pHYs));
+            //Data.RegisterType(typeof(tEXt));
+            //Data.RegisterType(typeof(IDAT));
             Data.RegisterType(typeof(IEND));
             Data.FallbackType = typeof(Unknown);
         }

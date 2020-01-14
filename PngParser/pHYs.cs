@@ -35,17 +35,7 @@ namespace PngParser
         {
             Type = new Magic(new byte[] { 112, 72, 89, 115 });
             //SetupChunkFields();
-            /*
-            AutomaticFields = new List<ChunkField>()
-            {
-                Length,
-                Type, 
-                PPUX, 
-                PPUY, 
-                UnitSpecifier, 
-                CRC
-            };
-            */
+
             SetAutomaticFields(new List<ChunkField>()
             {
                 PPUX,

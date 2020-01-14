@@ -19,14 +19,17 @@ namespace PngParser
 
             AutomaticFields = new List<ChunkField>()
             {
-                Length,
-                Type
+                Length
             };
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            Parser.WriteLine("Magic: " + Type.Value);
+            Parser.Dumper.OnInfo("Length: " + Length.Value);
+
+            Parser.Dumper.NewItem();
+            Type.Read(rdr);
+            Parser.Dumper.OnInfo("Magic : " + Type.Value);
 
             Data.Length = Length.Value;
             Data.Read(rdr);

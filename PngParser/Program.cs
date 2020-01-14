@@ -14,8 +14,6 @@ namespace PngParser
                 var pngFile = new PngFile();
                 var reader = new FileReader();
 
-                var dumper = new HexDumperClassic(reader);
-                Parser.dumper = dumper;
                 Parser.DefaultDumpFormat = DumpFormat.Ascii;
 
                 reader.Open("jag-200x200.png");
@@ -35,11 +33,11 @@ namespace PngParser
             }
             catch (BadMagicException ex)
             {
-                Parser.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (ParserEOFException)
             {
-                Parser.WriteLine("Unexpected Eod of File reached.");
+                Console.WriteLine("Unexpected Eod of File reached.");
             }
         }
     }

@@ -54,7 +54,7 @@ namespace PngParser
                 Keyword = "";
                 Text = Data.Value;
             }
-            Parser.WriteLine("tEXt: " + Text);
+            Parser.Dumper.OnInfo("tEXt: " + Text);
 
             CRC.Read(rdr);
         }

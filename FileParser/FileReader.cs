@@ -27,7 +27,7 @@ namespace FileParser
                 throw new ParserEOFException();
             var b = Convert.ToByte(i);
 
-            Parser.Write(b);
+            Parser.Dumper.OnByte(b, _stream.Position);
 
             return b;
         }

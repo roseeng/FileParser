@@ -20,7 +20,7 @@ namespace FileParser
         {
             IsValid = true;
             var buf = new byte[_magic.Length];
-            Parser.NewItem();
+            Parser.Dumper.NewItem();
 
             for (int i = 0; i < _magic.Length; i++)
             {
@@ -31,9 +31,9 @@ namespace FileParser
             if (IsValid.HasValue && IsValid.Value)
             {
                 if (Parser.DefaultDumpFormat == DumpFormat.Ascii)
-                    Parser.WriteLine($"Magic: {AsAscii(_magic)}");
+                    Parser.Dumper.OnInfo($"Magic: {AsAscii(_magic)}");
                 else
-                    Parser.WriteLine($"Magic: {AsHex(_magic)}");
+                    Parser.Dumper.OnInfo($"Magic: {AsHex(_magic)}");
             }
             else
             {

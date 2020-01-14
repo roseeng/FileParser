@@ -6,23 +6,12 @@ namespace FileParser
 {
     public class Parser 
     {
-        public static HexDumperClassic dumper { get; set; } // TODO: Change to interface when more complete
-
-        public static void Write(byte b)
+        static Parser()
         {
-            dumper?.OnByte(b);
-        }
-                
-        public static void WriteLine(string s, [System.Runtime.CompilerServices.CallerFilePath] string filepath = "")
-        {
-            var memberName = System.IO.Path.GetFileNameWithoutExtension(filepath);
-            dumper?.WriteLine($"{s} ({memberName})");
+            Dumper = new FileDumper();
         }
 
-        public static void NewItem()
-        {
-            dumper?.NewItem();
-        }
+        public static FileDumper Dumper { get; } 
 
         public static DumpFormat DefaultDumpFormat = DumpFormat.Hex;
 
@@ -52,23 +41,6 @@ namespace FileParser
 
         public static bool Debug { get; set; } = false;
 
-        // ---
-        /*
-        public FileReader Reader { get { return _reader; } }
-
-        FileReader _reader = null;
-        public void Open(string filename)
-        {
-            _reader = new FileReader();
-            _reader.Open(filename);
-        }
-
-        public void Read(Chunk c)
-        {
-            c.Read(_reader);
-            c.AfterAutomaticRead(_reader);
-        }
-        */
     }
  
     public enum DumpFormat

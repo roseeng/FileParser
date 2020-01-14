@@ -33,22 +33,9 @@ namespace PngParser
         public IHDR()
         {
             Type = new Magic(new byte[] { 73, 72, 68, 82 });
+
             SetupChunkFields();
-            /*
-            AutomaticFields = new List<ChunkField>()
-            {
-                Length,
-                Type,
-                Width,
-                Height,
-                BitDepth,
-                Colour,
-                Compression,
-                Filter,
-                Interlace, 
-                CRC
-            };
-            */
+
             SetAutomaticFields(new List<ChunkField>()
             {
                 Width,

@@ -189,9 +189,9 @@ namespace FileParser
         public override void Read(FileReader rdr)
         {
             rdr.SetMilestone();
-            Parser.dumper.Freeze = true;
-            Parser.dumper.NewItem();
-            Parser.dumper.Flush();
+            Parser.Dumper.NewItem();
+            Parser.Dumper.Flush();
+            Parser.Dumper.Freeze = true;
 
             foreach (var type in _validTypes)
             {
@@ -203,8 +203,8 @@ namespace FileParser
                     _chunk.Read(rdr);
                     _chunk.AfterAutomaticRead(rdr);
 
-                    Parser.dumper.Freeze = false;
-                    Parser.dumper.Flush();
+                    Parser.Dumper.Freeze = false;
+                    Parser.Dumper.Flush();
                     return;
                 }
                 catch (BadMagicException ex)
@@ -213,12 +213,12 @@ namespace FileParser
 
                     // Bad Magic is not an error, we just roll back and discard the dumper text
                     rdr.GoToMilestone();
-                    Parser.dumper.Restart();
+                    Parser.Dumper.Restart();
                 }
             }
 
             // Fallback type, must work or we´ll throw
-            Parser.dumper.Freeze = false;
+            Parser.Dumper.Freeze = false;
 
             if (FallbackType == null)
                 throw new BadMagicException("No valid chunk identified");

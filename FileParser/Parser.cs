@@ -4,16 +4,8 @@ using System.Text;
 
 namespace FileParser
 {
-    public class Parser //<T> where T : FileChunk, new()
+    public class Parser 
     {
-        /* 
-        public T f;
-        public Parser()
-        {
-            f = new T();
-        }
-        */
-
         public static HexDumperClassic dumper { get; set; } // TODO: Change to interface when more complete
 
         public static void Write(byte b)

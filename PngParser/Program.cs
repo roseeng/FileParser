@@ -22,29 +22,24 @@ namespace PngParser
 
                 pngFile.FileMagic.Read(reader);
                 pngFile.Header.Read(reader);
-                     
-                /*
-                pngFile.Gamma.Read(reader);
-                pngFile.Physical.Read(reader);
-                pngFile.Palette.Read(reader);
-                //tEXt
-                */
 
-                pngFile.Data.Read(reader);
-                //Console.WriteLine("Found: " + pngFile.Data.Type.Name);
+                while (pngFile.Data.CurrentType != typeof(IEND))
+                {
+                    pngFile.Data.Read(reader);
+                    pngFile.MapCurrentChunk();
+                }
 
-                pngFile.Data.Read(reader);
-                //Console.WriteLine("Found: " + pngFile.Data.Type.Name);
-
-                pngFile.Data.Read(reader);
-                //Console.WriteLine("Found: " + pngFile.Data.Type.Name);
-
-                pngFile.Data.Read(reader);
-                //Console.WriteLine("Found: " + pngFile.Data.Type.Name);
+                Console.WriteLine("");
+                Console.WriteLine($"Gamma is: {pngFile.GammaChunk?.Gamma?.Value}");
+                Console.WriteLine($"PPI   is: {pngFile.PhysicalChunk?.PPUX?.Value}x{pngFile.PhysicalChunk?.PPUY?.Value}");
             }
             catch (BadMagicException ex)
             {
                 Parser.WriteLine("Error: " + ex.Message);
+            }
+            catch (ParserEOFException)
+            {
+                Parser.WriteLine("Unexpected Eod of File reached.");
             }
         }
     }

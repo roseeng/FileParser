@@ -230,8 +230,8 @@ namespace FileParser
             _chunk.AfterAutomaticRead(rdr);
         }
 
-        public Chunk Chunk => _chunk;
+        public Chunk CurrentChunk => _chunk;
 
-        public Type Type => _chunk.GetType();
+        public Type CurrentType => _chunk?.GetType();
     }
 }

@@ -45,15 +45,18 @@ namespace PngParser
     public class PngFile : FileChunk
     {
         public Magic FileMagic;
-        public IHDR Header = new IHDR();
-        public PLTE Palette = new PLTE();
-        public gAMA Gamma = new gAMA();
-        public pHYs Physical = new pHYs();
+        public IHDR Header;
 
+        public PLTE PaletteChunk;
+        public gAMA GammaChunk;
+        public pHYs PhysicalChunk;
+        
         public PolyChunk Data;
+        public IEND End;
 
         public PngFile()
         {
+            Header = new IHDR();
             FileMagic = new Magic(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 });
 
             Data = new PolyChunk();
@@ -62,7 +65,26 @@ namespace PngParser
             Data.RegisterType(typeof(pHYs));
             Data.RegisterType(typeof(tEXt));
             Data.RegisterType(typeof(IDAT));
+            Data.RegisterType(typeof(IEND));
             Data.FallbackType = typeof(Unknown);
+        }
+
+        public void MapCurrentChunk()
+        {
+            switch (Data.CurrentChunk)
+            {
+                case gAMA g:
+                    GammaChunk = g;
+                    break;
+                case pHYs p:
+                    PhysicalChunk = p;
+                    break;
+                case PLTE p:
+                    PaletteChunk = p;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

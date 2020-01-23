@@ -12,20 +12,36 @@ namespace FileParser
         private HexDumperConsole _console = new HexDumperConsole();
         private Queue<Message> _messages = new Queue<Message>();
 
-        public bool Freeze { get; set; } = false;
+        private bool _freeze = false;
 
         public FileDumper()
         {
         }
 
-        public void Restart()
+        public void Freeze()
         {
+            if (_freeze)
+                throw new ApplicationException("Freezing when already frozen. Check your logic please.");
+
+            _freeze = true;
+        }
+
+        public void Discard()
+        {
+            if (!_freeze)
+                throw new ApplicationException("Calling Discard() when not frozen. Check your logic please.");
+
             _col = 0;
             _messages.Clear();
         }
 
-        public void Flush()
+        public void Unfreeze()
         {
+            if (!_freeze)
+                throw new ApplicationException("Unfreezing when not frozen. Check your logic please.");
+            
+            _freeze = false;
+
             while (_messages.Count > 0)
             {
                 var m = _messages.Dequeue();
@@ -46,7 +62,7 @@ namespace FileParser
 
         public void OnByte(byte b, long pos)
         {
-            if (Freeze)
+            if (_freeze)
                 _messages.Enqueue(new Message() 
                 { 
                     type = MessageType.OnByteMessage,
@@ -59,7 +75,7 @@ namespace FileParser
 
         public void OnInfo(string s)
         {
-            if (Freeze)
+            if (_freeze)
                 _messages.Enqueue(new Message() 
                 { 
                     type = MessageType.OnInfoMessage, 
@@ -72,7 +88,7 @@ namespace FileParser
 
         public void NewItem()
         {
-            if (Freeze)
+            if (_freeze)
                 _messages.Enqueue(new Message()
                 {
                     type = MessageType.NewItemMessage,

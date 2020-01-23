@@ -190,8 +190,7 @@ namespace FileParser
         {
             rdr.SetMilestone();
             Parser.Dumper.NewItem();
-            Parser.Dumper.Flush();
-            Parser.Dumper.Freeze = true;
+            Parser.Dumper.Freeze();
 
             foreach (var type in _validTypes)
             {
@@ -203,8 +202,7 @@ namespace FileParser
                     _chunk.Read(rdr);
                     _chunk.AfterAutomaticRead(rdr);
 
-                    Parser.Dumper.Freeze = false;
-                    Parser.Dumper.Flush();
+                    Parser.Dumper.Unfreeze();
                     return;
                 }
                 catch (BadMagicException ex)
@@ -213,12 +211,12 @@ namespace FileParser
 
                     // Bad Magic is not an error, we just roll back and discard the dumper text
                     rdr.GoToMilestone();
-                    Parser.Dumper.Restart();
+                    Parser.Dumper.Discard();
                 }
             }
 
             // Fallback type, must work or we´ll throw
-            Parser.Dumper.Freeze = false;
+            Parser.Dumper.Unfreeze();
 
             if (FallbackType == null)
                 throw new BadMagicException("No valid chunk identified");

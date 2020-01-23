@@ -43,6 +43,15 @@ namespace PngParser
             AutomaticFields.AddRange(fields);
             AutomaticFields.Add(CRC);
         }
+
+        public override void AfterAutomaticRead(FileReader rdr)
+        {
+            if (CRC != null)
+            { 
+
+            }
+            base.AfterAutomaticRead(rdr);
+        }
     }
 
 }

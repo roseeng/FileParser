@@ -64,6 +64,8 @@ namespace PngParser
             Entries.ReadAll(rdr);
 
             CRC.Read(rdr);
+
+            base.AfterAutomaticRead(rdr);
         }
     }
 

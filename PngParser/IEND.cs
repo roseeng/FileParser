@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 using FileParser;
+
+using DamienG.Security.Cryptography;
+
 namespace PngParser
 {
     public class IEND : PngChunk
@@ -14,7 +17,18 @@ namespace PngParser
             SetAutomaticFields(new List<ChunkField>()
             {
                 
-            });
+            });            
+        }
+
+        public override void AfterAutomaticRead(FileReader rdr)
+        {
+            base.AfterAutomaticRead(rdr);
+
+            if (CRC != null && Type != null)
+            {
+                var arr = new byte[] { 73, 69, 78, 68 };
+
+            }
         }
     }
 }

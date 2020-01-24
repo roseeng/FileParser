@@ -36,7 +36,8 @@ namespace FileParser
 
         public void OnInfo(string s, long pos)
         {
-            if (_col == 0) WritePos(pos);
+            if (_col == 0) 
+                WritePos(pos);
 
             // Fill out to 16 cols
             while (_col++ <= 15)

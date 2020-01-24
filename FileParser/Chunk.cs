@@ -19,11 +19,20 @@ namespace FileParser
         public virtual void StartNew()
         { }
 
+        public virtual void BeforeAutomaticRead(FileReader rdr)
+        { }
+
+        public virtual void ReadAutomatic(FileReader rdr)
+        { }
+
         public virtual void AfterAutomaticRead(FileReader rdr)
         { }
 
         public virtual void Read(FileReader rdr)
         {
+            BeforeAutomaticRead(rdr);
+            ReadAutomatic(rdr);
+            AfterAutomaticRead(rdr);
         }
 
         public void SetupChunkFields()
@@ -63,10 +72,7 @@ namespace FileParser
                 f.StartNew();
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
-        { }
-
-        public override void Read(FileReader rdr)
+        public override void ReadAutomatic(FileReader rdr)
         {
             foreach (var f in AutomaticFields)
             {
@@ -101,9 +107,7 @@ namespace FileParser
             try
             {
                 rdr.SetMilestone();
-                _chunk.StartNew();
                 _chunk.Read(rdr);
-                _chunk.AfterAutomaticRead(rdr);
                 return _chunk;
             }
             catch (ParserEOFException)
@@ -198,9 +202,7 @@ namespace FileParser
 
                 try
                 {
-                    _chunk.StartNew();
                     _chunk.Read(rdr);
-                    _chunk.AfterAutomaticRead(rdr);
 
                     Parser.Dumper.Unfreeze();
                     return;
@@ -223,9 +225,7 @@ namespace FileParser
 
             _chunk = (Chunk)FallbackType.GetConstructor(Type.EmptyTypes).Invoke(null);
 
-            _chunk.StartNew();
             _chunk.Read(rdr);
-            _chunk.AfterAutomaticRead(rdr);
         }
 
         public Chunk CurrentChunk => _chunk;

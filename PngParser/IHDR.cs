@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 using FileParser;
+
+using DamienG.Security.Cryptography;
+
 namespace PngParser
 {
     public class IHDR : PngChunk
@@ -47,5 +50,6 @@ namespace PngParser
                 Interlace
             });
         }
+
     }
 }

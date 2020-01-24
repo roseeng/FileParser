@@ -12,12 +12,7 @@ namespace PngParser
     {        
         public IEND()
         {
-            Type = new Magic(new byte[] { 73, 69, 78, 68 });
-
-            SetAutomaticFields(new List<ChunkField>()
-            {
-                
-            });            
+            Type = new Magic(new byte[] { 73, 69, 78, 68 });          
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
@@ -27,7 +22,8 @@ namespace PngParser
             if (CRC != null && Type != null)
             {
                 var arr = new byte[] { 73, 69, 78, 68 };
-
+                var olle = CRC.Value;
+                var kalle = Crc32.Compute(arr);
             }
         }
     }

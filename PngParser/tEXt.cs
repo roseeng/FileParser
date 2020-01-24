@@ -30,12 +30,6 @@ namespace PngParser
         public tEXt()
         {
             Type = new Magic(new byte[] { 116, 69, 88, 116 });
-
-            AutomaticFields = new List<ChunkField>()
-            {
-                Length,
-                Type
-            };
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
@@ -56,7 +50,7 @@ namespace PngParser
             }
             Parser.Dumper.OnInfo("tEXt: " + Text);
 
-            CRC.Read(rdr);
+            base.AfterAutomaticRead(rdr);
         }
     }
 }

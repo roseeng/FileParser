@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using FileParser;
+using DamienG.Security.Cryptography;
 
 namespace PngParser
 {
@@ -26,7 +27,7 @@ namespace PngParser
     public class PngChunk : SimpleChunk
     {
         public Data32BE Length = new Data32BE();
-        public Magic Type;
+        public Magic Type; // Set by subclass
         // Data
         public Data32BE CRC = new Data32BE();
 
@@ -37,20 +38,43 @@ namespace PngParser
 
         public void SetAutomaticFields(List<ChunkField> fields)
         {
-            AutomaticFields.Clear();
-            AutomaticFields.Add(Length);
-            AutomaticFields.Add(Type);
             AutomaticFields.AddRange(fields);
-            AutomaticFields.Add(CRC);
+        }
+
+        public override void BeforeAutomaticRead(FileReader rdr)
+        {
+            Length.Read(rdr);
+
+            ResetCRC();
+            // Register our CRC calculator
+            rdr.OnByteRead = this.OnByte;
+            
+            Type.Read(rdr);
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            if (CRC != null)
-            { 
+            // Unregister the CRC calculation
+            rdr.OnByteRead = null;
 
-            }
-            base.AfterAutomaticRead(rdr);
+            CRC.Read(rdr);
+            var x = CRC.Value;
+            var y = currentCRC;
+        }
+
+        public int nBytes = 0;
+        public UInt32 currentCRC = Crc32.DefaultSeed;
+
+        public void ResetCRC()
+        {
+            currentCRC = Crc32.DefaultSeed;
+            nBytes = 0;
+        }
+
+        public void OnByte(byte b, long _)
+        {
+            currentCRC = Crc32.Compute(~currentCRC, new byte[] { b });
+            nBytes++;
         }
     }
 

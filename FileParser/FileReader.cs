@@ -16,6 +16,8 @@ namespace FileParser
             _stream = new FileStream(filename, FileMode.Open);
         }
 
+        public Action<byte, long> OnByteRead { get; set; }
+
         /// <summary>
         /// Get a byte. Throw ParserEOFException if unexpected EOF
         /// </summary>
@@ -28,6 +30,9 @@ namespace FileParser
             var b = Convert.ToByte(i);
 
             Parser.Dumper.OnByte(b, _stream.Position);
+
+            if (OnByteRead != null)
+                OnByteRead(b, _stream.Position);
 
             return b;
         }

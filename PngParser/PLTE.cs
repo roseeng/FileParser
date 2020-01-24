@@ -46,13 +46,6 @@ namespace PngParser
         public PLTE()
         {
             Type = new Magic(new byte[] { 80, 76, 84, 69 });
-            //SetupChunkFields();
-
-            AutomaticFields = new List<ChunkField>()
-            {
-                Length,
-                Type
-            };
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
@@ -62,8 +55,6 @@ namespace PngParser
 
             Entries = new ChunkList<RGBTriplet>(ChunkListRepeat.ToCount, Length.Value / 3);
             Entries.ReadAll(rdr);
-
-            CRC.Read(rdr);
 
             base.AfterAutomaticRead(rdr);
         }

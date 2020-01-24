@@ -19,6 +19,7 @@ namespace PngParser
                 reader.Open("jag-200x200.png");
 
                 pngFile.FileMagic.Read(reader);
+                 
                 pngFile.Header.Read(reader);
 
                 while (pngFile.Data.CurrentType != typeof(IEND))

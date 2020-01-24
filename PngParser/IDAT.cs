@@ -9,14 +9,7 @@ namespace PngParser
     {
         public IDAT()
         {
-            Type = new Magic(new byte[] { 73, 68, 65, 84 });
-            
-            AutomaticFields = new List<ChunkField>()
-            {
-                Length,
-                Type
-            };
-
+            Type = new Magic(new byte[] { 73, 68, 65, 84 });                    
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
@@ -24,8 +17,6 @@ namespace PngParser
             var data = new Chararray();
             data.Length = this.Length.Value;
             data.Read(rdr);
-
-            CRC.Read(rdr);
 
             base.AfterAutomaticRead(rdr);
         }

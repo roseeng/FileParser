@@ -63,14 +63,16 @@ namespace FileParser
         public void OnByte(byte b, long pos)
         {
             if (_freeze)
-                _messages.Enqueue(new Message() 
-                { 
+                _messages.Enqueue(new Message()
+                {
                     type = MessageType.OnByteMessage,
-                    b = b, 
+                    b = b,
                     pos = pos
                 });
             else
+            {
                 _console.OnByte(b, pos);
+            }
         }
 
         public void OnInfo(string s)

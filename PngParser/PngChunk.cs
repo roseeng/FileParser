@@ -46,7 +46,7 @@ namespace PngParser
             Length.Read(rdr);
 
             ResetCRC();
-            // Register our CRC calculator
+            // Register our CRC calculator (Length is not included in the clculation, byt Type is)
             rdr.OnByteRead = this.OnByte;
             
             Type.Read(rdr);
@@ -54,12 +54,14 @@ namespace PngParser
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            // Unregister the CRC calculation
+            // Unregister the CRC calculation (CRC is not included in the calculation, Dah)
             rdr.OnByteRead = null;
 
             CRC.Read(rdr);
-            var x = CRC.Value;
-            var y = currentCRC;
+            if (CRC.Value == currentCRC)
+                Parser.Dumper.OnInfo("CRC OK.");
+            else
+                throw new FileParserException($"Invalid CRC, got {currentCRC}, expected {CRC.Value}");
         }
 
         public int nBytes = 0;
@@ -67,7 +69,7 @@ namespace PngParser
 
         public void ResetCRC()
         {
-            currentCRC = Crc32.DefaultSeed;
+            currentCRC = 0;
             nBytes = 0;
         }
 

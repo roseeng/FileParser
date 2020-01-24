@@ -13,7 +13,9 @@ namespace PngParser
             {
                 var pngFile = new PngFile();
                 var reader = new FileReader();
-
+                pngFile.GammaChunk = new gAMA();
+                pngFile.PhysicalChunk = new pHYs();
+                
                 Parser.DefaultDumpFormat = DumpFormat.Ascii;
 
                 reader.Open("jag-200x200.png");
@@ -21,6 +23,19 @@ namespace PngParser
                 pngFile.FileMagic.Read(reader);
                  
                 pngFile.Header.Read(reader);
+                
+                /*
+                pngFile.GammaChunk.Read(reader);
+                pngFile.PhysicalChunk.Read(reader);
+                var text = new tEXt();
+                text.Read(reader);
+                var data1 = new IDAT();
+                data1.Read(reader);
+                var data2 = new IDAT();
+                data2.Read(reader);
+                var end = new IEND();
+                end.Read(reader);
+                */
 
                 while (pngFile.Data.CurrentType != typeof(IEND))
                 {

@@ -8,9 +8,7 @@ namespace FileParser
     {
         int _col = 0;
         public bool Decimal { get; set; } = false;
-
-        public bool Freeze { get; set; } = false;
-
+        
         public HexDumperConsole()
         {
         }

@@ -55,7 +55,7 @@ namespace FileParserConsole
         {
             FileComment.Length = FileCommentLen.Value;
             FileComment.Read(rdr);
-            Console.WriteLine("Comment: " + FileComment.Value);
+            Parser.Dumper.OnInfo("Comment: " + FileComment.Value);
         }
     }
 }

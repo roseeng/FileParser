@@ -1,0 +1,43 @@
+Return-Path: <sunda@swipnet.se>
+Received: from s0212108.amv.se ([164.135.2.199]) by 164.135.28.129 with ESMTP id to0lfl_-; 16 Oct 2001 19:28:00 +0100
+Received: from amv.amv.se (amv.amv.se [192.168.137.22])by s0212108.amv.se (8.9.3/8.9.3) with ESMTP id TAA13787for <kent-arne.emretsson@lanab.amv.se>; Tue, 16 Oct 2001 19:30:02 +0200 (MET DST)
+Received: from fep04-svc.swip.net (fep04.swip.net [130.244.199.132])by amv.amv.se (8.11.0/8.11.0) with ESMTP id f9GHT5516440for <kent-arne.emretsson@lanab.amv.se>; Tue, 16 Oct 2001 19:29:05 +0200 (Sommartid)
+Received: from tomask63gspv0v ([212.151.167.116]) by fep04-svc.swip.net         with SMTP         id <20011016172505.OVNF24956.fep04-svc.swip.net@tomask63gspv0v>;         Tue, 16 Oct 2001 19:25:05 +0200
+Message-ID: <002e01c15667$d4045b00$74a797d4@tomask63gspv0v>
+From: "Sunda" <sunda@swipnet.se>
+To: "Christer Ahlin" <christer@marstajarn.se>
+Cc: "Teddy Strindefjord" <tstrindefjord@swipnet.se>,       "Ronny Lundin" <ronni@telia.com>,       "Peter Bergh" <peter-bergh@swipnet.se>,       <kent-arne.emretsson@lanab.amv.se>,       =?Windows-1252?Q?Magnus_=C5hlberg?= <magnus.ahlberg@mail.bip.net>,       =?Windows-1252?Q?Kent_Fridstr=F6m?= <kento@privat.utfors.se>,       =?Windows-1252?Q?johnny_l=F6fholm?= <jonka@libertysurf.se>,       =?Windows-1252?Q?Benke_Sj=F6din?= <bengt.sjodin@mail.bip.net>
+Subject: nu 
+Date: Tue, 16 Oct 2001 19:27:26 +0200
+MIME-Version: 1.0
+Content-Type: multipart/mixed;boundary="----=_NextPart_000_002A_01C15678.966ACB10"
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 5.00.3018.1300
+X-MimeOLE: Produced By Microsoft MimeOLE V5.00.3018.1300
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002A_01C15678.966ACB10
+Content-Type: multipart/alternative;boundary="----=_NextPart_001_002B_01C15678.966ACB10"
+
+
+------=_NextPart_001_002B_01C15678.966ACB10
+Content-Type: text/plain;charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<<B1><E116><L2>>
+------=_NextPart_001_002B_01C15678.966ACB10
+Content-Type: text/html;charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<<B2><E116><L10>>
+------=_NextPart_001_002B_01C15678.966ACB10--
+
+------=_NextPart_000_002A_01C15678.966ACB10
+Content-Type: application/vnd.ms-powerpoint;name="silicon.pps"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;filename="silicon.pps"
+
+<<B3><E117><L10304>>
+------=_NextPart_000_002A_01C15678.966ACB10--

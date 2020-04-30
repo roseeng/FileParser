@@ -1,0 +1,83 @@
+[-- server to client --]
+Data size: 10
+Data:
+2A 01 C1 2A 04 00 00 00 00 01                    : *.Á*......
+
+[-- client to server --]
+Data size: 139
+Data:
+2A 01 01 5A 00 85 00 00 00 01 00 01 00 08 36 38  : *..Z.…........68
+31 35 31 34 31 37 00 02 00 08 XX XX XX XX XX XX  : 151417....XXXXXX
+XX XX 00 03 00 33 49 43 51 20 49 6E 63 2E 20 2D  : XX...3ICQ Inc. -
+20 50 72 6F 64 75 63 74 20 6F 66 20 49 43 51 20  :  Product of ICQ 
+28 54 4D 29 2E 32 30 30 31 62 2E 35 2E 31 35 2E  : (TM).2001b.5.15.
+31 2E 33 36 33 38 2E 38 35 00 16 00 02 01 0A 00  : 1.3638.85.......
+17 00 02 00 05 00 18 00 02 00 0F 00 19 00 02 00  : ................
+01 00 1A 00 02 0E 36 00 14 00 04 00 00 00 55 00  : ......6.......U.
+0F 00 02 65 6E 00 0E 00 02 75 73                 : ...en....us
+
+[-- server to client --]
+Data size: 299
+Data:
+2A 04 C2 2A 25 01 00 01 00 08 36 38 31 35 31 34  : *.Â*%.....681514
+31 37 00 05 00 11 36 34 2E 31 32 2E 32 35 2E 31  : 17....64.12.25.1
+30 39 3A 35 31 39 30 00 06 01 00 84 4A 07 EB 6C  : 09:5190....„J.ël
+E2 BA 3D ED A3 A1 D3 B5 E0 93 38 B6 89 1D 71 61  : âº=í£¡Óµà“8¶‰.qa
+70 DB 4A 10 08 CF F9 29 E6 B9 77 68 78 B3 38 1E  : pÛJ..Ïù)æ¹whx³8.
+7A 2C 02 00 B0 0D 4E 69 34 09 22 B2 50 4D BA A8  : z,..°.Ni4."²PMº¨
+7F FD DC 39 8F 5C BC 66 68 3B B2 A9 B0 2C DD EB  : .ıÜ9\¼fh;²©°,İë
+72 AF D9 3D BE 2F AA C4 63 84 A2 C1 A5 14 B9 F4  : r¯Ù=¾/ªÄc„¢Á¥.¹ô
+9F DD 68 87 D5 BE 5A 4A AD 3B 50 0E D3 4E A7 8F  : Ÿİh‡Õ¾ZJ­;P.ÓN§
+29 40 D1 CF C3 6B 2D 95 D6 AA 8D 32 02 63 25 68  : )@ÑÏÃk-•Öª2.c%h
+82 61 17 E8 C8 3F 6C B5 81 4E 44 7E FB A3 C6 A8  : ‚a.èÈ?lµND~û£Æ¨
+DA BD FB 04 EA D3 7C E1 59 D0 2C 70 67 24 9B 67  : Ú½û.êÓ|áYĞ,pg$›g
+38 11 D1 71 5A 21 C5 97 1E 7F 2E 0B C6 07 0B 4D  : 8.ÑqZ!Å—....Æ..M
+3E D8 E8 A3 00 B8 55 DE A3 6E D5 30 DD DF 07 B4  : >Øè£.¸UŞ£nÕ0İß.´
+CE C2 7C A2 F8 93 78 A9 A4 10 AA 31 76 B5 33 3A  : ÎÂ|¢ø“x©¤.ª1vµ3:
+12 3B 2D B9 86 45 64 50 AE 81 1D CA 63 4D DF 33  : .;-¹†EdP®.ÊcMß3
+62 4B 9F 59 A7 BC 48 01 74 A1 8C 89 EB 69 25 B5  : bKŸY§¼H.t¡Œ‰ëi%µ
+FC 7A 6B 56 F0 DF 11 0D 2B 6F DE 22 9F 2A 28 95  : üzkVğß..+oŞ"Ÿ*(•
+A1 5D D7 A5 07 B7 E8 0F 85 F8 72                 : ¡]×¥.·è.…ør
+
+[-- client to server --]
+Data size: 6
+Data:
+2A 04 01 5B 00 00                                : *..[..
+
+[-- server to client --]
+Data size: 10
+Data:
+2A 01 43 82 04 00 00 00 00 01                    : *.C‚......
+
+[-- client to server --]
+Data size: 270
+Data:
+2A 01 69 71 01 08 00 00 00 01 00 06 01 00 84 4A  : *.iq..........„J
+07 EB 6C E2 BA 3D ED A3 A1 D3 B5 E0 93 38 B6 89  : .ëlâº=í£¡Óµà“8¶‰
+1D 71 61 70 DB 4A 10 08 CF F9 29 E6 B9 77 68 78  : .qapÛJ..Ïù)æ¹whx
+B3 38 1E 7A 2C 02 00 B0 0D 4E 69 34 09 22 B2 50  : ³8.z,..°.Ni4."²P
+4D BA A8 7F FD DC 39 8F 5C BC 66 68 3B B2 A9 B0  : Mº¨.ıÜ9\¼fh;²©°
+2C DD EB 72 AF D9 3D BE 2F AA C4 63 84 A2 C1 A5  : ,İër¯Ù=¾/ªÄc„¢Á¥
+14 B9 F4 9F DD 68 87 D5 BE 5A 4A AD 3B 50 0E D3  : .¹ôŸİh‡Õ¾ZJ­;P.Ó
+4E A7 8F 29 40 D1 CF C3 6B 2D 95 D6 AA 8D 32 02  : N§)@ÑÏÃk-•Öª2.
+63 25 68 82 61 17 E8 C8 3F 6C B5 81 4E 44 7E FB  : c%h‚a.èÈ?lµND~û
+A3 C6 A8 DA BD FB 04 EA D3 7C E1 59 D0 2C 70 67  : £Æ¨Ú½û.êÓ|áYĞ,pg
+24 9B 67 38 11 D1 71 5A 21 C5 97 1E 7F 2E 0B C6  : $›g8.ÑqZ!Å—....Æ
+07 0B 4D 3E D8 E8 A3 00 B8 55 DE A3 6E D5 30 DD  : ..M>Øè£.¸UŞ£nÕ0İ
+DF 07 B4 CE C2 7C A2 F8 93 78 A9 A4 10 AA 31 76  : ß.´ÎÂ|¢ø“x©¤.ª1v
+B5 33 3A 12 3B 2D B9 86 45 64 50 AE 81 1D CA 63  : µ3:.;-¹†EdP®.Êc
+4D DF 33 62 4B 9F 59 A7 BC 48 01 74 A1 8C 89 EB  : Mß3bKŸY§¼H.t¡Œ‰ë
+69 25 B5 FC 7A 6B 56 F0 DF 11 0D 2B 6F DE 22 9F  : i%µüzkVğß..+oŞ"Ÿ
+2A 28 95 A1 5D D7 A5 07 B7 E8 0F 85 F8 72        : *(•¡]×¥.·è.…ør
+
+[-- server to client --]
+Data size: 44
+Data:
+2A 04 44 82 26 00 00 01 00 00 00 04 00 12 68 74  : *.D‚&.........ht
+74 70 3A 2F 2F 77 77 77 2E 61 6F 6C 2E 63 6F 6D  : tp://www.aol.com
+00 08 00 02 00 04 00 0C 00 02 00 06              : ............
+
+[-- client to server --]
+Data size: 6
+Data:
+2A 04 69 72 00 00                                : *.ir..

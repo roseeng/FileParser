@@ -1,0 +1,13 @@
+[DEFAULT]
+BASEURL=http://www.skeidar.se/
+[DOC#6#7#8]
+BASEURL=http://www.skeidar.se/topleft_se.htm
+[DOC#6#7#9]
+BASEURL=http://www.skeidar.se/topright_se.htm
+[DOC#6#10#11]
+BASEURL=http://www.skeidarweb.no/menutree_se.asp
+[DOC#6#10#12]
+BASEURL=http://www.skeidarweb.no/visprodukt_se.asp?I=3590001&T=&K=13&S=1&PS=5&Search=
+[InternetShortcut]
+URL=http://www.skeidar.se/
+Modified=A0080A592011C101FE

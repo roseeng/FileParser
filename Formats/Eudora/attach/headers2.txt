@@ -1,0 +1,25 @@
+Return-Path: <PER-INGE.SVENSSON@MEMO.IKEA.COM>
+Received: from s0212108.amv.se ([164.135.2.199]) by 164.135.28.129 with ESMTP id tk0xb9gp; 13 Nov 2001 15:25:00 +0100
+Received: from amv.amv.se (amv.amv.se [192.168.137.22])by s0212108.amv.se (8.9.3/8.9.3) with ESMTP id PAA15680for <martin.holmdahl@lanab.amv.se>; Tue, 13 Nov 2001 15:25:54 +0100 (MET)
+Received: from honken.ikea.com (honken.ikea.com [192.71.68.104])by amv.amv.se (8.11.0/8.11.0) with SMTP id fADEP3C13552for <martin.holmdahl@lanab.amv.se>; Tue, 13 Nov 2001 15:25:03 +0100 (Vintertid)
+Received: FROM memo.ikea.com BY honken.ikea.com ; Tue Nov 13 15:24:35 2001 +0100
+MIME-Version: 1.0
+Date: Tue, 13 Nov 2001 15:19 +0100
+Message-id: <XfSHHs2o0s.PER-INGE.SVENSSON@MEMO.IKEA.COM>
+From: PER-INGE SVENSSON 24/33 <PER-INGE.SVENSSON@MEMO.IKEA.COM>
+To: martin.holmdahl@lanab.amv.se
+Subject: :-)
+Content-Type: multipart/mixed;boundary="====YG3m0yXcP4M1mOxwCUPPshTc1UsPw==NX100000043=="
+
+--====YG3m0yXcP4M1mOxwCUPPshTc1UsPw==NX100000043==
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<<B1><E116><L16>>
+--====YG3m0yXcP4M1mOxwCUPPshTc1UsPw==NX100000043==
+Content-Type: application/octet-stream; Name="un_Looking_Osama.pps"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="un_Looking_Osama.pps"
+
+<<B2><E117><L4481>>
+--====YG3m0yXcP4M1mOxwCUPPshTc1UsPw==NX100000043==--

@@ -1,0 +1,23 @@
+Return-Path: <tommy.sodergren@rimpac.se>
+Received: from s0212108.amv.se ([164.135.2.199]) by 164.135.28.129 with ESMTP id tj02=dld; 7 May 2001 16:58:00 +0100
+Received: from amv.amv.se (amv.amv.se [192.168.137.22])by s0212108.amv.se (8.9.3/8.9.3) with ESMTP id RAA03792for <kent-arne.emretsson@lanab.amv.se>; Mon, 7 May 2001 17:00:14 +0200 (MET DST)
+Received: from mx3.worldnet.se (mail.lidingocentrum.nu [62.100.128.2])by amv.amv.se (8.11.0/8.11.0) with SMTP id f47Eww116512for <kent-arne.emretsson@lanab.amv.se>; Mon, 7 May 2001 16:58:59 +0200 (Sommartid)
+Received: (qmail 31111 invoked from network); 7 May 2001 14:58:58 -0000
+Received: from unknown (HELO r12) (62.100.129.146) by mx2.worldnet.se with SMTP; 7 May 2001 14:58:58 -0000
+Reply-To: <tommy.sodergren@rimpac.se>
+From: =?iso-8859-1?Q?Tommy_S=F6dergren?= <tommy.sodergren@rimpac.se>
+To: "Kent-arne Emretsson \(E-mail\)" <kent-arne.emretsson@lanab.amv.se>,       "Lars Christensen \(E-mail\)" <lars.christensen@rimpac.se>,       "=?iso-8859-1?Q?P=E4r_Bj=F6rkman_\=28E-mail\=29?=" <par.bjorkman@rimpac.se>,       "Staffan hem \(E-mail\)" <staffan.molin@norrtalje.mail.telia.com>
+Subject: VB: ..Biologilektion
+Date: Mon, 7 May 2001 16:59:00 +0200
+Message-ID: <000501c0d706$404b34a0$2201a8c0@Rimpac>
+MIME-Version: 1.0
+Content-Type: text/plain;charset="iso-8859-1"
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook CWS, Build 9.0.2416 (9.0.2910.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V5.00.2919.6600
+Importance: Normal
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by s0212108.amv.se id RAA03792
+
+<<B1><E116><L62>>

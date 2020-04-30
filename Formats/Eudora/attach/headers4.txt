@@ -1,0 +1,19 @@
+Return-Path: <Annelie_Gullberg@Dell.com>
+Received: from sadbsmtpi1.sfa.se ([193.180.160.223]) by sadbrn1res.ADS.SFA.SE with ESMTP id t6ib_c7g; 18 Jun 2002 11:35:00 +0200
+Received: from sadbsmtpy1.sfa.se (sadbsmtpy1.sfa.se [194.71.64.3])by sadbsmtpi1.sfa.se (8.11.4/8.11.4) with ESMTP id g5I9Zk012903for <annicka.nylund@rfv.sfa.se>; Tue, 18 Jun 2002 11:35:46 +0200 (MET DST)
+Received: from AUSADMMSPS306.aus.amer.dell.com (ausadmmsps306.aus.amer.dell.com [143.166.224.101])by sadbsmtpy1.sfa.se (Switch-2.0.1/Switch-2.0.1/Lovely MTA) with SMTP id g5I9ZjS15224for <annicka.nylund@rfv.sfa.se>; Tue, 18 Jun 2002 11:35:45 +0200 (MET DST)
+Received: from 143.166.98.229 by AUSADMMSPS306.aus.amer.dell.com withESMTP (Tumbleweed MMS SMTP Relay (MMS v4.7);); Tue, 18 Jun 2002 04:35:44 -0500
+X-Server-Uuid: c21c953d-96eb-4242-880f-19bdb46bc876
+Received: by ausxc10.us.dell.com with Internet Mail Service (5.5.2650.21) id <MYTJJZA6>; Tue, 18 Jun 2002 04:29:08 -0500
+Message-ID: <559C77018A1ED311BE690090277B0D0F03578989@uppxmbl102.se.dell.com>
+From: Annelie_Gullberg@Dell.com
+To: rgullberg@hotmail.com, annicka.nylund@rfv.sfa.se,  annettegullberg@hotmail.com, Niall_Brady@Dell.com
+Subject: FW: Hemglass
+Date: Tue, 18 Jun 2002 03:13:42 -0500
+MIME-Version: 1.0
+X-Mailer: Internet Mail Service (5.5.2650.21)
+X-WSS-ID: 1110217A909664-01-01
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<<B1><E116><L49>>

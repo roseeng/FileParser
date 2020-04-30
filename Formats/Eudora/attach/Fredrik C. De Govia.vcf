@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:2.1
+N:De Govia;Fredrik
+FN:Fredrik C. De Govia
+ORG:Hypoteksdata System AB;System
+TITLE:Purchasing Manager
+TEL;WORK;VOICE:08-545 519 12
+TEL;CELL;VOICE:070-689 74 12
+ADR;WORK:;;Kungsgatan 78;Stockholm;;112 27;SWEDEN
+LABEL;WORK;ENCODING=QUOTED-PRINTABLE:Kungsgatan 78=0D=0AStockholm 112 27=0D=0ASWEDEN
+EMAIL;PREF;INTERNET:fredrik.c.degovia@hypoteksdata.se
+REV:20020502T063948Z
+END:VCARD

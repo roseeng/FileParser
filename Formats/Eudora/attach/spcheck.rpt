@@ -1,0 +1,178 @@
+SPCHECK Report File
+
+System Date: Tue Jan 15 15:23:31 2002
+
+The last Windows service pack to be installed on this system was:
+Version 5.0 Service Pack 2 (Build 2195)
+
+Check the system analysis section of this report,
+to see if all files are Service Pack 2 files
+
+System Analysis
+===================
+
+[W2K DNS]
+C:\WINNT\SYSTEM32\DNS.EXE SP2
+C:\WINNT\SYSTEM32\DNSMGR.DLL SP2
+C:\WINNT\SYSTEM32\DNSPERF.DLL SP2
+
+[W2K DNS] Summary:
+Missing files: 0
+Unknown files: 0
+SP2: 3
+
+--------------------------------------------------------------
+
+[W2K WINS]
+C:\WINNT\SYSTEM32\JETPACK.EXE SP0-2
+C:\WINNT\SYSTEM32\WINSCTRS.DLL SP0-2
+C:\WINNT\SYSTEM32\WINSEVNT.DLL SP0-2
+C:\WINNT\SYSTEM32\WINSMIB.DLL SP0-2
+C:\WINNT\SYSTEM32\WINS.EXE SP2
+C:\WINNT\SYSTEM32\WINSSNAP.DLL SP2
+
+[W2K WINS] Summary:
+Missing files: 0
+Unknown files: 0
+SP0-2: 4
+SP2: 2
+
+--------------------------------------------------------------
+
+[W2K SNMP]
+C:\WINNT\SYSTEM32\LMMIB2.DLL Missing
+C:\WINNT\SYSTEM32\HOSTMIB.DLL Missing
+C:\WINNT\SYSTEM32\SNMPMIB.DLL Missing
+C:\WINNT\SYSTEM32\EVNTAGNT.DLL Missing
+C:\WINNT\SYSTEM32\EVNTCMD.EXE Missing
+C:\WINNT\SYSTEM32\EVNTWIN.EXE Missing
+C:\WINNT\SYSTEM32\SNMP.EXE Missing
+C:\WINNT\SYSTEM32\SNMPTRAP.EXE Missing
+C:\WINNT\SYSTEM32\INETMIB1.DLL SP0-2
+C:\WINNT\SYSTEM32\SNMPAPI.DLL SP0-2
+C:\WINNT\SYSTEM32\MSOBJS.DLL SP0-2
+C:\WINNT\SYSTEM32\WINSMIB.DLL SP0-2
+C:\WINNT\SYSTEM32\IGMPAGNT.DLL SP0-2
+C:\WINNT\SYSTEM32\MCASTMIB.DLL SP0-2
+C:\WINNT\SYSTEM32\ACSMIB.DLL SP0-2
+C:\WINNT\SYSTEM32\PERFOS.DLL SP0-2
+C:\WINNT\SYSTEM32\RIPAGNT.DLL SP0-2
+C:\WINNT\SYSTEM32\OSPFAGNT.DLL SP0-2
+C:\WINNT\SYSTEM32\BTPAGNT.DLL SP0-2
+C:\WINNT\SYSTEM32\RTIPXMIB.DLL SP0-2
+
+[W2K SNMP] Summary:
+Missing files: 8
+Unknown files: 0
+SP0-2: 12
+
+--------------------------------------------------------------
+
+[W2K DHCP]
+C:\WINNT\SYSTEM32\DHCPMIB.DLL SP0-2
+C:\WINNT\SYSTEM32\DHCPSNAP.DLL SP0-2
+C:\WINNT\SYSTEM32\JETPACK.EXE SP0-2
+C:\WINNT\SYSTEM32\BINLSVC.DLL SP0-2
+C:\WINNT\SYSTEM32\DHCPSSVC.DLL SP2
+C:\WINNT\SYSTEM32\DHCPSAPI.DLL SP2
+C:\WINNT\SYSTEM32\DHCPCSVC.DLL SP2
+
+[W2K DHCP] Summary:
+Missing files: 0
+Unknown files: 0
+SP0-2: 4
+SP2: 3
+
+--------------------------------------------------------------
+
+[W2K NWLink IPx/SPX]
+C:\WINNT\SYSTEM32\DRIVERS\NWLNKSPX.SYS SP0-2
+C:\WINNT\SYSTEM32\DRIVERS\NWLNKIPX.SYS SP2
+C:\WINNT\SYSTEM32\DRIVERS\NWLNKNB.SYS SP2
+
+[W2K NWLink IPx/SPX] Summary:
+Missing files: 0
+Unknown files: 0
+SP0-2: 1
+SP2: 2
+
+--------------------------------------------------------------
+
+[W2K Internet Protocol TCP/IP]
+C:\WINNT\SYSTEM32\DRIVERS\MSGPC.SYS SP0-2
+C:\WINNT\SYSTEM32\DRIVERS\WANARP.SYS SP0-2
+C:\WINNT\SYSTEM32\ICMP.DLL SP0-2
+C:\WINNT\SYSTEM32\IPHLPAPI.DLL SP0-2
+C:\WINNT\SYSTEM32\SNMPAPI.DLL SP0-2
+C:\WINNT\SYSTEM32\WS2HELP.DLL SP0-2
+C:\WINNT\SYSTEM32\MPRAPI.DLL SP0-2
+C:\WINNT\SYSTEM32\IPBOOTP.DLL SP0-2
+C:\WINNT\SYSTEM32\IPCONFIG.EXE SP0-2
+C:\WINNT\SYSTEM32\PING.EXE SP0-2
+C:\WINNT\SYSTEM32\PATHPING.EXE SP0-2
+C:\WINNT\SYSTEM32\FINGER.EXE SP0-2
+C:\WINNT\SYSTEM32\RSH.EXE SP0-2
+C:\WINNT\SYSTEM32\REXEC.EXE SP0-2
+C:\WINNT\SYSTEM32\RCP.EXE SP0-2
+C:\WINNT\SYSTEM32\TFTP.EXE SP0-2
+C:\WINNT\SYSTEM32\NBTSTAT.EXE SP0-2
+C:\WINNT\SYSTEM32\NETSTAT.EXE SP0-2
+C:\WINNT\SYSTEM32\ARP.EXE SP0-2
+C:\WINNT\SYSTEM32\TRACERT.EXE SP0-2
+C:\WINNT\SYSTEM32\HOSTNAME.EXE SP0-2
+C:\WINNT\SYSTEM32\NTSHRUI.DLL SP0-2
+C:\WINNT\SYSTEM32\DRIVERS\TCPIP.SYS SP2
+C:\WINNT\SYSTEM32\DRIVERS\NETBT.SYS SP2
+C:\WINNT\SYSTEM32\DRIVERS\IPSEC.SYS SP2
+C:\WINNT\SYSTEM32\LMHSVC.DLL SP2
+C:\WINNT\SYSTEM32\OAKLEY.DLL SP2
+C:\WINNT\SYSTEM32\DHCPCSVC.DLL SP2
+C:\WINNT\SYSTEM32\WSOCK32.DLL SP2
+C:\WINNT\SYSTEM32\WS2_32.DLL SP2
+C:\WINNT\SYSTEM32\DNSAPI.DLL SP2
+C:\WINNT\SYSTEM32\TCPMON.DLL SP2
+C:\WINNT\SYSTEM32\FTP.EXE SP2
+C:\WINNT\SYSTEM32\TELNET.EXE SP2
+C:\WINNT\SYSTEM32\NSLOOKUP.EXE SP2
+
+[W2K Internet Protocol TCP/IP] Summary:
+Missing files: 0
+Unknown files: 0
+SP0-2: 22
+SP2: 13
+--------------------------------------------------------------
+
+System Totals:
+Total missing files: 8
+Total unknown files: 0
+SP2: 23
+SP0-2: 43
+
+
+************************** END of Report ****************************
+
+
+Understanding and/or troubleshooting the report:
+================================================
+
+A) If files are reported as missing, possible causes include:
+      1) The file is actually missing
+      2) The file could not be read because of restricted file permissions
+         Check the file's permissions
+      3) The file did not exist in the location specified in the ini file
+         or in any directory listed in the path environmental variable
+         or in the default directory on any other local drive
+         Edit the ini file and specify the actual location of the file
+         or add the directory where the file(s) are located to the path variable
+      4) A system environmental variable used in the ini file has not been set
+         Ensure that all system environmental variables used in the ini file are set
+      5) The file's name and/or path specified in the ini file has embedded spaces
+         Use a long file name alias in the ini file instead of embedded spaces
+         Refer to Microsoft KB article Q142982 for details
+B) If files are reported as installed, but all files for a particular
+   component are not installed:
+      1) The component is not installed
+         Some files are installed with Windows, before a component is installed
+      2) The files are shared with other component that are
+         installed
+

@@ -1,0 +1,17 @@
+[DEFAULT]
+BASEURL=http://www.getoutthere.co.uk/index2.cfm
+[DOC#7#8]
+BASEURL=http://www.getoutthere.co.uk/nav.cfm
+ORIGURL=nav.cfm
+[DOC#7#9]
+BASEURL=http://www.getoutthere.co.uk/home/index.cfm?zone=music
+ORIGURL=/home/index.cfm
+[DOC#7#9#8#9]
+BASEURL=http://www.getoutthere.co.uk/home/mid.cfm?zone=music
+ORIGURL=mid.cfm?zone=music
+[DOC#7#9#8#10]
+BASEURL=http://www.getoutthere.co.uk/home/main_sub.cfm?zone=music
+ORIGURL=main_sub.cfm?zone=music
+[InternetShortcut]
+URL=http://www.getoutthere.co.uk/index2.cfm
+Modified=C0E8C45AD157C101B0

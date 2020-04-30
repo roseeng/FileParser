@@ -1,0 +1,67 @@
+2a 02 8f a6 00 84 00 13 00 06 80 00 00 01 00 04
+
+00 06 00 01 00 - TLV(06), Length 1
+   
+02 00 - UNKNOWN1
+02 00 - UNKNOWN1 again
+
+00 06 - COUNT
+
+-- Entry
+00 00 - Empty string
+00 00 - Tag
+00 00 - ID
+00 01 - Type
+00 0c - Following length 12
+   00 c8 00 08 TLV(c8), Length: 8
+      49 b0 5c 2a 3e ac 74 4b
+--/
+
+-- Entry
+00 00 - Empty string
+00 00 - Tag
+7b 2a - ID
+00 04 - Type: unknown
+00 05 - Length of the following data: 5
+   00 ca 00 01 - TLV(ca)
+      04  
+--/
+
+
+-- Entry
+00 07 46 72 69 65 6e 64 73 - 'Friends'
+3e ac - Tag
+00 00 - ID
+00 01 - Type: larger grouping header
+00 00 - Length of the following data: 0
+--/
+
+
+-- Entry
+00 07 47 65 6e 65 72 61 6c - 'General'
+49 b0 - Tag
+00 00 - ID
+00 01 - Type: larger grouping header  
+00 00 - Length of the following data: 0
+--/
+
+
+-- Entry
+00 06 46 61 6d 69 6c 79 - 'Family'
+5c 2a - Tag
+00 00 - ID
+00 01 - Type: larger grouping header
+00 00 - Length of the following data: 0
+--/
+
+
+-- Entry
+00 0a 43 6f 2d 57 6f 72 6b 65 72 73 - 'Co-Workers'
+74 4b - Tag
+00 00 - ID
+00 01 - Type: larger grouping header
+00 00 - Length of the following data: 0
+--/
+
+
+3c fd 62 39 - Time

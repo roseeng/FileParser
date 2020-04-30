@@ -1,0 +1,27 @@
+
+Koder till Julens hjältar.
+
+1. Stjärna, Hjärta, Gris
+2. Måne, Gran, Gumma
+3. Stjärna, Gris, Ring
+4. Gubbe, Måne, Hjärta
+5. Ring, Gubbe, Gumma
+6. Gris, Bock, Stjärna
+7. Måne, Hjärta, Gran
+8. Ring, Stjärna, Blomma
+9. Gris, Måne, Blomma
+10. Gran, Ring, Gumma
+11. Bock, Stjärna, Gubbe
+12. Gumma, Stjärna, Hjärta
+13. Hjärta, Gran, Bock
+14. Måne, Gris, Bock
+15. Gubbe, Ring, Blomma
+16. Bock, Måne, Gumma
+17. Måne, Gubbe, Gris
+18. Hjärta, Bock, Hjärta
+19. Stjärna, Gubbe, Gubbe
+20. Blomma, Gumma, Gran
+21. Gran, Bock, Gris
+22. Stjärna, Gumma, Bock
+23. Ring, Hjärta, Gubbe
+24. Gumma, Ring, Gris

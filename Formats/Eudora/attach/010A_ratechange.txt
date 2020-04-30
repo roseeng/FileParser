@@ -1,0 +1,305 @@
+
+00 01 00 0a  00 00 86 e3  61 66 00 04  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  9f d4 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  62 dc 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  13 50 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  63 43 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  12 70 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  63 8d 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 9c 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  63 f3 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 d1 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  64 58 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 12 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  64 92 00 03  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  0f 5d 00 00  17 70 00 00  00 00 01
+
+00 01 00 0a  00 00 86 e3  7b c4 00 04  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  14 74 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  7c 9c 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  12 9b 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  7c f9 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 c5 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  7d 71 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 f8 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  7e 09 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 36 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  7e 56 00 03  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  0f 7f 00 00  17 70 00 00  00 00 01
+
+00 01 00 0a  00 00 86 e3  95 fa 00 04  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  14 94 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  96 7d 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  12 b9 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  96 f9 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 e0 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  97 82 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 14 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  97 e2 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 52 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  98 3b 00 03  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  0f 98 00 00  17 70 00 00  00 00 01
+
+00 01 00 0a  00 00 86 e3  af f5 00 04  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  14 af 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b0 ae 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  12 d2 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b0 f9 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 f9 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b1 3e 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  11 2c 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b1 81 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  10 69 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b2 07 00 02  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  0f bc 00 00  17 70 00 00  00 00 00
+00 01 00 0a  00 00 86 e3  b2 52 00 03  00 03 00 00    00 14 00 00  13 ec 00 00  13 88 00 00  0f a0 00 00    0b b8 00 00  0f 0c 00 00  17 70 00 00  00 00 01
+--------------
+                          xx xx    xx                                                                                    xx xx                           xx
+
+
+61 66  04 9f d4 00 //<-- this was sent by server in reply to the very first message from client sent after login
+62 dc  02 13 50 00
+63 43  02 12 70 00
+63 8d  02 11 9c 00
+63 f3  02 10 d1 00
+64 58  02 10 12 00
+64 92  03 0f 5d 01
+      
+7b c4  04 14 74 00
+7c 9c  02 12 9b 00
+7c f9  02 11 c5 00
+7d 71  02 10 f8 00
+7e 09  02 10 36 00
+7e 56  03 0f 7f 01
+      
+95 fa  04 14 94 00
+96 7d  02 12 b9 00
+96 f9  02 11 e0 00
+97 82  02 11 14 00
+97 e2  02 10 52 00
+98 3b  03 0f 98 01
+      
+af f5  04 14 af 00
+b0 ae  02 12 d2 00
+b0 f9  02 11 f9 00
+b1 3e  02 11 2c 00
+b1 81  02 10 69 00
+b2 07  02 0f bc 00
+b2 52  03 0f 0c 01
+      
+                ^^
+                last bit: "message is just ignored by server."
+                in this case, we don't receive an ack from server.
+                i am certain that all messages with "0" here have received an ack (after send), 
+                and were delivered to a party.  
+                i am certain that all messages with "1" here have NOT received an ack (after send), 
+                and were NOT delivered to a party.  They were resent by my client.
+       ^^ 
+       shows certain pattern related to the last bit
+       
+       Excerpt from libfaim code:
+       
+       AIM_RATE_CODE_CHANGE      = 0x0001;
+       AIM_RATE_CODE_WARNING     = 0x0002;
+       AIM_RATE_CODE_LIMIT       = 0x0003;
+       AIM_RATE_CODE_CLEARLIMIT  = 0x0004;
+       
+       
+^^ ^^  
+part of snac request id
+
+
+Other excerpt from libfaim code:
+
+AIM_CB_FAM_GEN        = 0x0001;
+AIM_CB_GEN_RATECHANGE = 0x000a;
+
+      
+
+more excerpts from libfaim:
+
+int faimtest_parse_ratechange(struct aim_session_t *sess, struct command_rx_struct *command, ...)
+{
+  static char *codes[5] = {"invalid",
+         "change",
+         "warning",
+         "limit",
+         "limit cleared"};
+  va_list ap;
+  int code;
+  unsigned long rateclass, windowsize, clear, alert, limit, disconnect;
+  unsigned long currentavg, maxavg;
+
+  va_start(ap, command); 
+
+  /* See code explanations below */
+  code = va_arg(ap, int);
+
+  /*
+   * See comments above aim_parse_ratechange_middle() in aim_rxhandlers.c.
+   */
+  rateclass = va_arg(ap, unsigned long);
+
+  /*
+   * Not sure what this is exactly.  I think its the temporal 
+   * relation factor (ie, how to make the rest of the numbers
+   * make sense in the real world). 
+   */
+  windowsize = va_arg(ap, unsigned long);
+
+  /* Explained below */
+  clear = va_arg(ap, unsigned long);
+  alert = va_arg(ap, unsigned long);
+  limit = va_arg(ap, unsigned long);
+  disconnect = va_arg(ap, unsigned long);
+  currentavg = va_arg(ap, unsigned long);
+  maxavg = va_arg(ap, unsigned long);
+
+  va_end(ap);
+
+
+  dvprintf("faimtest: rate %s (rate class 0x%04lx): curavg = %ld, maxavg = %ld, alert at %ld, clear warning at %ld, limit at %ld, disconnect at %ld (window size = %ld)\n",
+   (code < 5)?codes[code]:"invalid",
+   rateclass,
+   currentavg, maxavg,
+   alert, clear,
+   limit, disconnect,
+   windowsize);
+
+  if (code == AIM_RATE_CODE_CHANGE) {
+    /*
+     * Not real sure when these get sent.
+     */
+    if (currentavg >= clear)
+      aim_conn_setlatency(command->conn, 0);
+
+  } else if (code == AIM_RATE_CODE_WARNING) {
+    /*
+     * We start getting WARNINGs the first time we go below the 'alert'
+     * limit (currentavg < alert) and they stop when either we pause
+     * long enough for currentavg to go above 'clear', or until we
+     * flood it bad enough to go below 'limit' (and start getting
+     * LIMITs instead) or even further and go below 'disconnect' and 
+     * get disconnected completely (and won't be able to login right
+     * away either).
+     */
+    aim_conn_setlatency(command->conn, windowsize/4); /* XXX this is bogus! */ 
+
+  } else if (code == AIM_RATE_CODE_LIMIT) {
+    /*
+     * When we hit LIMIT, messages will start getting dropped.
+     */
+    aim_conn_setlatency(command->conn, windowsize/2); /* XXX this is bogus! */ 
+
+  } else if (code == AIM_RATE_CODE_CLEARLIMIT) {
+    /*
+     * The limit is cleared when curavg goes above 'clear'.
+     */
+    aim_conn_setlatency(command->conn, 0); 
+  }
+
+  return 1;
+}
+
+
+
+
+/**
+ * aim_conn_setlatency - Set a forced latency value for connection
+ * @conn: Conn to set latency for
+ * @newval: Number of seconds to force between transmits
+ *
+ * Causes @newval seconds to be spent between transmits on a connection.
+ *
+ * This is my lame attempt at overcoming not understanding the rate
+ * limiting. 
+ *
+ * XXX: This should really be replaced with something that scales and
+ * backs off like the real rate limiting does.
+ *
+ */
+faim_export int aim_conn_setlatency(struct aim_conn_t *conn, int newval)
+{
+  if (!conn)
+    return -1;
+
+  faim_mutex_lock(&conn->active);
+  conn->forcedlatency = newval;
+  conn->lastactivity = 0; /* reset this just to make sure */
+  faim_mutex_unlock(&conn->active);
+
+  return 0;
+}
+
+
+<packet>
+00 01 00 0a  00 00 86 e3  61 66 //snac header, AIM_CB_FAM_GEN / AIM_CB_GEN_RATECHANGE
+
+00 04   //rate code: can be 1, 2, 3, or 4:
+        //
+        //AIM_RATE_CODE_CHANGE      = 0x0001;
+        //AIM_RATE_CODE_WARNING     = 0x0002;
+        //AIM_RATE_CODE_LIMIT       = 0x0003;
+        //AIM_RATE_CODE_CLEARLIMIT  = 0x0004;
+        //
+        //in AIM_CB_GEN_RATECHANGE packets, 
+        //(rate code == AIM_RATE_CODE_LIMIT if and only if packet ignored bit == 1).
+        //
+        //rate code == AIM_RATE_CODE_CLEARLIMIT means that you can now send faster (?).
+        
+00 03   //rate class (what's this?)
+00 00 00 14 //window size (here, 20 decimal) 
+            //(total buffer size on icq server, for this rate class?)
+            
+00 00 13 ec //clear level (here, 5100 decimal) 
+            //(above this level, RATECHANGE packet is sent by server, with code==AIM_RATE_CODE_CLEARLIMIT)
+            
+00 00 13 88 //alert level (here, 5000 decimal) 
+            //(below this level, RATECHANGE packet is sent by server, with code==AIM_RATE_CODE_WARNING)
+            
+00 00 0f a0 //limit level (here, 4000 decimal) 
+            //(below this level, messages are ignored by the server, and
+            //                   RATECHANGE packet is sent by server, with code==AIM_RATE_CODE_LIMIT)
+            
+00 00 0b b8 //disconnect level (here, 3000 decimal)
+00 00 9f d4 //current level (varies from disconnect level to max level)
+00 00 17 70 //xlevel     (here, 6000 decimal)
+            //(acceptable level (?))
+            //libfaim (incorrectly) calls it 'maxlevel' (incorrectly, since current level is often > xlevel)
+00 00 00 00 //always 0?
+00 //packet ignored bit //01 when previous packet from client is ignored by icq server, 00 otherwise
+</packet>
+
+excerpt from Douglas' site (with my comments):
+
+SRV_RATES packet SNAC(1,7) //aka 'rate info response'
+Group 3: 
+20,   //window size
+5100, //clear level
+5000, //alert level
+4000, //limit level
+3000, //disconnect level
+6000, //xlevel
+6000, //xlevel
+114   //?
+
+excerpt end.
+
+
+//puzzle for mathematicians:
+//diff is difference between consecutive levels
+//dd is difference between consecutive diffs
+
+0x9fd4 = (decimal) 40916 //is often more than xlevel
+0x1350 = (decimal) 4944, diff=35972 
+0x1270 = (decimal) 4720, diff=224, dd=35748
+0x119c = (decimal) 4508, diff=212, dd=12
+0x10d1 = (decimal) 4305, diff=203, dd=9
+0x1012 = (decimal) 4114, diff=191, dd=12
+0x0f5d = (decimal) 3933, diff=181, dd=10
+
+0x1474 = (decimal) 5236, diff=1303 //in clearlimit packets, this can be:
+                                   //5236..5300 after 30 seconds of not sending,
+                                   //6776 after 60 seconds of not sending
+0x129b = (decimal) 4763, diff=473, dd=830
+0x11c5 = (decimal) 4549, diff=214, dd=259
+0x10f8 = (decimal) 4344, diff=205, dd=9
+0x1036 = (decimal) 4150, diff=194, dd=11
+0x0f7f = (decimal) 3967, diff=183, dd=11
+
+0x1494 = (decimal) 5268, diff=1301
+0x12b9 = (decimal) 4793, diff=475, dd=826
+0x11e0 = (decimal) 4576, diff=217, dd=258
+0x1114 = (decimal) 4372, diff=204, dd=13
+0x1052 = (decimal) 4178, diff=194, dd=10
+0x0f98 = (decimal) 3992, diff=186, dd=8
+
+0x14af = (decimal) 5295, diff=1303
+0x12d2 = (decimal) 4818, diff=477, dd=826
+0x11f9 = (decimal) 4601, diff=217, dd=260
+0x112c = (decimal) 4396, diff=205, dd=12
+0x1069 = (decimal) 4201, diff=195, dd=10
+0x0fbc = (decimal) 4028, diff=173, dd=22
+0x0f0c = (decimal) 3852, diff=176, dd=-3
+
+
+
+
+if the client with uin X got diconnected due to ratelimit, after the next login, 
+when he sends his first snac 4/6 (sendmessage), he often receives 1/0a clearlimit packet.
+

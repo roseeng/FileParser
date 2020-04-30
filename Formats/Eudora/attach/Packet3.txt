@@ -1,0 +1,127 @@
+2a 02 bb e6 01 39 00 13 00 06 80 00 00 01 00 04
+
+00 06 00 01 00 - TLV(06), Length: 1
+02 00 - UNKNOWN1
+02 00 - UNKNOWN1 again
+
+00 0c - Number of entries
+
+
+-- Entry
+00 00 - Empty string
+00 00 - Tag
+00 00 - ID
+00 01 - Type: larger grouping header
+00 08 - Length of the following data: 8
+   00 c8 00 04 - TLV(c8), Length: 4
+      1f 64 79 14
+--//
+
+
+-- Entry
+00 08 38 35 32 36 36 36 36 36 - '5266666'
+00 00 - Tag
+12 34 - ID
+00 03 - User in invisible list
+00 00 - Length of the following data
+--//
+
+
+-- Entry
+00 00 - Empty string
+00 00 - Tag
+66 c2 - ID
+00 04 - Type: unknown
+00 05 - Length of the following data: 5
+00 ca 00 01 - TLV(ca)
+   04
+--//
+
+-- Entry
+00 07 47 65 6e 65 72 61 6c - 'General'
+1f 64 - Tag 
+00 00 - ID
+00 01 - Type: larger grouping header
+00 12 - Length of the following data: 18
+
+00 c8 00 0e - TLV(c8), Length: 14
+   4d 9b 7c fb 57 20 47 e4 19 3f 24 73 04 74 //IDs in order as in contact list
+--//
+
+-- Entry
+00 09 31 32 31 34 36 36 35 35 30 - '121466550'
+1f 64 - Tag: General
+04 74 - ID
+00 00 - Type: a normal contact list entry
+00 0b - Length of the following data: 11
+
+01 31 00 07 
+   52 65 64 5f 72 75 6d - 'Red_rum'
+--//
+
+-- Entry
+00 08 35 32 38 39 32 33 30 31 - '52892301'
+1f 64 - Tag: General
+19 3f - ID
+00 00 - Type: a normal contact list entry
+00 00 - Length of the following data: 0
+--//
+
+-- Entry
+00 05 31 30 35 34 33 - '10543'
+1f 64 - Tag: General
+24 73 - ID 
+00 00 - Type: a normal contact list entry
+00 09 - Length of the following data
+   01 31 00 05 - TLV(131), Length 5
+      43 6f 62 61 6e - 'Coban'
+--//
+
+-- Entry
+00 08 34 33 39 31 32 34 34 35 - '43912445'
+1f 64 - Tag: General
+47 e4 - ID
+00 00 - Type: a normal contact list entry
+00 12 - Length of the following data: 18
+   01 31 00 0e - TLV(131), Length: 14
+   46 72 6f 73 20 5b 50 68 30 65 6e 69 78 5d 
+--//
+
+-- Entry
+00 07 31 36 33 34 39 39 31 
+1f 64 - Tag: General
+4d 9b - ID
+00 00 - Type
+00 0a - Length of the following data
+01 31 00 06 6b 61 6b 74 75 73 
+--//
+
+-- Entry
+00 09 31 36 32 37 39 32 36 39 38 
+1f 64 - Tag: General 
+57 20 - ID
+00 00 - Type
+00 00 - Length of the following data
+--//
+
+-- Entry
+00 09 31 33 33 32 30 30 33 38 39 
+1f 64 - Tag: General
+7c fb - ID
+00 00 - Type
+00 08 - Length of the following data
+   01 31 00 04 
+      4a 6f 72 6a - 'Jorj'
+--//
+
+-- Entry
+00 07 46 72 69 65 6e 64 73 - 'Friends'
+79 14 
+00 00 
+00 01 
+00 04 
+   00 c8 00 00 
+--//
+
+
+3d 1f b1 9e - Time

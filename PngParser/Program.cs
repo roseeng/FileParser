@@ -13,8 +13,6 @@ namespace PngParser
             {
                 var pngFile = new PngFile();
                 var reader = new FileReader();
-                pngFile.GammaChunk = new gAMA();
-                pngFile.PhysicalChunk = new pHYs();
                 
                 Parser.DefaultDumpFormat = DumpFormat.Ascii;
 
@@ -23,8 +21,11 @@ namespace PngParser
                 pngFile.FileMagic.Read(reader);
                  
                 pngFile.Header.Read(reader);
-                
+
                 /*
+                pngFile.GammaChunk = new gAMA();
+                pngFile.PhysicalChunk = new pHYs();
+
                 pngFile.GammaChunk.Read(reader);
                 pngFile.PhysicalChunk.Read(reader);
                 var text = new tEXt();
@@ -37,11 +38,12 @@ namespace PngParser
                 end.Read(reader);
                 */
 
-                while (pngFile.Data.CurrentType != typeof(IEND))
+                do
                 {
                     pngFile.Data.Read(reader);
                     pngFile.MapCurrentChunk();
-                }
+                } 
+                while (pngFile.Data.CurrentType != typeof(IEND));
 
                 Console.WriteLine("");
                 Console.WriteLine($"Gamma is: {pngFile.GammaChunk?.Gamma?.Value}");

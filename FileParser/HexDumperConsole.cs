@@ -56,7 +56,11 @@ namespace FileParser
 
         private void WritePos(long pos)
         {
-            string ps = pos.ToString("D6");
+            string ps;
+            if (Decimal)
+                ps = pos.ToString("D6");
+            else
+                ps = pos.ToString("X4");
             Console.Write($"{ps} : ");
         }
     }

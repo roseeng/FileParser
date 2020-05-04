@@ -56,6 +56,25 @@ namespace FileParser
         }
     }
 
+    public class SignedData32LE : ChunkField
+    {
+        public Int32 Value;
+        public override void Read(FileReader rdr)
+        {
+            var buf = new byte[4];
+            buf[0] = rdr.GetByte();
+            buf[1] = rdr.GetByte();
+            buf[2] = rdr.GetByte();
+            buf[3] = rdr.GetByte();
+            Value = BitConverter.ToInt32(buf, 0);
+        }
+
+        public override void StartNew()
+        {
+            Value = 0;
+        }
+    }
+
     public class Data16BE : ChunkField
     {
         public UInt16 Value;

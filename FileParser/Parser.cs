@@ -30,8 +30,8 @@ namespace FileParser
 
         public static bool IsPrintable(byte b)
         {
-            // Range of chars from space till ~ (tilda)
-            return b >= 32 && b < 126;
+            // Range of chars from space till ~ (tilde)
+            return b >= 32; // testa att vara mer generös? && b < 126;
         }
 
         public static string AsHex(byte[] bytes)

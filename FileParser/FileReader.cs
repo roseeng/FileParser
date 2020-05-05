@@ -64,6 +64,11 @@ namespace FileParser
             _stream.Position = _milestone;
         }
 
+        public void GoTo(long position)
+        {
+            _stream.Position = position;
+        }
+
         public void Dispose()
         {
             if (_stream != null)

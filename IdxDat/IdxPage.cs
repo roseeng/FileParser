@@ -51,7 +51,9 @@ namespace IdxDat
         {
             //ListItems.ReadAll(rdr);
             for (int i = 0; i < 1000; i++)
+            {
                 ListItems.ReadOne(rdr);
+            }
 
             base.AfterAutomaticRead(rdr);
         }

@@ -6,7 +6,7 @@ using FileParser;
 
 namespace IdxDat
 {
-    class DatPage : SimpleChunk
+    class DatPageHeader : SimpleChunk
     {
         public Magic Magic;
         public Data32LE Next;
@@ -18,7 +18,7 @@ namespace IdxDat
         public Chararray AllocationBitmap;
         //public ChunkList<> ListItems;
 
-        public DatPage()
+        public DatPageHeader()
         {
             Magic = new Magic(new byte[] { 201, 0, 0, 0,
                                              0, 0, 0, 0,
@@ -50,6 +50,7 @@ namespace IdxDat
         public override void AfterAutomaticRead(FileReader rdr)
         {
             //ListItems.ReadAll(rdr);
+            Parser.Dumper.OnInfo("Next Page is on address: " + Next.Value.ToString("X4"));
 
             base.AfterAutomaticRead(rdr);
         }

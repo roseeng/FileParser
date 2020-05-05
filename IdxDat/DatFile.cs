@@ -9,6 +9,6 @@ namespace IdxDat
     class DatFile : FileChunk
     {
         public DatMainHeader Header = new DatMainHeader();
-        public DatPage Page = new DatPage();
+        public DatPageHeader PageHeader = new DatPageHeader();
     }
 }

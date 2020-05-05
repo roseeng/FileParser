@@ -32,15 +32,20 @@ namespace IdxDat
         public override void BeforeAutomaticRead(FileReader rdr)
         {
             base.BeforeAutomaticRead(rdr);
-            Parser.Dumper.OnInfo("<Listitem>");
+            //Parser.Dumper.OnInfo("<Listitem>");
         }
+
+        public static HashSet<long> EntryTypes = new HashSet<long>();
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
             if (Status.Value == -2)
             {
-                Parser.Dumper.OnInfo($"Status: {Status.Value}");
-                Parser.Dumper.OnInfo($"Type  : {Entry.Value}");
+                EntryTypes.Add(Entry.Value);
+
+                Parser.Dumper.OnInfo($"Type: {Entry.Value}");
+
+                /*
                 if (Previous.Value == MinusOne)
                     Parser.Dumper.OnInfo($"Prev  : (none)");
                 else
@@ -50,11 +55,18 @@ namespace IdxDat
                     Parser.Dumper.OnInfo($"Next  : (none)");
                 else
                     Parser.Dumper.OnInfo($"Next  : {Next.Value}");
+                */
 
-                if (DatPointer.Value == MinusOne)
-                    Parser.Dumper.OnInfo($"DATptr: (none)");
-                else
+                if (DatPointer.Value != MinusOne)
                     Parser.Dumper.OnInfo($"DATptr: {DatPointer.Value}");
+
+                if (Entry.Value > 1000 && Entry.Value < 2000)
+                    Parser.Dumper.OnInfo($"aaa");
+
+            }
+            else
+            {
+                Parser.Dumper.OnInfo("(invalid)");
             }
 
             base.AfterAutomaticRead(rdr);

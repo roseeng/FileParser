@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FileParser;
 
 namespace IdxDat
@@ -60,58 +61,28 @@ namespace IdxDat
             {
                 Data8 d = new Data8();
                 d.Read(rdr);
+
                 if (prev0 == 0x23 && d.Value == 0xA3)
                 {
-                    Parser.Dumper.OnInfo("Found sig with code: " + prev1.ToString("X2"));                    
+                    Parser.Dumper.OnInfo("Found sig with code: " + prev1.ToString("X2"));
 
-                    if (prev1 == 0xE0)
+                    if (datFile.ValidSigs.Contains(prev1))
                     {
                         var pos = rdr.Position;
                         rdr.GoTo(pos - (4 + 4 + 4 + 3));
 
-                        var entry = new E0Entry();
-                        entry.Read(rdr);
+                        datFile.PolyChunk.Read(rdr);
                     }
 
-                    if (prev1 == 0xE5)
-                    {
-                        var pos = rdr.Position;
-                        rdr.GoTo(pos - (4 + 4 + 4 + 3));
+                }
 
-                        var entry = new E5Entry();
-                        entry.Read(rdr);
-                    }
+                if (prev0 == 0x50 && d.Value == 0x3B)
+                {
+                    // Long message format
+                    var pos = rdr.Position;
+                    rdr.GoTo(pos - (4 + 4 + 4 + 2));
 
-                    if (prev1 == 0xE7)
-                    {
-                        var pos = rdr.Position;
-                        rdr.GoTo(pos - (4 + 4 + 4 + 3));
-
-                        var entry = new E7Entry();
-                        entry.Read(rdr);
-                    }
-
-                    /*
-                    Data32LE length = new Data32LE();
-                    length.Read(rdr);
-
-                    Data32LE filed = new Data32LE();
-                    filed.Read(rdr);
-
-                    Data32LE entry = new Data32LE();
-                    entry.Read(rdr);
-
-                    Data8 sig = new Data8();
-                    sig.Read(rdr);
-
-                    Magic magic = new Magic(new byte[] { 0x23, 0xA3, 0xDB, 0xDF, 0xB8, 0xD1, 0x11, 0x8A, 0x65, 0x00, 0x60, 0x08, 0x71, 0xA3, 0x91 });
-                    magic.Read(rdr);
-
-                    Chararray data = new Chararray();
-                    data.Length = length.Value - (4 + 4 + 4 + 16);
-                    data.Read(rdr);
-                    */
-                    int a = 1;
+                    datFile.LongMessage.Read(rdr);
                 }
 
                 // Go on scanning
@@ -125,12 +96,6 @@ namespace IdxDat
                 }
             }
             
-
-            /*
-                Chararray dummy = new Chararray();
-                dummy.Length = 16;
-                dummy.Read(reader);
-            */
         }
 
         static void ReadIdx()

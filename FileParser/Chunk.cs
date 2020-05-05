@@ -35,12 +35,16 @@ namespace FileParser
             AfterAutomaticRead(rdr);
         }
 
-        public void SetupChunkFields()
+        public void SetupChunkFields(bool inherit = false)
         {
             Type type = this.GetType();
             if (Parser.Debug) Console.WriteLine($"SetupChunkFields for {type.Name}");
 
-            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.DeclaredOnly| BindingFlags.NonPublic | BindingFlags.Public); //.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            BindingFlags flags = BindingFlags.DeclaredOnly;
+            if (inherit)
+                flags = BindingFlags.Public;
+
+            FieldInfo[] fields = type.GetFields(flags | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public); //.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (FieldInfo field in fields)
             {
                 var otto = field.GetValue(this);

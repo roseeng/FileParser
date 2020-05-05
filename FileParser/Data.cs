@@ -136,4 +136,27 @@ namespace FileParser
             Value = null;
         }
     }
+
+    public class ByteArray : ChunkField
+    {
+        public byte[] Value;
+        public UInt32 Length = 0;
+
+        public override void Read(FileReader rdr)
+        {
+            //Console.WriteLine($"ByteArray Reading {Length} bytes");
+            Value = new byte[Length];
+
+            for (int i = 0; i < Length; i++)
+            {
+                var b = rdr.GetByte();
+                Value[i] = b;
+            }
+        }
+
+        public override void StartNew()
+        {
+            Value = null;
+        }
+    }
 }

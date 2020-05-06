@@ -33,17 +33,20 @@ namespace IdxDat
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            if (rdr.Position != startPos + length.Value)
+            if (rdr.Position != startPos + length.Value - 4)
             {
-                var delta = startPos + length.Value - rdr.Position;
+                var delta = startPos + length.Value - 4 - rdr.Position;
+                /*
+                 Do not read up to length
                 if (delta > 0)
                 {
                     diffdata.Length = (uint)delta;
                     diffdata.Read(rdr);
                 }
+                */
 
                 if (Parser.Debug)
-                    Parser.Dumper.OnInfo($"Diff length: {delta} bytes.");
+                    Parser.Dumper.OnInfo($"Diff length: {delta} bytes, Length={length.Value}");
             }
 
             base.AfterAutomaticRead(rdr);

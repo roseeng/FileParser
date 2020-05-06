@@ -24,15 +24,16 @@ namespace FileParser
         /// <returns>byte</returns>
         public byte GetByte()
         {
+            var pos = _stream.Position;
             var i = _stream.ReadByte();
             if (i == -1)
                 throw new ParserEOFException();
             var b = Convert.ToByte(i);
 
-            Parser.Dumper.OnByte(b, _stream.Position);
+            Parser.Dumper.OnByte(b, pos);
 
             if (OnByteRead != null)
-                OnByteRead(b, _stream.Position);
+                OnByteRead(b, pos);
 
             return b;
         }
@@ -62,11 +63,13 @@ namespace FileParser
         public void GoToMilestone()
         {
             _stream.Position = _milestone;
+            Parser.Dumper.NewItem();
         }
 
         public void GoTo(long position)
         {
             _stream.Position = position;
+            Parser.Dumper.NewItem();
         }
 
         public void Dispose()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace FileParser
@@ -9,8 +10,14 @@ namespace FileParser
         int _col = 0;
         public bool Decimal { get; set; } = false;
 
-        private HexDumperConsole _console = new HexDumperConsole();
+        public HexDumperConsole _console = new HexDumperConsole();
         private Queue<Message> _messages = new Queue<Message>();
+
+        public HexDumperConsole Console
+        {
+            get { return _console; }
+            set { _console = value; }
+        }
 
         private bool _freeze = false;
 

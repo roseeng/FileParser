@@ -13,6 +13,8 @@ namespace FileParser
         {
         }
 
+        public ColorSpan ColorSpan { get; set; }
+
         public void OnByte(byte b, long pos)
         {
             if (_col > 15)
@@ -23,10 +25,17 @@ namespace FileParser
 
             if (_col == 0) WritePos(pos);
 
+            if (ColorSpan != null && ColorSpan.Start <= pos && ColorSpan.End >= pos)
+                Console.ForegroundColor = ColorSpan.Color;
+            else
+                Console.ForegroundColor = ConsoleColor.White;
+
             if (Decimal)
                 Console.Write(b.ToString("D3"));
             else
                 Console.Write(b.ToString("X2"));
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" ");
 
             _col++;
@@ -62,6 +71,27 @@ namespace FileParser
             else
                 ps = pos.ToString("X4");
             Console.Write($"{ps} : ");
+        }
+    }
+
+    public class ColorSpan
+    {
+        public ConsoleColor Color;
+        public long Start;
+        public long End;
+
+        public ColorSpan()
+        {
+            Color = ConsoleColor.White;
+            Start = 0;
+            End = 0;
+        }
+
+        public ColorSpan(ConsoleColor color, long start, long end)
+        {
+            Color = color;
+            Start = start;
+            End = end;
         }
     }
 }

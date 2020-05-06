@@ -1,0 +1,16 @@
+2003 (inte hela):
+Unhandled signatures: EF, EC, F1, E9
+
+Entry types:
+E7 : 286
+E5 : 134
+EF : 3
+EC : 11
+F1 : 1
+E0 : 760
+E9 : 1
+
+Message types:
+1 : 1572
+4 : 14
+12 : 1

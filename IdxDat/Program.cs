@@ -28,10 +28,13 @@ namespace IdxDat
             var datFile = new DatFile();
             var rdr = new FileReader();
 
-            Parser.DefaultDumpFormat = DumpFormat.Ascii;
+            Parser.DefaultDumpFormat = DumpFormat.Hex;
             //Parser.Debug = true;
-
-            rdr.Open("2001_790171.dat");
+            
+            HexDumperConsole console = new HexDumperConsole();
+            Parser.Dumper.Console = console;
+ 
+            rdr.Open("2003_790171.dat");
 
             datFile.Header.Read(rdr);
             
@@ -39,7 +42,8 @@ namespace IdxDat
             byte prev1 = 0;
             long ix = 0;
 
-            rdr.GoTo(0x265290);
+            //rdr.GoTo(0x265280);
+            //console.ColorSpan = new ColorSpan(ConsoleColor.Green, 0x265290, 0x265290 + 4 + 146);
 
             try
             {

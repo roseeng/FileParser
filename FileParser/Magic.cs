@@ -30,10 +30,13 @@ namespace FileParser
             }
             if (IsValid.HasValue && IsValid.Value)
             {
-                if (Parser.DefaultDumpFormat == DumpFormat.Ascii)
-                    Parser.Dumper.OnInfo($"Magic: {AsAscii(_magic)}");
-                else
-                    Parser.Dumper.OnInfo($"Magic: {AsHex(_magic)}");
+                if (Parser.Debug && Parser.DebugLevel > 5)
+                {
+                    if (Parser.DefaultDumpFormat == DumpFormat.Ascii)
+                        Parser.Dumper.OnInfo($"Magic: {AsAscii(_magic)}");
+                    else
+                        Parser.Dumper.OnInfo($"Magic: {AsHex(_magic)}");
+                }
             }
             else
             {

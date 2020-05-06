@@ -1,4 +1,5 @@
 ﻿using FileParser;
+using IdxDat.DatEntries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,7 @@ namespace IdxDat
         Data32LE wavEntries;
         Data16LE separator3;
 
-        Data32LE propertyBlocks;
-
-        // Repeat
-        Data16LE separator4;
-        Data32LE properties;
-
-        // Repeat-repeat
-        Data16LE nameLength;
-        Chararray name;
-        Data8 propType;        
+        Data32LE propertyBlocks;   
 
         public E5Entry()
         {
@@ -57,13 +49,22 @@ namespace IdxDat
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
+            // Repeat
+            Data16LE separator4 = new Data16LE(); ;
+            Data32LE properties = new Data32LE(); ;
+
+            // Repeat-repeat
+            AsciiZ name = new AsciiZ(); 
+            Data8 propType = new Data8();
+
             Data8 data8 = new Data8();
             Data16LE data16 = new Data16LE();
             Data32LE data32 = new Data32LE();
-            Chararray datax = new Chararray();
+            AsciiZ textData = new AsciiZ();
+            ByteArray binData = new ByteArray();
 
-            long UIN;
-            string nickname;
+            long UIN = 0;
+            string nickname = "";
 
             for (int block = 0; block < propertyBlocks.Value; block++)
             {
@@ -71,10 +72,8 @@ namespace IdxDat
                 properties.Read(rdr);
                 for (int i = 0; i < properties.Value; i++)
                 {
-                    nameLength.Read(rdr);
-                    name.Length = nameLength.Value;
                     name.Read(rdr);
-                    var propName = name.Value.Substring(0, name.Value.Length - 1);
+                    var propName = name.Value;
 
                     propType.Read(rdr);
 
@@ -101,10 +100,8 @@ namespace IdxDat
                             value = data32.Value.ToString("D");
                             break;
                         case 0x6B:
-                            data16.Read(rdr);
-                            datax.Length = data16.Value; 
-                            datax.Read(rdr);
-                            value = datax.Value.Substring(0, datax.Value.Length - 1);
+                            textData.Read(rdr);
+                            value = textData.Value;
                             if (propName == "NickName" || propName == "MyDefinedHandle")
                                 nickname =  value;
 
@@ -112,12 +109,24 @@ namespace IdxDat
                         case 0x6D:
                             data32.Read(rdr); // Count
                             data8.Read(rdr); // Type
-                            value = "(sublist)";
+                            value = "(sublist) : ";
+                            if (data8.Value == 0x6B)
+                            {
+                                for (int j = 0; j < data32.Value; j++)
+                                {
+                                    textData.Read(rdr);
+                                    value += textData.Value + ", ";
+                                }
+                            }
+                            else
+                            {
+                                throw new NotImplementedException($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
+                            }
                             break;
                         case 0x6F:
                             data32.Read(rdr); // Length
-                            datax.Length = data32.Value;
-                            datax.Read(rdr);
+                            binData.Length = data32.Value;
+                            binData.Read(rdr);
                             value = "(blob)";
                             break;
 
@@ -126,11 +135,12 @@ namespace IdxDat
                             break;
                     }
 
-                    Parser.Dumper.OnInfo($"'{propName}' : " + propType.Value.ToString("X2") + $" Value: {value}");
-
+                    if (Parser.Debug)
+                        Parser.Dumper.OnInfo($"'{propName}' : " + propType.Value.ToString("X2") + $" Value: {value}");
                 }
             }
 
+            Parser.Dumper.OnInfo($"Contact UIN: {UIN} Nick: {nickname}");
             base.AfterAutomaticRead(rdr);
         }
     }

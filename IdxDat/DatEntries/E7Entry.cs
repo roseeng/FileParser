@@ -1,4 +1,5 @@
 ﻿using FileParser;
+using IdxDat.DatEntries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,7 @@ namespace IdxDat
         Data32LE unknown1;
         Data32LE unknown2;
 
-        Data16LE nameLength;
-        Chararray name;
+        AsciiZ name;
 
         public E7Entry()
         {
@@ -38,15 +38,12 @@ namespace IdxDat
                  unknown0,
                  unknown1,
                  unknown2,
-                 nameLength,
+                 name,
             };
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            name.Length = nameLength.Value;
-            name.Read(rdr);
-
             Parser.Dumper.OnInfo($"Address book: {name.Value}");
             base.AfterAutomaticRead(rdr);
         }

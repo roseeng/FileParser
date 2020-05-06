@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FileParser;
+
+using System.Linq;
 
 namespace IdxDat
 {
@@ -16,11 +19,13 @@ namespace IdxDat
         static void ReadDat()
         {
             Console.WriteLine("Hello World!");
+            HashSet<string> unhandled = new HashSet<string>();
 
             var datFile = new DatFile();
             var rdr = new FileReader();
 
             Parser.DefaultDumpFormat = DumpFormat.Ascii;
+            Parser.Debug = true;
 
             rdr.Open("2001_790171.dat");
 
@@ -57,45 +62,71 @@ namespace IdxDat
             byte prev1 = 0;
             long ix = 0;
 
-            while (true)
+            try
             {
-                Data8 d = new Data8();
-                d.Read(rdr);
-
-                if (prev0 == 0x23 && d.Value == 0xA3)
+                while (true)
                 {
-                    Parser.Dumper.OnInfo("Found sig with code: " + prev1.ToString("X2"));
+                    Data8 d = new Data8();
+                    d.Read(rdr);
 
-                    if (datFile.ValidSigs.Contains(prev1))
+                    if (prev0 == 0x23 && d.Value == 0xA3)
                     {
+                        Parser.Dumper.OnInfo("Found sig with code: " + prev1.ToString("X2"));
+
+                        if (datFile.ValidSigs.Contains(prev1))
+                        {
+                            var pos = rdr.Position;
+                            rdr.GoTo(pos - (4 + 4 + 4 + 3));
+
+                            datFile.PolyChunk.Read(rdr);
+
+                            prev0 = prev1 = 0;
+                            d.StartNew();
+                        }
+                        else
+                        {
+                            string code = prev1.ToString("X2");
+                            if (!unhandled.Contains(code))
+                            {
+                                unhandled.Add(code);
+                                Parser.Dumper.OnInfo("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
+                            }
+                        }
+                    }
+
+                    if (prev1 == 0x50 && prev0 == 0x3B && d.Value == 0xC1)
+                    {
+                        // Long message format
                         var pos = rdr.Position;
                         rdr.GoTo(pos - (4 + 4 + 4 + 3));
 
-                        datFile.PolyChunk.Read(rdr);
+                        datFile.LongMessage.Read(rdr);
+
+                        prev0 = prev1 = 0;
+                        d.StartNew();
                     }
 
-                }
+                    // Go on scanning
+                    prev1 = prev0;
+                    prev0 = d.Value;
+                    ix++;
 
-                if (prev0 == 0x50 && d.Value == 0x3B)
-                {
-                    // Long message format
-                    var pos = rdr.Position;
-                    rdr.GoTo(pos - (4 + 4 + 4 + 2));
-
-                    datFile.LongMessage.Read(rdr);
-                }
-
-                // Go on scanning
-                prev1 = prev0;
-                prev0 = d.Value;
-                ix++;
-
-                if (ix % 256 == 0)
-                {
-                    Parser.Dumper.OnInfo("");
+                    if (ix % 256 == 0)
+                    {
+                        Parser.Dumper.OnInfo("");
+                    }
                 }
             }
-            
+            catch (ParserEOFException)
+            {
+                Parser.Dumper.OnInfo("End of file."));
+            }
+            catch (Exception ex)
+            {
+                Parser.Dumper.OnInfo("Unhandled Exception: " + ex.Message);
+            }
+
+            Parser.Dumper.OnInfo("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
         }
 
         static void ReadIdx()

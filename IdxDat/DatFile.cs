@@ -22,7 +22,9 @@ namespace IdxDat
             PolyChunk.RegisterType(typeof(E5Entry));
             PolyChunk.RegisterType(typeof(E7Entry));
 
+            //            ValidSigs = new byte[] { 0xE0, 0xE1, 0xE2, 0xE4, 0xE5, 0xE6, 0xE7 };
             ValidSigs = new byte[] { 0xE0, 0xE5, 0xE7 };
+
         }
     }
 }

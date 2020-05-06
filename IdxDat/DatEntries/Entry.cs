@@ -41,7 +41,9 @@ namespace IdxDat
                     diffdata.Length = (uint)delta;
                     diffdata.Read(rdr);
                 }
-                Parser.Dumper.OnInfo($"Diff length: {delta} bytes.");
+
+                if (Parser.Debug)
+                    Parser.Dumper.OnInfo($"Diff length: {delta} bytes.");
             }
 
             base.AfterAutomaticRead(rdr);

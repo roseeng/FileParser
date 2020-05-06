@@ -1,4 +1,5 @@
 ﻿using FileParser;
+using IdxDat.DatEntries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,7 @@ namespace IdxDat
         Data32LE filingFlags;
         Data16LE entrySubtype;
         Data32LE UIN;
-        Data16LE messageTextLength;
-        Chararray messageText;
+        AsciiZ messageText;
         Data32LE status;
         Data32LE sentOrReceived;
         Data16LE separator2;
@@ -38,23 +38,23 @@ namespace IdxDat
                  filingFlags,
                  entrySubtype,
                  UIN,
-                 messageTextLength,
-                 //messageText,
-                 //status,
-                 //sentOrReceived,
-                 //separator2,
-                 //timestamp
+//                 messageTextLength,
+                 messageText,
+                 status,
+                 sentOrReceived,
+                 separator2,
+                 timestamp
             };
         }
 
         public override void AfterAutomaticRead(FileReader rdr)
         {
-            messageText.Length = messageTextLength.Value;
-            messageText.Read(rdr);
-            status.Read(rdr);
-            sentOrReceived.Read(rdr);
-            separator2.Read(rdr);
-            timestamp.Read(rdr);
+            //messageText.Length = messageTextLength.Value;
+            //messageText.Read(rdr);
+            //status.Read(rdr);
+            //sentOrReceived.Read(rdr);
+            //separator2.Read(rdr);
+            //timestamp.Read(rdr);
 
             var dest = (sentOrReceived.Value == 0) ? "from" : "to";
             Parser.Dumper.OnInfo($"Message {dest} UIN:{UIN.Value}, Text: {messageText.Value}");

@@ -39,6 +39,8 @@ namespace IdxDat
             byte prev1 = 0;
             long ix = 0;
 
+            rdr.GoTo(0x265290);
+
             try
             {
                 while (true)

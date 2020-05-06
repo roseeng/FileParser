@@ -68,13 +68,27 @@ namespace IdxDat
             timestamp.Read(rdr);
             nineteenZeroes.Read(rdr);
 
+            Parser.Dumper.OnInfo("19 nollor");
+
             richTextLength.Read(rdr);
             richText.Length = richTextLength.Value;
             richText.Read(rdr);
+            Parser.Dumper.OnInfo($"Rich text: {richText.Length} bytes");
 
             utf8TextLength.Read(rdr);
             utf8Text.Length = utf8TextLength.Value;
+
+            /*
+            utf8Text.Length = 32;
             utf8Text.Read(rdr);
+            Parser.Dumper.OnInfo("32 bytes UTF8 text");
+
+            utf8Text.Read(rdr);
+            Parser.Dumper.OnInfo("32 bytes UTF8 text");
+
+            utf8Text.Read(rdr);
+            Parser.Dumper.OnInfo("32 bytes UTF8 text");
+            */
             if (utf8TextLength.Value > 0)
             {
                 string kalle = Encoding.UTF8.GetString(utf8Text.Value);

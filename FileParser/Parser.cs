@@ -40,7 +40,9 @@ namespace FileParser
         }
 
         public static bool Debug { get; set; } = false;
-
+        public static int DebugLevel { get; set; } = 0;
+        
+        public const int DebugLevelInternal = 10;
     }
  
     public enum DumpFormat

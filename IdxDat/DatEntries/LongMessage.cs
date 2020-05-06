@@ -12,28 +12,28 @@ namespace IdxDat
         //Data32LE type;
         //Data32LE datEntryNumber;
         //Magic signature;
-        Data16LE separator;
-        Data32LE filingFlags;
-        Data16LE entrySubtype;
-        Data32LE UIN;
-        Data16LE ansiTextLength;
-        Chararray ansiText;
-        Data32LE status;
-        Data32LE sentOrReceived;
-        Data16LE separator2;
-        Data32LE timestamp;
+        public Data16LE separator;
+        public Data32LE filingFlags;
+        public Data16LE entrySubtype;
+        public Data32LE UIN;
+        public Data16LE ansiTextLength;
+        public Chararray ansiText;
+        public Data32LE status;
+        public Data32LE sentOrReceived;
+        public Data16LE separator2;
+        public Data32LE timestamp;
 
-        Chararray nineteenZeroes;
+        public Chararray nineteenZeroes;
 
-        Data16LE richTextLength;
-        ByteArray richText;
+        public Data16LE richTextLength;
+        public ByteArray richText;
 
-        Data16LE utf8TextLength;
-        ByteArray utf8Text;
+        public Data16LE utf8TextLength;
+        public ByteArray utf8Text;
 
-        Data32LE Unknown0;
-        Data32LE Unknown1;
-        Data32LE Unknown2; // received: 00800080h,  sent: 00FFFFFFh
+        public Data32LE Unknown0;
+        public Data32LE Unknown1;
+        public Data32LE Unknown2; // received: 00800080h,  sent: 00FFFFFFh
 
         public LongMessage()
         {

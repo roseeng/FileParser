@@ -19,44 +19,21 @@ namespace IdxDat
         static void ReadDat()
         {
             Console.WriteLine("Hello World!");
+            
+            // Statistics:
             HashSet<string> unhandled = new HashSet<string>();
+            Dictionary<string, long> entryTypes = new Dictionary<string, long>();
+            Dictionary<int, long> messageTypes = new Dictionary<int, long>();
 
             var datFile = new DatFile();
             var rdr = new FileReader();
 
             Parser.DefaultDumpFormat = DumpFormat.Ascii;
-            Parser.Debug = true;
+            //Parser.Debug = true;
 
             rdr.Open("2001_790171.dat");
 
             datFile.Header.Read(rdr);
-            /*
-            while (true)
-            {
-                datFile.PageHeader.Read(rdr);
-
-                while (true)
-                {
-                    var pos = rdr.Position;
-
-                    Data32LE length = new Data32LE();
-                    length.Read(rdr);
-
-                    Data32LE filed = new Data32LE();
-                    filed.Read(rdr);
-
-                    Data32LE entry = new Data32LE();
-                    entry.Read(rdr);
-                    Parser.Dumper.OnInfo($"Length {length.Value}, Entry {entry.Value}");
-                    rdr.GoTo(pos + length.Value);
-                }
-
-                if (datFile.PageHeader.Next.Value == 0xFFFFFFFF)
-                    break;
-
-                rdr.GoTo(datFile.PageHeader.Next.Value);
-            }
-            */
             
             byte prev0 = 0;
             byte prev1 = 0;
@@ -71,7 +48,9 @@ namespace IdxDat
 
                     if (prev0 == 0x23 && d.Value == 0xA3)
                     {
-                        Parser.Dumper.OnInfo("Found sig with code: " + prev1.ToString("X2"));
+                        string code = prev1.ToString("X2");
+                        Parser.Dumper.OnInfo($"Found sig with code: {code}");
+                        entryTypes[code] = entryTypes.GetValueOrDefault(code) + 1;
 
                         if (datFile.ValidSigs.Contains(prev1))
                         {
@@ -80,12 +59,17 @@ namespace IdxDat
 
                             datFile.PolyChunk.Read(rdr);
 
+                            if (datFile.PolyChunk.CurrentType == typeof(E0Entry))
+                            {
+                                int mtype = ((E0Entry)datFile.PolyChunk.CurrentChunk).entrySubtype.Value;
+                                messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+                            }
+
                             prev0 = prev1 = 0;
                             d.StartNew();
                         }
                         else
                         {
-                            string code = prev1.ToString("X2");
                             if (!unhandled.Contains(code))
                             {
                                 unhandled.Add(code);
@@ -102,6 +86,9 @@ namespace IdxDat
 
                         datFile.LongMessage.Read(rdr);
 
+                        int mtype = datFile.LongMessage.entrySubtype.Value;
+                        messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+
                         prev0 = prev1 = 0;
                         d.StartNew();
                     }
@@ -111,7 +98,7 @@ namespace IdxDat
                     prev0 = d.Value;
                     ix++;
 
-                    if (ix % 256 == 0)
+                    if (ix % 256*16 == 0)
                     {
                         Parser.Dumper.OnInfo("");
                     }
@@ -119,14 +106,23 @@ namespace IdxDat
             }
             catch (ParserEOFException)
             {
-                Parser.Dumper.OnInfo("End of file."));
+                Parser.Dumper.OnInfo("End of file.");
             }
             catch (Exception ex)
             {
                 Parser.Dumper.OnInfo("Unhandled Exception: " + ex.Message);
             }
 
-            Parser.Dumper.OnInfo("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
+            Console.WriteLine("");
+            Console.WriteLine("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
+
+            Console.WriteLine("");
+            Console.WriteLine("Entry types:");
+            entryTypes.Dump();
+
+            Console.WriteLine("");
+            Console.WriteLine("Message types:");
+            messageTypes.Dump();
         }
 
         static void ReadIdx()
@@ -168,6 +164,22 @@ namespace IdxDat
             dummy.Length = 32;
             dummy.Read(reader);
             */
+        }
+    }
+
+    public static class ExtensionMethods
+    {
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue)) 
+            => dictionary.TryGetValue(key, out var value) ? value : defaultValue;
+
+        public static void Dump<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+        {
+            foreach (var key in dictionary.Keys)
+            {
+                Console.Write(key.ToString());
+                Console.Write(" : ");
+                Console.WriteLine(dictionary[key].ToString());
+            }
         }
     }
 }

@@ -13,15 +13,15 @@ namespace IdxDat
         //Data32LE type;
         //Data32LE datEntryNumber;
         //Magic signature;
-        Data16LE separator;
-        Data32LE filingFlags;
-        Data16LE entrySubtype;
-        Data32LE UIN;
-        AsciiZ messageText;
-        Data32LE status;
-        Data32LE sentOrReceived;
-        Data16LE separator2;
-        Data32LE timestamp;
+        public Data16LE separator;
+        public Data32LE filingFlags;
+        public Data16LE entrySubtype;
+        public Data32LE UIN;
+        public AsciiZ messageText;
+        public Data32LE status;
+        public Data32LE sentOrReceived;
+        public Data16LE separator2;
+        public Data32LE timestamp;
 
         public E0Entry()
         {
@@ -38,7 +38,6 @@ namespace IdxDat
                  filingFlags,
                  entrySubtype,
                  UIN,
-//                 messageTextLength,
                  messageText,
                  status,
                  sentOrReceived,
@@ -56,8 +55,15 @@ namespace IdxDat
             //separator2.Read(rdr);
             //timestamp.Read(rdr);
 
+            var message = entrySubtype.Value switch
+            {
+                0x01 => "Message",
+                0x04 => "URL Message",
+                0x13 => "Contacts list",
+                _ => "Message of unknown type"
+            };
             var dest = (sentOrReceived.Value == 0) ? "from" : "to";
-            Parser.Dumper.OnInfo($"Message {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
+            Parser.Dumper.OnInfo($"{message} {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
             base.AfterAutomaticRead(rdr);
         }
     }

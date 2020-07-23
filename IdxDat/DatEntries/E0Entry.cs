@@ -21,7 +21,7 @@ namespace IdxDat
         public Data32LE status;
         public Data32LE sentOrReceived;
         public Data16LE separator2;
-        public Data32LE timestamp;
+        public UnixTimestamp timestamp;
 
         public E0Entry()
         {
@@ -48,13 +48,6 @@ namespace IdxDat
 
         public override void AfterAutomaticRead(IReader rdr)
         {
-            //messageText.Length = messageTextLength.Value;
-            //messageText.Read(rdr);
-            //status.Read(rdr);
-            //sentOrReceived.Read(rdr);
-            //separator2.Read(rdr);
-            //timestamp.Read(rdr);
-
             var message = entrySubtype.Value switch
             {
                 0x01 => "Message",
@@ -62,8 +55,9 @@ namespace IdxDat
                 0x13 => "Contacts list",
                 _ => "Message of unknown type"
             };
+
             var dest = (sentOrReceived.Value == 0) ? "from" : "to";
-            Parser.Dumper.OnInfo($"{message} {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
+            Parser.Dumper.OnInfo($"{timestamp} {message} {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
             base.AfterAutomaticRead(rdr);
         }
     }

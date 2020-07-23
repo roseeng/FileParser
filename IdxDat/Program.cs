@@ -118,7 +118,7 @@ namespace IdxDat
             HexDumperConsole console = new HexDumperConsole();
             Parser.Dumper.Console = console;
  
-            rdr.Open("2003_790171.dat");
+            rdr.Open("2001_790171.dat");
 
             datFile.MainHeader.Read(rdr);
             

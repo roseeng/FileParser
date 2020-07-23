@@ -1,4 +1,5 @@
 ﻿using FileParser;
+using IdxDat.DatEntries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,11 @@ namespace IdxDat
         public Data32LE filingFlags;
         public Data16LE entrySubtype;
         public Data32LE UIN;
-        public Data16LE ansiTextLength;
-        public Chararray ansiText;
+        public AsciiZ ansiText;
         public Data32LE status;
         public Data32LE sentOrReceived;
         public Data16LE separator2;
-        public Data32LE timestamp;
+        public UnixTimestamp timestamp;
 
         public Chararray nineteenZeroes;
 
@@ -53,19 +53,16 @@ namespace IdxDat
                  filingFlags,
                  entrySubtype,
                  UIN,
-                 ansiTextLength,
-            };
+                 ansiText,
+                 status,
+                 sentOrReceived,
+                 separator2,
+                 timestamp,
+    };
         }
 
         public override void AfterAutomaticRead(IReader rdr)
         {
-            ansiText.Length = ansiTextLength.Value;
-            ansiText.Read(rdr);
-
-            status.Read(rdr);
-            sentOrReceived.Read(rdr);
-            separator2.Read(rdr);
-            timestamp.Read(rdr);
             nineteenZeroes.Read(rdr);
           
             richTextLength.Read(rdr);
@@ -82,7 +79,6 @@ namespace IdxDat
             if (utf8TextLength.Value > 0)
             {
                 string kalle = Encoding.UTF8.GetString(utf8Text.Value);
-                var otto = kalle;
             }
             */
 
@@ -91,7 +87,7 @@ namespace IdxDat
             Unknown2.Read(rdr);
 
             var dest = (sentOrReceived.Value == 0) ? "from" : "to";
-            Parser.Dumper.OnInfo($"Long Message {dest} UIN:{UIN.Value}, Text: {ansiText.Value}");
+            Parser.Dumper.OnInfo($"{timestamp} Long Message {dest} UIN:{UIN.Value}, Text: {ansiText.Value}");
 
             base.AfterAutomaticRead(rdr);
         }

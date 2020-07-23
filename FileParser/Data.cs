@@ -19,6 +19,11 @@ namespace FileParser
         {
             Value = 0;
         }
+
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
+        }
     }
 
     public class Data16LE : ChunkField
@@ -35,6 +40,10 @@ namespace FileParser
         public override void StartNew()
         {
             Value = 0;
+        }
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
         }
     }
 
@@ -55,6 +64,10 @@ namespace FileParser
         {
             Value = 0;
         }
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
+        }
     }
 
     public class SignedData32LE : ChunkField
@@ -74,6 +87,10 @@ namespace FileParser
         {
             Value = 0;
         }
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
+        }
     }
 
     public class Data16BE : ChunkField
@@ -90,6 +107,10 @@ namespace FileParser
         public override void StartNew()
         {
             Value = 0;
+        }
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
         }
     }
 
@@ -109,6 +130,10 @@ namespace FileParser
         public override void StartNew()
         {
             Value = 0;
+        }
+        public override string ToString()
+        {
+            return Parser.DefaultDumpFormat == DumpFormat.Hex ? Value.ToString("X") : Value.ToString("D");
         }
     }
 
@@ -135,6 +160,10 @@ namespace FileParser
         public override void StartNew()
         {
             Value = null;
+        }
+        public override string ToString()
+        {
+            return Value;
         }
     }
 

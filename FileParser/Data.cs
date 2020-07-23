@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace FileParser
     public class Data8 : ChunkField
     {
         public byte Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             byte b = rdr.GetByte();
             Value = b;
@@ -23,7 +24,7 @@ namespace FileParser
     public class Data16LE : ChunkField
     {
         public UInt16 Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             var buf = new byte[2];
             buf[0] = rdr.GetByte();
@@ -40,7 +41,7 @@ namespace FileParser
     public class Data32LE : ChunkField
     {
         public UInt32 Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             var buf = new byte[4];
             buf[0] = rdr.GetByte();
@@ -59,7 +60,7 @@ namespace FileParser
     public class SignedData32LE : ChunkField
     {
         public Int32 Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             var buf = new byte[4];
             buf[0] = rdr.GetByte();
@@ -78,7 +79,7 @@ namespace FileParser
     public class Data16BE : ChunkField
     {
         public UInt16 Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             var buf = new byte[2];
             buf[1] = rdr.GetByte();
@@ -95,7 +96,7 @@ namespace FileParser
     public class Data32BE : ChunkField
     {
         public UInt32 Value;
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             var buf = new byte[4];
             buf[3] = rdr.GetByte();
@@ -116,7 +117,7 @@ namespace FileParser
         public string Value;
         public UInt32 Length = 0;
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             //Console.WriteLine($"Chararray Reading {Length} bytes");
             StringBuilder sb = new StringBuilder();
@@ -142,7 +143,7 @@ namespace FileParser
         public byte[] Value;
         public UInt32 Length = 0;
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             //Console.WriteLine($"ByteArray Reading {Length} bytes");
             Value = new byte[Length];
@@ -157,6 +158,28 @@ namespace FileParser
         public override void StartNew()
         {
             Value = null;
+        }
+
+        public int IndexOf(byte[] pattern)
+        {
+            for (int i = 0; i < Value.Length - pattern.Length + 1; i++)
+            {
+                if (Value[i] == pattern[0])
+                {
+                    if (ByteArrayContains(Value, i, pattern))
+                        return i;
+                }
+            }
+            return -1;
+        }
+
+        private bool ByteArrayContains(byte[] a, int pos, byte[] b)
+        {
+            for (int i = 0; i < b.Length; i++)
+                if (a[pos + i] != b[i])
+                    return false;
+            
+            return true;
         }
     }
 }

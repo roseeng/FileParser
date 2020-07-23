@@ -6,14 +6,16 @@ using System.IO;
 
 namespace FileParser
 {
-    public sealed class FileReader : IReader, IDisposable
+    public sealed class MemoryReader : IReader
     {
-        private FileStream _stream;
+        private byte[] _buffer;
+        private long _position;
         private long _milestone = 0;
 
-        public void Open(string filename)
+        public void Open(byte[] buffer)
         {
-            _stream = new FileStream(filename, FileMode.Open);
+            _buffer = buffer;
+            _position = 0;
         }
 
         public Action<byte, long> OnByteRead { get; set; }
@@ -24,17 +26,16 @@ namespace FileParser
         /// <returns>byte</returns>
         public byte GetByte()
         {
-            var pos = _stream.Position;
-            var i = _stream.ReadByte();
-            if (i == -1)
+            if (_position >= _buffer.Length)
                 throw new ParserEOFException();
-            var b = Convert.ToByte(i);
+            var b = _buffer[_position];
 
-            Parser.Dumper.OnByte(b, pos);
+            Parser.Dumper.OnByte(b, _position);
 
             if (OnByteRead != null)
-                OnByteRead(b, pos);
-
+                OnByteRead(b, _position);
+            
+            _position++;
             return b;
         }
 
@@ -44,17 +45,28 @@ namespace FileParser
         /// <returns>a byte as int</returns>
         public int GetByteUnsafe()
         {
-            return _stream.ReadByte();
+            if (_position >= _buffer.Length)
+                return -1;
+
+            var b = _buffer[_position];
+
+            Parser.Dumper.OnByte(b, _position);
+
+            if (OnByteRead != null)
+                OnByteRead(b, _position);
+
+            ++_position;
+            return (int)b;
         }
 
-        public long Position => _stream.Position;
+        public long Position => _position;
 
         /// <summary>
         /// Store current position in the file
         /// </summary>
         public void SetMilestone()
         {
-            _milestone = _stream.Position;
+            _milestone = _position;
         }
 
         /// <summary>
@@ -62,20 +74,14 @@ namespace FileParser
         /// </summary>
         public void GoToMilestone()
         {
-            _stream.Position = _milestone;
+            _position = _milestone;
             Parser.Dumper.NewItem();
         }
 
         public void GoTo(long position)
         {
-            _stream.Position = position;
+            _position = position;
             Parser.Dumper.NewItem();
-        }
-
-        public void Dispose()
-        {
-            if (_stream != null)
-                _stream.Close();
         }
     }
 }

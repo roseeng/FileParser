@@ -25,13 +25,13 @@ namespace IdxDat
             return result;
         }
 
-        public override void BeforeAutomaticRead(FileReader rdr)
+        public override void BeforeAutomaticRead(IReader rdr)
         {
             startPos = rdr.Position;
             base.BeforeAutomaticRead(rdr);
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             if (rdr.Position != startPos + length.Value - 4)
             {

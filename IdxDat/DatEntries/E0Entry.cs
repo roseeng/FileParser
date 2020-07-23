@@ -46,7 +46,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             //messageText.Length = messageTextLength.Value;
             //messageText.Read(rdr);

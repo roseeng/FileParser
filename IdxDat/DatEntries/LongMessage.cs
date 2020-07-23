@@ -57,7 +57,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             ansiText.Length = ansiTextLength.Value;
             ansiText.Read(rdr);

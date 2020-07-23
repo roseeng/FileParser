@@ -29,7 +29,7 @@ namespace IdxDat
             };
         }
 
-        public override void BeforeAutomaticRead(FileReader rdr)
+        public override void BeforeAutomaticRead(IReader rdr)
         {
             base.BeforeAutomaticRead(rdr);
             //Parser.Dumper.OnInfo("<Listitem>");
@@ -37,7 +37,7 @@ namespace IdxDat
 
         public static HashSet<long> EntryTypes = new HashSet<long>();
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             if (Status.Value == -2)
             {

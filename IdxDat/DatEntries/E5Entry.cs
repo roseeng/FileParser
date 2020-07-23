@@ -47,7 +47,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             // Repeat
             Data16LE separator4 = new Data16LE(); ;

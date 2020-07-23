@@ -4,6 +4,7 @@ using System.Linq;
 using FileParser;
 
 using System.Linq;
+using System.Diagnostics;
 
 namespace IdxDat
 {
@@ -13,13 +14,96 @@ namespace IdxDat
         static void Main(string[] args)
         {
             //ReadIdx();
-            ReadDat();
+            //SearchDat();
+            ParseDat();
         }
 
-        static void ReadDat()
+        /// <summary>
+        /// Open a DAT file and try to parse it according to the spec
+        /// </summary>
+        static void ParseDat()
         {
-            Console.WriteLine("Hello World!");
-            
+            var datFile = new DatFile();
+            var rdr = new FileReader();
+
+            Parser.DefaultDumpFormat = DumpFormat.Hex;
+            //Parser.Debug = true;
+
+            HexDumperConsole console = new HexDumperConsole();
+            Parser.Dumper.Console = console;
+            console.DefaultColor = ConsoleColor.Green;
+
+            rdr.Open("2003_790171.dat");
+
+            datFile.MainHeader.Read(rdr);
+
+            try
+            {
+                while (true)
+                {
+                    datFile.PageHeader.Read(rdr);
+                    datFile.ReadPage(rdr, console);
+
+                    if (rdr.Position != datFile.PageHeader.Next.Value)
+                    {
+                        Console.WriteLine("\n...\n--- JUMPING ---\n");
+                        rdr.GoTo(datFile.PageHeader.Next.Value);
+                    }
+                }
+            }
+            catch (ParserEOFException)
+            {
+                Parser.Dumper.OnInfo("End of file.");
+            }
+
+
+            // Try parsing a page
+            ProbeEntry entry = new ProbeEntry();
+            bool lastSigValid = false;
+
+            while (true)
+            {
+                if (!lastSigValid)
+                {
+                    (long start, long length) = FindSig(rdr);
+                    console.ColorSpans.Add( new ColorSpan(ConsoleColor.Green, start, start+length));
+                }
+
+                try
+                {
+                    entry.BeforeAutomaticRead(rdr);
+                    entry.ReadAutomatic(rdr);
+                    entry.AfterAutomaticRead(rdr);
+                    lastSigValid = true;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    lastSigValid = false;
+                    var delta = entry.startPos + entry.length.Value - 4 - rdr.Position;
+                    if (delta < 0)
+                    {
+                        Parser.Dumper.OnInfo($"Negative jump on length: {delta} bytes.");
+                    }
+                    else if (delta > 100)
+                    {
+                        Parser.Dumper.OnInfo($"Jump on length too long: {delta} bytes.");
+                    }
+                    else
+                    {
+                        entry.diffdata.Length = (uint)delta;
+                        entry.diffdata.Read(rdr);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Scan a DAT file and look for signatures
+        /// </summary>
+        static void SearchDat()
+        {
             // Statistics:
             HashSet<string> unhandled = new HashSet<string>();
             Dictionary<string, long> entryTypes = new Dictionary<string, long>();
@@ -36,7 +120,7 @@ namespace IdxDat
  
             rdr.Open("2003_790171.dat");
 
-            datFile.Header.Read(rdr);
+            datFile.MainHeader.Read(rdr);
             
             byte prev0 = 0;
             byte prev1 = 0;
@@ -131,6 +215,60 @@ namespace IdxDat
             messageTypes.Dump();
         }
 
+        public static (long, long) FindSig(IReader rdr)
+        {
+            byte prev0 = 0;
+            byte prev1 = 0;
+            long ix = 0;
+            long start;
+            Data32LE length = new Data32LE();
+
+            while (true)
+            {
+                Data8 d = new Data8();
+                d.Read(rdr);
+
+                if (prev0 == 0x23 && d.Value == 0xA3)
+                {
+                    string code = prev1.ToString("X2");
+                    Parser.Dumper.OnInfo($"Found sig with code: {code}");
+
+                    var pos = rdr.Position;
+                    start = pos - (4 + 4 + 4 + 3); // Lenght, Filing, Type + 3 bytes from signature
+                    rdr.GoTo(start);
+                    
+                    length.Read(rdr);
+                    rdr.GoTo(start);
+
+                    return (start, length.Value);
+                }
+
+                if (prev1 == 0x50 && prev0 == 0x3B && d.Value == 0xC1)
+                {
+                    Parser.Dumper.OnInfo($"Found sig for Long Message format");
+
+                    var pos = rdr.Position;
+                    start = pos - (4 + 4 + 4 + 3); // Lenght, Filing, Type + 3 bytes from signature
+                    rdr.GoTo(start);
+
+                    length.Read(rdr);
+                    rdr.GoTo(start);
+
+                    return (start, length.Value);
+                }
+
+                // Go on scanning
+                prev1 = prev0;
+                prev0 = d.Value;
+                ix++;
+
+                if (ix % 256 * 16 == 0)
+                {
+                    Parser.Dumper.OnInfo("");
+                }
+            }
+        }
+
         static void ReadIdx()
         {
             Console.WriteLine("Hello World!");
@@ -159,7 +297,7 @@ namespace IdxDat
             idxFile.Page.Read(reader);
             Parser.Dumper.OnInfo("New page");
             */
-            Console.WriteLine("");
+                Console.WriteLine("");
             Console.WriteLine("Entry types:");
             foreach (var entry in IdxListItem.EntryTypes)
                 Console.WriteLine(entry.ToString());

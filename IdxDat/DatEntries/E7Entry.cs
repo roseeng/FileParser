@@ -42,7 +42,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             Parser.Dumper.OnInfo($"Address book: {name.Value}");
             base.AfterAutomaticRead(rdr);

@@ -51,7 +51,7 @@ namespace FileParserConsole
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             FileComment.Length = FileCommentLen.Value;
             FileComment.Read(rdr);

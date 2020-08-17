@@ -60,5 +60,6 @@ namespace IdxDat
             Parser.Dumper.OnInfo($"{timestamp} {message} {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
             base.AfterAutomaticRead(rdr);
         }
+
     }
 }

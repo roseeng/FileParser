@@ -5,6 +5,8 @@ using FileParser;
 
 using System.Linq;
 using System.Diagnostics;
+using DbWriter;
+using System.Runtime.CompilerServices;
 
 namespace IdxDat
 {
@@ -13,10 +15,15 @@ namespace IdxDat
         // https://github.com/miranda-ng/miranda-ng/blob/master/plugins/Import/docs/import-ICQ_Db_Specs.txt
         static void Main(string[] args)
         {
+            _context = new IcqContext();
+            //var allan = _context.Messages.ToList();
+
             //ReadIdx();
-            //SearchDat();
-            ParseDat();
+            SearchDat();
+            //ParseDat();
         }
+
+        static IcqContext _context;
 
         /// <summary>
         /// Open a DAT file and try to parse it according to the spec
@@ -153,6 +160,17 @@ namespace IdxDat
                             {
                                 int mtype = ((E0Entry)datFile.PolyChunk.CurrentChunk).entrySubtype.Value;
                                 messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+
+                                var msg = ToMessage((E0Entry)datFile.PolyChunk.CurrentChunk);
+                                if (_context.Messages.Any(m => m.Hash == msg.Hash))
+                                { 
+                                    int allan = 1; 
+                                }
+                                else
+                                {
+                                    _context.Messages.Add(msg);
+                                    _context.SaveChanges();
+                                }
                             }
 
                             prev0 = prev1 = 0;
@@ -178,6 +196,17 @@ namespace IdxDat
 
                         int mtype = datFile.LongMessage.entrySubtype.Value;
                         messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+
+                        var msg = ToMessage(datFile.LongMessage);
+                        if (_context.Messages.Any(m => m.Hash == msg.Hash))
+                        {
+                            int allan = 1;
+                        }
+                        else
+                        {
+                            _context.Messages.Add(msg);
+                            _context.SaveChanges();
+                        }
 
                         prev0 = prev1 = 0;
                         d.StartNew();
@@ -213,6 +242,41 @@ namespace IdxDat
             Console.WriteLine("");
             Console.WriteLine("Message types:");
             messageTypes.Dump();
+        }
+
+        public static DbWriter.Message ToMessage(E0Entry entry)
+        {
+            var msg = new DbWriter.Message()
+            {
+                Direction = (entry.sentOrReceived.Value == 0) ? Direction.From : Direction.To,
+                UIN = entry.UIN.Value,
+                Timestamp = entry.timestamp.Value,
+                Text = entry.messageText.Value,
+            };
+
+//            msg.Hash = msg.Direction.GetHashCode() + msg.UIN.GetHashCode() + msg.Timestamp.GetHashCode() + msg.Text.GetHashCode();
+            msg.Hash = GetLongHash(msg.Timestamp.GetHashCode(), msg.Text.GetHashCode());
+            return msg;
+        }
+
+        public static DbWriter.Message ToMessage(LongMessage entry)
+        {
+            var msg = new DbWriter.Message()
+            {
+                Direction = (entry.sentOrReceived.Value == 0) ? Direction.From : Direction.To,
+                UIN = entry.UIN.Value,
+                Timestamp = entry.timestamp.Value,
+                Text = entry.ansiText.Value,
+            };
+
+//            msg.Hash = msg.Direction.GetHashCode() + msg.UIN.GetHashCode() + msg.Timestamp.GetHashCode() + msg.Text.GetHashCode();
+            msg.Hash = GetLongHash(msg.Timestamp.GetHashCode(), msg.Text.GetHashCode());
+            return msg;
+        }
+
+        public static long GetLongHash(int h1, int h2)
+        {
+            return (long)h1 << 32 | (long)(uint)h2;
         }
 
         public static (long, long) FindSig(IReader rdr)

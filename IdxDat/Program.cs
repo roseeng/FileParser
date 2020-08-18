@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using DbWriter;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace IdxDat
 {
@@ -115,6 +116,7 @@ namespace IdxDat
             HashSet<string> unhandled = new HashSet<string>();
             Dictionary<string, long> entryTypes = new Dictionary<string, long>();
             Dictionary<int, long> messageTypes = new Dictionary<int, long>();
+            HashSet<string> properties = new HashSet<string>();
 
             var datFile = new DatFile();
             var rdr = new FileReader();
@@ -173,6 +175,36 @@ namespace IdxDat
                                 }
                             }
 
+                            if (datFile.PolyChunk.CurrentType == typeof(E5Entry))
+                            {
+                                E5Entry e = (E5Entry)datFile.PolyChunk.CurrentChunk;
+
+                                e.Properties.Keys.ToList().ForEach(p => properties.Add(p));
+
+                                var ct = ToContact(e);
+
+                                if (_context.Contacts.Any(c => c.Hash == ct.Hash))
+                                {
+                                    int allan = 1;
+                                }
+                                else
+                                {
+                                    foreach (var pv in e.Properties)
+                                    {
+                                        var ctp = new ContactProperty()
+                                        {
+                                            UIN = e.UIN,
+                                            Name = pv.Key,
+                                            Value = pv.Value,
+                                        };
+                                        _context.ContactProperties.Add(ctp);
+                                    }
+
+                                    _context.Contacts.Add(ct);
+                                    _context.SaveChanges();
+                                }
+                            }
+
                             prev0 = prev1 = 0;
                             d.StartNew();
                         }
@@ -193,6 +225,9 @@ namespace IdxDat
                         rdr.GoTo(pos - (4 + 4 + 4 + 3));
 
                         datFile.LongMessage.Read(rdr);
+
+                        string code = "Long";
+                        entryTypes[code] = entryTypes.GetValueOrDefault(code) + 1;
 
                         int mtype = datFile.LongMessage.entrySubtype.Value;
                         messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
@@ -242,6 +277,28 @@ namespace IdxDat
             Console.WriteLine("");
             Console.WriteLine("Message types:");
             messageTypes.Dump();
+
+            Console.WriteLine("");
+            Console.WriteLine("Contact properties: " + string.Join(", ", properties.ToArray()));
+        }
+
+        private static DbWriter.Contact ToContact(E5Entry entry)
+        {
+            /* About, Authorize, FirstName, GroupText, GroupText1, GroupText2, HomeAddress, HomeCell, HomeCity, HomeCountry, HomeFax, HomeHomepage, HomePhone, HomeState, HomeZipCode, 
+             * InterestText, InterestText1, InterestText2, InterestText3, LastName, MyDefinedHandle, NickName, OfflineReminderDaysCounter, OfflineReminderLastTimeCounter, 
+             * PastText, PastText1, PastText2, PrimaryEmail, TimeZone, UIN, WorkAddress, WorkCity, WorkCompany, WorkDepartment, WorkFax, WorkHomepage, WorkJobTitle, WorkPhone, WorkState, WorkZipCode, 
+             * BirthDayReminderDays, ClientFeatures, TrueFeatures, OnlineAlert, Age, Gender, HomepageDescription, OldEmail, SecondEmail, IP, LastKnownUpdateDate, 
+             * BirthDay, BirthMonth, BirthYear, InterestCategory, Language, Language1, PersistentUserShowIP, InterestCategory1, InterestCategory2, InterestCategory3, Language2, Occupation, 
+             * GroupCategory, GroupCategory1, GroupCategory2, UserKind, LastOnlineTime, LastUpdateDate, AlreadyRemindedBirthday, AcceptInAway, OnlineAlertDisable, OnlineAlertFlg, 
+             * UserSendByServer, WorkCountry, AdditionalEmails, LastMoreInfoUpdateDate, LastMoreStatusUpdateDate, PastCategory */
+            var ct = new Contact()
+            {
+                UIN = entry.UIN,
+                Nickname = entry.Nickname
+            };
+
+            ct.Hash = GetLongHash(ct.UIN.GetHashCode(), ct.Nickname.GetHashCode());
+            return ct;
         }
 
         public static DbWriter.Message ToMessage(E0Entry entry)
@@ -254,8 +311,7 @@ namespace IdxDat
                 Text = entry.messageText.Value,
             };
 
-//            msg.Hash = msg.Direction.GetHashCode() + msg.UIN.GetHashCode() + msg.Timestamp.GetHashCode() + msg.Text.GetHashCode();
-            msg.Hash = GetLongHash(msg.Timestamp.GetHashCode(), msg.Text.GetHashCode());
+            msg.Hash = GetLongHash(msg.Timestamp.Ticks, msg.Text);
             return msg;
         }
 
@@ -269,8 +325,7 @@ namespace IdxDat
                 Text = entry.ansiText.Value,
             };
 
-//            msg.Hash = msg.Direction.GetHashCode() + msg.UIN.GetHashCode() + msg.Timestamp.GetHashCode() + msg.Text.GetHashCode();
-            msg.Hash = GetLongHash(msg.Timestamp.GetHashCode(), msg.Text.GetHashCode());
+            msg.Hash = GetLongHash(msg.Timestamp.Ticks, msg.Text);
             return msg;
         }
 
@@ -279,6 +334,34 @@ namespace IdxDat
             return (long)h1 << 32 | (long)(uint)h2;
         }
 
+        public static long GetLongHash(long t1, string s2)
+        {
+            long h2 = GetInt64HashCode(s2);
+            return t1 ^ h2;
+        }
+
+        static Int64 GetInt64HashCode(string strText)
+        {
+            Int64 hashCode = 0;
+            if (!string.IsNullOrEmpty(strText))
+            {
+                //Unicode Encode Covering all characterset
+                byte[] byteContents = Encoding.Unicode.GetBytes(strText);
+                System.Security.Cryptography.SHA256 hash =
+                new System.Security.Cryptography.SHA256CryptoServiceProvider();
+                byte[] hashText = hash.ComputeHash(byteContents);
+                //32Byte hashText separate
+                //hashCodeStart = 0~7  8Byte
+                //hashCodeMedium = 8~23  8Byte
+                //hashCodeEnd = 24~31  8Byte
+                //and Fold
+                Int64 hashCodeStart = BitConverter.ToInt64(hashText, 0);
+                Int64 hashCodeMedium = BitConverter.ToInt64(hashText, 8);
+                Int64 hashCodeEnd = BitConverter.ToInt64(hashText, 24);
+                hashCode = hashCodeStart ^ hashCodeMedium ^ hashCodeEnd;
+            }
+            return (hashCode);
+        }
         public static (long, long) FindSig(IReader rdr)
         {
             byte prev0 = 0;

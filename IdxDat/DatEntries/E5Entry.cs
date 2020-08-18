@@ -23,7 +23,11 @@ namespace IdxDat
         Data32LE wavEntries;
         Data16LE separator3;
 
-        Data32LE propertyBlocks;   
+        Data32LE propertyBlocks;
+
+        public uint UIN = 0;
+        public string Nickname = "";
+        public Dictionary<string, string> Properties = new Dictionary<string, string>();
 
         public E5Entry()
         {
@@ -63,9 +67,6 @@ namespace IdxDat
             AsciiZ textData = new AsciiZ();
             ByteArray binData = new ByteArray();
 
-            long UIN = 0;
-            string nickname = "";
-
             for (int block = 0; block < propertyBlocks.Value; block++)
             {
                 separator4.Read(rdr);
@@ -103,7 +104,7 @@ namespace IdxDat
                             textData.Read(rdr);
                             value = textData.Value;
                             if (propName == "NickName" || propName == "MyDefinedHandle")
-                                nickname =  value;
+                                Nickname =  value;
 
                             break;
                         case 0x6D:
@@ -135,12 +136,13 @@ namespace IdxDat
                             break;
                     }
 
+                    Properties.Add(propName, value);
                     if (Parser.Debug)
                         Parser.Dumper.OnInfo($"'{propName}' : " + propType.Value.ToString("X2") + $" Value: {value}");
                 }
             }
 
-            Parser.Dumper.OnInfo($"Contact UIN: {UIN} Nick: {nickname}");
+            Parser.Dumper.OnInfo($"Contact UIN: {UIN} Nick: {Nickname}");
             base.AfterAutomaticRead(rdr);
         }
     }

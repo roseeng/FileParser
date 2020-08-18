@@ -9,6 +9,7 @@ namespace DbWriter
     {
         public DbSet<Message> Messages { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ContactProperty> ContactProperties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

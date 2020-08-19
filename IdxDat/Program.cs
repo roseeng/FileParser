@@ -16,11 +16,15 @@ namespace IdxDat
         // https://github.com/miranda-ng/miranda-ng/blob/master/plugins/Import/docs/import-ICQ_Db_Specs.txt
         static void Main(string[] args)
         {
+            string filename = "2001_790171.dat";
+            if (args.Count() > 0)
+                filename = args[0];
+
             _context = new IcqContext();
             //var allan = _context.Messages.ToList();
 
             //ReadIdx();
-            SearchDat();
+            SearchDat(filename);
             //ParseDat();
         }
 
@@ -110,13 +114,17 @@ namespace IdxDat
         /// <summary>
         /// Scan a DAT file and look for signatures
         /// </summary>
-        static void SearchDat()
+        static void SearchDat(string filename)
         {
+            Console.WriteLine($"Searching {filename} for valid entries...");
+
             // Statistics:
             HashSet<string> unhandled = new HashSet<string>();
             Dictionary<string, long> entryTypes = new Dictionary<string, long>();
             Dictionary<int, long> messageTypes = new Dictionary<int, long>();
             HashSet<string> properties = new HashSet<string>();
+            int duplicateContacts = 0;
+            int duplicateMessages = 0;
 
             var datFile = new DatFile();
             var rdr = new FileReader();
@@ -127,7 +135,7 @@ namespace IdxDat
             HexDumperConsole console = new HexDumperConsole();
             Parser.Dumper.Console = console;
  
-            rdr.Open("2001_790171.dat");
+            rdr.Open(filename);
 
             datFile.MainHeader.Read(rdr);
             
@@ -166,7 +174,7 @@ namespace IdxDat
                                 var msg = ToMessage((E0Entry)datFile.PolyChunk.CurrentChunk);
                                 if (_context.Messages.Any(m => m.Hash == msg.Hash))
                                 { 
-                                    int allan = 1; 
+                                    duplicateMessages++; 
                                 }
                                 else
                                 {
@@ -185,7 +193,7 @@ namespace IdxDat
 
                                 if (_context.Contacts.Any(c => c.Hash == ct.Hash))
                                 {
-                                    int allan = 1;
+                                    duplicateContacts++;
                                 }
                                 else
                                 {
@@ -235,7 +243,7 @@ namespace IdxDat
                         var msg = ToMessage(datFile.LongMessage);
                         if (_context.Messages.Any(m => m.Hash == msg.Hash))
                         {
-                            int allan = 1;
+                            duplicateMessages++;
                         }
                         else
                         {
@@ -268,7 +276,16 @@ namespace IdxDat
             }
 
             Console.WriteLine("");
+            Console.WriteLine("Statistics for file: " + filename);
+
+            Console.WriteLine("");
             Console.WriteLine("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
+
+            Console.WriteLine("");
+            Console.WriteLine("Duplicated Contacts: " + duplicateContacts);
+
+            Console.WriteLine("");
+            Console.WriteLine("Duplicated Messages: " + duplicateMessages);
 
             Console.WriteLine("");
             Console.WriteLine("Entry types:");
@@ -297,7 +314,7 @@ namespace IdxDat
                 Nickname = entry.Nickname
             };
 
-            ct.Hash = GetLongHash(ct.UIN.GetHashCode(), ct.Nickname.GetHashCode());
+            ct.Hash = GetLongHash(ct.UIN, ct.Nickname);
             return ct;
         }
 

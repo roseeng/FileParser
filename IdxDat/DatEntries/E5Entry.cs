@@ -121,7 +121,9 @@ namespace IdxDat
                             }
                             else
                             {
-                                throw new NotImplementedException($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
+                                if (Parser.Debug)
+                                    Parser.Dumper.OnInfo($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
+//                                throw new NotImplementedException($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
                             }
                             break;
                         case 0x6F:
@@ -134,6 +136,13 @@ namespace IdxDat
                         default:
                             value = "";
                             break;
+                    }
+
+                    if (string.IsNullOrEmpty(propName))
+                    {
+                        if (Parser.Debug)
+                            Parser.Dumper.OnInfo($"(empty propname)");
+                        continue;
                     }
 
                     Properties.Add(propName, value);

@@ -4,14 +4,16 @@ using DbWriter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbWriter.Migrations
 {
     [DbContext(typeof(IcqContext))]
-    partial class IcqContextModelSnapshot : ModelSnapshot
+    [Migration("20201201120955_AddedFileImportsTable")]
+    partial class AddedFileImportsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +81,6 @@ namespace DbWriter.Migrations
 
                     b.Property<DateTime>("ImportDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Statistics")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using DbWriter;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdxDat
 {
@@ -16,7 +17,8 @@ namespace IdxDat
         // https://github.com/miranda-ng/miranda-ng/blob/master/plugins/Import/docs/import-ICQ_Db_Specs.txt
         static void Main(string[] args)
         {
-            string filename = "2001_790171.dat";
+//            string filename = "2001_790171.dat";
+            string filename = @"2000b\20030424\790171.dat";
             if (args.Count() > 0)
                 filename = args[0];
 
@@ -138,7 +140,13 @@ namespace IdxDat
             rdr.Open(filename);
 
             datFile.MainHeader.Read(rdr);
-            
+
+            FileImport fi = new FileImport() { Filename = filename, ImportDate = DateTime.Now };
+            _context.FileImports.Add(fi);
+            _context.SaveChanges();
+
+            var fileImportId = fi.Id;
+
             byte prev0 = 0;
             byte prev1 = 0;
             long ix = 0;
@@ -172,12 +180,14 @@ namespace IdxDat
                                 messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
 
                                 var msg = ToMessage((E0Entry)datFile.PolyChunk.CurrentChunk);
+
                                 if (_context.Messages.Any(m => m.Hash == msg.Hash))
                                 { 
                                     duplicateMessages++; 
                                 }
                                 else
                                 {
+                                    msg.FileImportId = fileImportId;
                                     _context.Messages.Add(msg);
                                     _context.SaveChanges();
                                 }
@@ -208,6 +218,7 @@ namespace IdxDat
                                         _context.ContactProperties.Add(ctp);
                                     }
 
+                                    ct.FileImportId = fileImportId;
                                     _context.Contacts.Add(ct);
                                     _context.SaveChanges();
                                 }
@@ -247,6 +258,7 @@ namespace IdxDat
                         }
                         else
                         {
+                            msg.FileImportId = fileImportId;
                             _context.Messages.Add(msg);
                             _context.SaveChanges();
                         }
@@ -275,28 +287,37 @@ namespace IdxDat
                 Parser.Dumper.OnInfo("Unhandled Exception: " + ex.Message);
             }
 
+            StringBuilder sb = new StringBuilder();
             Console.WriteLine("");
             Console.WriteLine("Statistics for file: " + filename);
+            sb.Append("Statistics for file: " + filename + Environment.NewLine);
 
             Console.WriteLine("");
             Console.WriteLine("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
+            sb.Append("Unhandled signatures: " + string.Join(", ", unhandled.ToArray()));
 
             Console.WriteLine("");
             Console.WriteLine("Duplicated Contacts: " + duplicateContacts);
+            sb.Append("Duplicated Contacts: " + duplicateContacts);
 
             Console.WriteLine("");
             Console.WriteLine("Duplicated Messages: " + duplicateMessages);
+            sb.Append("Duplicated Messages: " + duplicateMessages);
 
             Console.WriteLine("");
-            Console.WriteLine("Entry types:");
-            entryTypes.Dump();
+            Console.WriteLine("Entry types:\n" + entryTypes.Dump());
+            sb.Append("Entry types:\n" + entryTypes.Dump());
 
             Console.WriteLine("");
-            Console.WriteLine("Message types:");
-            messageTypes.Dump();
+            Console.WriteLine("Message types:\n" + messageTypes.Dump());
+            sb.Append("Message types:\n" + messageTypes.Dump());
 
             Console.WriteLine("");
             Console.WriteLine("Contact properties: " + string.Join(", ", properties.ToArray()));
+
+            fi.Statistics = sb.ToString();
+            _context.Entry(fi).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         private static DbWriter.Contact ToContact(E5Entry entry)
@@ -480,14 +501,19 @@ namespace IdxDat
         public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue)) 
             => dictionary.TryGetValue(key, out var value) ? value : defaultValue;
 
-        public static void Dump<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+        public static string Dump<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
         {
+            StringBuilder sb = new StringBuilder();
+
             foreach (var key in dictionary.Keys)
             {
-                Console.Write(key.ToString());
-                Console.Write(" : ");
-                Console.WriteLine(dictionary[key].ToString());
+                sb.Append(key.ToString());
+                sb.Append(" : ");
+                sb.Append(dictionary[key].ToString());
+                sb.Append(Environment.NewLine);
             }
+
+            return sb.ToString();
         }
     }
 }

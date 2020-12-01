@@ -13,6 +13,8 @@ namespace DbWriter
         public DateTime Timestamp { get; set; }
         public string Text { get; set; }
         public long Hash { get; set; }
+        public int? FileImportId { get; set; }
+
     }
 
     public enum Direction

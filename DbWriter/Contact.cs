@@ -10,5 +10,6 @@ namespace DbWriter
         public uint UIN { get; set; }
         public string Nickname { get; set; }
         public long Hash { get; set; }
+        public int? FileImportId { get; set; }
     }
 }

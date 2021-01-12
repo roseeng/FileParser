@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PngParser", "PngParser\PngP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdxDat", "IdxDat\IdxDat.csproj", "{68B5A799-2F54-4905-BFFE-B4B3F5FF9C87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbWriter", "DbWriter\DbWriter.csproj", "{96E57D67-C243-47EF-B47B-CEEE23AE7302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbWriter", "DbWriter\DbWriter.csproj", "{96E57D67-C243-47EF-B47B-CEEE23AE7302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EudoraMbx", "EudoraMbx\EudoraMbx.csproj", "{EA9D6817-BE3A-45C0-9DDC-2CD5435C3843}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{96E57D67-C243-47EF-B47B-CEEE23AE7302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96E57D67-C243-47EF-B47B-CEEE23AE7302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96E57D67-C243-47EF-B47B-CEEE23AE7302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9D6817-BE3A-45C0-9DDC-2CD5435C3843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9D6817-BE3A-45C0-9DDC-2CD5435C3843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9D6817-BE3A-45C0-9DDC-2CD5435C3843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9D6817-BE3A-45C0-9DDC-2CD5435C3843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

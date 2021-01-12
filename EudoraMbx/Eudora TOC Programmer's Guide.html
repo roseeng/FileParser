@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>Eudora TOC Programmer's Guide</title>
+</head>
+
+<body>
+<center>
+The Eudora TOC File Format<br>
+by Jeramie Hicks<br>
+based on Eudora Lite versions 1.5.4 and 3.0.1<br>
+</center><p>
+Many people donated their time and effort to research this project. Try this page to see those involved and
+their contributions: <br><a href="https://web.archive.org/web/19991128153919/http://mango.human.cornell.edu/kens/toc.html"> http://mango.human.cornell.edu/kens/toc.html</a><br><br>
+
+A Eudora TOC file is used to store the Table of Contents (or index) of a matching MBX file. When a new email message is received, the text of the message is simply appended to the end of the  MBX file in ASCII. Since the MBX file is simply a long text file without control characters to distinguish between messages, a seperate index (the TOC file) is maintained. Each mailbox in Eudora has its own TOC/MBX file pair.<p><p>
+
+<strong>Note: It has come to my attention that OUT.TOC uses different status indicators. This reference was based solely on a user-defined mailbox and MAY not be fully correct with OUT.TOC as of yet. Please <a href="https://web.archive.org/web/19991128153919/mailto:Jeramie.Hicks@mail.utexas.edu">email me</a> on any updates 
+you have!</strong><p><p>
+
+NAMING THE TOC/MBX FILE PAIR<br>
+For each mailbox, the TOC file and its corresponding MBX file will have the same 8-character filename derived of the full mailbox name. Given a mailbox name, you can use the following steps to determine the filename for the TOC/MBX pair:<p>
+
+1) Remove any spaces from the name. Thus "My New Mailbox" becomes "MyNewMailbox".<br>
+2) Remove any of the following: colons, semicolons, quotation marks, pipes, ampresands, periods, commas, equals, pluses, slashes,greater/less than signs, [more?]<br>
+3) If the remaining string is longer than 8 characters, then truncate it. If it's 8 or less, then it's suitable. For instance, "MyNewMailbox" is "MYNEWMAI.TOC", whereas "In" is simply "IN.TOC". 
+The MBX will be named the same filename: "MYNEWMAI.MBX" and "IN.MBX"<p>
+
+THE TOC FILE FORMAT<br>
+The TOC file format is seperated into two block types. The first block type, the header, is located at offset 0 and is mandatory - the TOC of an empty mailbox will simply be a TOC header block. There is only one header per mailbox, and it is always the first 104 bytes of a TOC file. The second block type is the message entry block; there is one message entry block per message stored in the MBX file. Each message entry block is 218 bytes.<p>
+
+PRELIMINARY NOTES - ASSUMPTIONS/DEFINITIONS<br>
+All values are stored Least-Significant-Byte first, aka Little Endian. Unless otherwise noted, all other  values not described are to be NULL (value zero). A CHAR is one (8 bit) byte, a INT is 2 bytes, a LONG INT is 4 bytes; all types are unsigned. All STRINGs are null-terminated, and the null-terminator is included in the offset &amp; size values. All listed values are in decimal. Offsets are from the begining of the block (offset 0), not from the begining of the file. Offset ranges include the listed values; ie "Offset 8-32" includes both bytes at offset #8 and offset #32. [?] indicates uncertain information, educated guesses, or unconfirmed data. [X] means bit #X, with bit 0 as the least significant (rightmost) bit.
+<p>
+<hr>
+<p>
+HEADER BLOCK<br>
+The header block is the first 104 bytes (file offsets 0-103) of the TOC file and contains the following general information about the mailbox. 
+<p>
+	VERSION IDENTIFIER [?], offsets 0-5, 6 bytes, type (?)<br>
+	The first six bytes of the header change for every version of Eudora and, therefore, may be a version identifier. For Eudora 1.4.4, they were "1.0a15" in ASCII; in Eudora 1.5.4, they were 0x2A0000000000.  In Eudora 3.0.1, they are 0x300000000000.<p>
+
+	MAILBOX NAME, offsets 8-36, &lt;*&gt; bytes, type STRING<br>
+	This is a null-terminated string containing the real mailbox name. Unused bytes are filled with NULLs.  
+<p>
+	MAILBOX TYPE, offsets 40-41, 2 bytes, type INT<br>
+	An integer value ranging from 0 to 3. <br>
+	0 = In box<br>
+	1 = Out box<br>
+	2 = Trash box<br>
+	3 = Any user defined/created box<br>
+<p>
+	MAILBOX COORDINATES, offsets 46-53, type 4 INTs<br>
+	Four integers starting at offset 46 provide the upper left X &amp; Y and the lower right X &amp; Y coordinates of the mailbox window, relative to the overall Eudora window. 
+<p>
+	NUMBER OF MESSAGES IN MAILBOX, offsets 102-103, type INT<br>
+	An integer value which is equal to:<br>
+	o The number of messages in the mailbox<br>
+	o The number of message entries following the header<br>
+	o The number of messages in the compacted MBX file <br>
+		[Note [?]: An uncompacted MBX may contain messages marked for deletion before they are actually deleted. How is this value affected? ]
+<p>
+	UNKNOWN VALUES, as saved in my test mailbox<br>
+	Offsets 54-69: Always filled with 0xFFs. Probably four default integer values. See the description for message entry offsets 178-185.<br>
+	Offsets 70-71: 0x0200. Probably an INT value.<br>
+	Offsets 72-73: 0x0200. Probably an INT value.<br>
+<p><hr><p>
+MESSAGE ENTRY BLOCK<br>
+The message entry blocks, if any, follow directly after the header block. The number of message entry blocks in the TOC can be found in TOC Header offsets 102-103. Note: offsets listed below are offsets relative to the begining of the message entry block. Each message entry block is 218 bytes and yields the following information about individual messages.
+<p>
+	MBX OFFSET, offset 0-3, type LONG INT<br>
+	Describes where in the MBX file, relative to the begining of the MBX file, where the message 	begins. 
+<p>
+	MESSAGE LENGTH, offset 4-7, type LONG INT<br>
+	How long the message is, in bytes.
+<p>
+	MESSAGE DATE/TIME (DATA FORMAT), offsets 8-11, type LONG INT<br>
+	The message's date/time stamp, given as the number of seconds elapsed since a standard 	date of [?]. This is the date/time in "machine readable" format, and is how Eudora sorts by 		date/time. There has been a question as to exactly which date this figure is derived, and 		there is evidence of a bug in Eudora 1.5.4 which will occasionally miscalculate this figure. 
+<p>
+	MESSAGE STATUS, offset 12-13, type INT<br>
+	An integer value describing the current status of the message as listed below.
+	0 = Unread	1 = Read	2 = Replied	3 = Forwarded
+	4 = Redirected	5 = Unread	6 = Unsent	7 = Queued
+	8 = Sent	9 = Status Unknown
+<p>
+	MESSAGES OPTIONS #1, offset 14, type CHAR<br>
+	This byte provids eight YES/NO values listed below. []=Bit #<br>
+	[0] = Signature is alternate (if [0] is set, then [1] is set)<br>
+	[1] = Signature is used<br>
+	[2] = Word Wrap<br>
+	[3] = Tabs in message body<br>
+	[4] = Keep Copy<br>
+	[5] = Text Attachment in message body<br>
+	[6] = Include "Return Receipt To:" in sent message header<br>
+	[7] = Quoted_Printable<br>
+<p>
+	MESSAGE OPTIONS #2, offset 15, type CHAR<br>
+	This byte provides two values listed below.<br>
+	[0] = Message is MIME encoded<br>
+	[1] = Message is UUCODE encoded<br>
+		Note, if neither [0] nor [1] is set, then message is BinHex encoded<br>
+	[7] = Attachment<br>
+<p>
+	MESSAGE PRIORITY, offset 16-17, type INT<br>
+	This is a integer value describing the message's priority, ranging from 0 to [?]
+<p>
+	MESSAGE DATE/TIME (ASCII FORMAT), offset 18-[?], type STRING<br>
+	This is a null-terminated string which contains the message's date/time stamp in human readable format, adjusted for regional format differences (ie MMDDYY vs DDMMYY). The string format has changed between v1.5.4 and v3.0.1, such as discarding timezone information. Note: This is purely for display to the user and should NOT be used for any calculations. 
+<p>
+	MESSAGE "FROM", offset 50-113, max 63 text + 1 NT, type STRING<br>
+	A null-terminated string listing the originator of the message, ie the "FROM:" field.
+<p>
+	MESSAGE "SUBJECT", offset 114-177, max 63 text + 1 NT, type STRING<br>
+	A null-terminated string listing the subject of the message, ie the "SUBJECT:" field
+<p>
+	MESSAGE COORDINATES, offset 178-185, 4 INTs<br>
+	Four integer values describing the upper left X &amp; Y and the lower right X &amp; Y coordinates of this specific message's window, relative to the main Eudora window. A coordinate value of 0xFFFF lets Windows chose an appropriate default value. They are all usually set to 0xFFFF.
+<p>
+	UNKNOWN VALUES - as observed in my test message<br>
+	Offset 192: 0x02<br>
+	Offset 198: 0x01<br>
+<p>
+<hr>
+<p>
+FINDING A MESSAGE ENTRY BLOCK<br>
+The formula to find the message entry block for message #MsgNum (of Msgs #1 to #x) is:<br><p>
+
+	TOC_Offset(MsgNum) = (MsgNum-1)*218 + 104;
+<br><br>
+<hr><br>
+<em><a href="tocinfo.htm">Return to the main TOC page</a></em>
+</body>
+</html><!--
+     FILE ARCHIVED ON 15:39:19 Nov 28, 1999 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 15:44:16 Jan 12, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  RedisCDXSource: 41.255
+  LoadShardBlock: 703.906 (3)
+  exclusion.robots: 0.341
+  captures_list: 771.971
+  PetaboxLoader3.datanode: 2260.807 (4)
+  CDXLines.iter: 21.201 (3)
+  load_resource: 2265.39
+  esindex: 0.015
+  PetaboxLoader3.resolve: 608.443
+  exclusion.robots.policy: 0.327
+-->

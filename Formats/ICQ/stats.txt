@@ -1,3 +1,27 @@
+2001
+Unhandled signatures: EF, EC, F1, E2
+
+Entry types:
+E0 : 13982
+E7 : 286
+E5 : 126
+EF : 2
+EC : 11
+F1 : 1
+E2 : 2
+
+Message types:
+1 : 19983
+12 : 15
+4 : 124
+19 : 1
+8 : 1
+6 : 7
+
+Earliest message: 2000-11-06 09:22:48
+Latest message  : 2001-09-14 06:02:03
+
+
 2003 (inte hela):
 Unhandled signatures: EF, EC, F1, E9
 

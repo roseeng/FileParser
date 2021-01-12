@@ -24,6 +24,8 @@ namespace IdxDat
             HashSet<string> unhandled = new HashSet<string>();
             Dictionary<string, long> entryTypes = new Dictionary<string, long>();
             Dictionary<int, long> messageTypes = new Dictionary<int, long>();
+            DateTime earliest = DateTime.MaxValue;
+            DateTime latest = DateTime.MinValue;
 
             var datFile = new DatFile();
             var rdr = new FileReader();
@@ -67,8 +69,11 @@ namespace IdxDat
 
                             if (datFile.PolyChunk.CurrentType == typeof(E0Entry))
                             {
-                                int mtype = ((E0Entry)datFile.PolyChunk.CurrentChunk).entrySubtype.Value;
+                                E0Entry entry = ((E0Entry)datFile.PolyChunk.CurrentChunk);
+                                int mtype = entry.entrySubtype.Value;
                                 messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+                                if (entry.timestamp.Value < earliest) earliest = entry.timestamp.Value;
+                                if (entry.timestamp.Value > latest) latest = entry.timestamp.Value;
                             }
 
                             prev0 = prev1 = 0;
@@ -92,8 +97,11 @@ namespace IdxDat
 
                         datFile.LongMessage.Read(rdr);
 
-                        int mtype = datFile.LongMessage.entrySubtype.Value;
+                        LongMessage entry = datFile.LongMessage;
+                        int mtype = entry.entrySubtype.Value;
                         messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
+                        if (entry.timestamp.Value < earliest) earliest = entry.timestamp.Value;
+                        if (entry.timestamp.Value > latest) latest = entry.timestamp.Value;
 
                         prev0 = prev1 = 0;
                         d.StartNew();
@@ -129,6 +137,10 @@ namespace IdxDat
             Console.WriteLine("");
             Console.WriteLine("Message types:");
             messageTypes.Dump();
+
+            Console.WriteLine("");
+            Console.WriteLine("Earliest message: " + earliest.ToString("yyyy-MM-dd HH:mm:ss"));
+            Console.WriteLine("Latest message  : " + latest.ToString("yyyy-MM-dd HH:mm:ss"));
         }
 
         static void ReadIdx()

@@ -141,6 +141,7 @@ namespace FileParser
     {
         public string Value;
         public UInt32 Length = 0;
+        public bool KeepNull = false;
 
         public override void Read(IReader rdr)
         {
@@ -152,7 +153,8 @@ namespace FileParser
                 if (Parser.IsPrintable(b))
                     sb.Append(Convert.ToChar(b));
                 else
-                    sb.Append(".");
+                    if (b != '\0' || KeepNull)
+                        sb.Append(".");
             }
             Value = sb.ToString();
         }

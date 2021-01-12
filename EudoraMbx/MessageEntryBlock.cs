@@ -10,8 +10,7 @@ namespace EudoraMbx
         public Data32LE Offset = new Data32LE();
         public Data32LE Length = new Data32LE();
 
-        public Data32LE Timestamp = new Data32LE();
-        public DateTime Timestamp2;
+        public UnixTimestamp Timestamp = new UnixTimestamp();
 
         public Data16LE Status = new Data16LE();
         public Data8 Options1 = new Data8();

@@ -1,0 +1,468 @@
+<html>
+<head>
+<title>SNAC(17,03) auth_md5: server login response</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(17,03)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_LOGIN_REPLY&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server reply for for <a href="snac_17_02.html">SNAC(17,02)</a> and 
+<a href="snac_17_06.html">SNAC(17,06)</a> client requests. It may contain error 
+information or BOS address/cookie. There are two modifications of this snac. 
+First (error notification) contain TLV(1), TLV(8) and TLV(4). The second 
+contain TLV(1), TLV(5), TLV(6), latest client info TLV(0x40)-TLV(0x48) and 
+TLV(0x54) See also <a href="login.html" target="_top">md5 login sequence</a> info.<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=23%>&nbsp;00 17</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=58%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <!-- TLV 0x01 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x01) - screen name</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Screen name</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x08 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 08</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x08) - error code</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 02</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Error code (see list above)</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x04 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 04</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x04) - error description url</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Error description url string</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x05 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 05</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x05) - BOS server address</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>BOS server address string</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x06 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 06</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x06) - authorization cookie</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>array</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>authorization cookie</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td>
+</tr>
+</table>
+</td></tr></table>
+
+<br>Known error codes (for TLV 0x08):
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=12%><b>&nbsp;0x01&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The screen name or password you entered is not valid</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x04&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The screen name or password you entered is not valid</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x05&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The password you entered is not valid</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x06&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Internal client error: bad input to authorizer</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x08&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Your account has been deleted</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x0c&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x0d&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x11&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Suspended account</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x12&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x13&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x14&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x15&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x18&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;You are attempting to sign on again too soon (rate limit)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x1A&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x1B&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;You are running an old client version. Upgrage.</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x1C&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;You are running an old client version. Upgrage.</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x1D&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;You are attempting to sign on again too soon (rate limit)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x1F&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;The AOL Instant Messenger service is temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x20&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Invalid SecurID</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;0x22&nbsp;&nbsp;</b></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Account suspended because of your age (age&lt;13)</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+</td></tr></table>
+
+</td>
+</tr>
+</table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 48 01 00 10 00 17  00 03 00 00 00 00 00 00 *.H.............
+  00 08 00 02 00 08                                ......
+
+  -----------------------------------------------------------------
+
+  2A 02 CA A0 01 2C 00 17  00 03 00 00 00 00 00 00 *...............
+  00 01 00 07 36 32 31 38  38 39 35 00 05 00 0F 31 ....6218895....1
+  30 2E 31 30 2E 31 30 2E  39 3A 35 31 39 30 00 06 0.10.10.9:5190..
+  01 00 36 32 31 38 38 39  35 30 36 65 31 3C 65 66 ..621889506e1.ef
+  3B 37 65 66 35 35 63 65  42 4A 66 30 61 34 31 32 .7ef55ceBJf0a412
+  63 35 37 66 39 36 63 63  32 66 44 44 66 31 35 44 c57f96cc2fDDf15D
+  32 50 42 34 32 31 4C 65  63 61 33 4F 39 38 31 38 2PB421Leca3O9818
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41                                            AA
+</pre></font>
+
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</body>
+
+</html>

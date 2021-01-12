@@ -23,7 +23,7 @@ namespace PngParser
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             Parser.Dumper.OnInfo("Length: " + Length.Value);
 

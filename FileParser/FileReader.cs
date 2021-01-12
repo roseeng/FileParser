@@ -6,7 +6,7 @@ using System.IO;
 
 namespace FileParser
 {
-    public sealed class FileReader : IDisposable
+    public sealed class FileReader : IReader, IDisposable
     {
         private FileStream _stream;
         private long _milestone = 0;

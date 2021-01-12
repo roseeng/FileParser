@@ -47,7 +47,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             //ListItems.ReadAll(rdr);
             for (int i = 0; i < 1000; i++)

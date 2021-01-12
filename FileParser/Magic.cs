@@ -16,7 +16,7 @@ namespace FileParser
             _magic = magic;
         }
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             IsValid = true;
             var buf = new byte[_magic.Length];

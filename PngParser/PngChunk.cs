@@ -41,7 +41,7 @@ namespace PngParser
             AutomaticFields.AddRange(fields);
         }
 
-        public override void BeforeAutomaticRead(FileReader rdr)
+        public override void BeforeAutomaticRead(IReader rdr)
         {
             Length.Read(rdr);
 
@@ -52,7 +52,7 @@ namespace PngParser
             Type.Read(rdr);
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             // Unregister the CRC calculation (CRC is not included in the calculation, Dah)
             rdr.OnByteRead = null;

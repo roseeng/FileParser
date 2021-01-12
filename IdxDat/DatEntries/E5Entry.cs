@@ -23,7 +23,11 @@ namespace IdxDat
         Data32LE wavEntries;
         Data16LE separator3;
 
-        Data32LE propertyBlocks;   
+        Data32LE propertyBlocks;
+
+        public uint UIN = 0;
+        public string Nickname = "";
+        public Dictionary<string, string> Properties = new Dictionary<string, string>();
 
         public E5Entry()
         {
@@ -47,7 +51,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             // Repeat
             Data16LE separator4 = new Data16LE(); ;
@@ -62,9 +66,6 @@ namespace IdxDat
             Data32LE data32 = new Data32LE();
             AsciiZ textData = new AsciiZ();
             ByteArray binData = new ByteArray();
-
-            long UIN = 0;
-            string nickname = "";
 
             for (int block = 0; block < propertyBlocks.Value; block++)
             {
@@ -103,7 +104,7 @@ namespace IdxDat
                             textData.Read(rdr);
                             value = textData.Value;
                             if (propName == "NickName" || propName == "MyDefinedHandle")
-                                nickname =  value;
+                                Nickname =  value;
 
                             break;
                         case 0x6D:
@@ -120,7 +121,9 @@ namespace IdxDat
                             }
                             else
                             {
-                                throw new NotImplementedException($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
+                                if (Parser.Debug)
+                                    Parser.Dumper.OnInfo($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
+//                                throw new NotImplementedException($"Property type sublist, subtype 6D-{data8.Value.ToString("X2")} is Not Yet Implemented");
                             }
                             break;
                         case 0x6F:
@@ -135,12 +138,20 @@ namespace IdxDat
                             break;
                     }
 
+                    if (string.IsNullOrEmpty(propName))
+                    {
+                        if (Parser.Debug)
+                            Parser.Dumper.OnInfo($"(empty propname)");
+                        continue;
+                    }
+
+                    Properties.Add(propName, value);
                     if (Parser.Debug)
                         Parser.Dumper.OnInfo($"'{propName}' : " + propType.Value.ToString("X2") + $" Value: {value}");
                 }
             }
 
-            Parser.Dumper.OnInfo($"Contact UIN: {UIN} Nick: {nickname}");
+            Parser.Dumper.OnInfo($"Contact UIN: {UIN} Nick: {Nickname}");
             base.AfterAutomaticRead(rdr);
         }
     }

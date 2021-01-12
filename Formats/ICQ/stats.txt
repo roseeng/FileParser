@@ -21,7 +21,6 @@ Message types:
 Earliest message: 2000-11-06 09:22:48
 Latest message  : 2001-09-14 06:02:03
 
-
 2003 (inte hela):
 Unhandled signatures: EF, EC, F1, E9
 

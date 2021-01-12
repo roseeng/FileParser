@@ -15,7 +15,7 @@ namespace PngParser
             Type = new Magic(new byte[] { 73, 69, 78, 68 });          
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             base.AfterAutomaticRead(rdr);
 

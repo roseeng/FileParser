@@ -15,7 +15,7 @@ namespace IdxDat.DatEntries
         private Data16LE Length = new Data16LE();
         private Chararray Text = new Chararray();
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             Length.Read(rdr);
             Text.Length = Length.Value;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FileParser
@@ -11,9 +12,12 @@ namespace FileParser
         
         public HexDumperConsole()
         {
+            ColorSpans = new List<ColorSpan>();
         }
 
-        public ColorSpan ColorSpan { get; set; }
+        public List<ColorSpan> ColorSpans { get; private set; }
+
+        public ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;
 
         public void OnByte(byte b, long pos)
         {
@@ -25,10 +29,11 @@ namespace FileParser
 
             if (_col == 0) WritePos(pos);
 
-            if (ColorSpan != null && ColorSpan.Start <= pos && ColorSpan.End >= pos)
-                Console.ForegroundColor = ColorSpan.Color;
+            var colorSpan = ColorSpans.Where(s => s.Start <= pos && s.End >= pos).LastOrDefault();
+            if (colorSpan != null) // (ColorSpan != null && ColorSpan.Start <= pos && ColorSpan.End >= pos)
+                Console.ForegroundColor = colorSpan.Color;
             else
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = DefaultColor;
 
             if (Decimal)
                 Console.Write(b.ToString("D3"));

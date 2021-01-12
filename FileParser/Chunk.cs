@@ -19,16 +19,16 @@ namespace FileParser
         public virtual void StartNew()
         { }
 
-        public virtual void BeforeAutomaticRead(FileReader rdr)
+        public virtual void BeforeAutomaticRead(IReader rdr)
         { }
 
-        public virtual void ReadAutomatic(FileReader rdr)
+        public virtual void ReadAutomatic(IReader rdr)
         { }
 
-        public virtual void AfterAutomaticRead(FileReader rdr)
+        public virtual void AfterAutomaticRead(IReader rdr)
         { }
 
-        public virtual void Read(FileReader rdr)
+        public virtual void Read(IReader rdr)
         {
             BeforeAutomaticRead(rdr);
             ReadAutomatic(rdr);
@@ -76,7 +76,7 @@ namespace FileParser
                 f.StartNew();
         }
 
-        public override void ReadAutomatic(FileReader rdr)
+        public override void ReadAutomatic(IReader rdr)
         {
             foreach (var f in AutomaticFields)
             {
@@ -88,7 +88,7 @@ namespace FileParser
     public abstract class ChunkField
     {
         public abstract void StartNew();
-        public abstract void Read(FileReader rdr);
+        public abstract void Read(IReader rdr);
     }
 
     public class ChunkList<T> : Chunk  where T : SimpleChunk, new()
@@ -106,7 +106,7 @@ namespace FileParser
             _count = count;
         }
 
-        public T ReadOne(FileReader rdr)
+        public T ReadOne(IReader rdr)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace FileParser
             _chunk.StartNew();
         }
 
-        public void ReadAll(FileReader rdr)
+        public void ReadAll(IReader rdr)
         {
             if (_repeat == ChunkListRepeat.ToCount)
             {
@@ -194,7 +194,7 @@ namespace FileParser
 
         public Type FallbackType { get; set; } = null;
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             rdr.SetMilestone();
             Parser.Dumper.NewItem();

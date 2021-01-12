@@ -48,7 +48,7 @@ namespace PngParser
             Type = new Magic(new byte[] { 80, 76, 84, 69 });
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             if (Length.Value % 3 != 0)
                 throw new FileParserException("PLTE: length not a multiple of 3");

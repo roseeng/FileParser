@@ -61,7 +61,7 @@ namespace IdxDat
     };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             nineteenZeroes.Read(rdr);
           

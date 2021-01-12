@@ -46,7 +46,7 @@ namespace IdxDat
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             var message = entrySubtype.Value switch
             {
@@ -60,5 +60,6 @@ namespace IdxDat
             Parser.Dumper.OnInfo($"{timestamp} {message} {dest} UIN:{UIN.Value}, Text: {messageText.Value}");
             base.AfterAutomaticRead(rdr);
         }
+
     }
 }

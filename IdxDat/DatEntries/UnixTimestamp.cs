@@ -15,7 +15,7 @@ namespace IdxDat.DatEntries
         private Data32LE data = new Data32LE();
         DateTimeOffset dto;
 
-        public override void Read(FileReader rdr)
+        public override void Read(IReader rdr)
         {
             data.Read(rdr);
             dto = DateTimeOffset.FromUnixTimeSeconds(data.Value);

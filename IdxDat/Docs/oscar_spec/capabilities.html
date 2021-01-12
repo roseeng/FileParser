@@ -1,0 +1,285 @@
+<html>
+<head>
+<title>Capabilities</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Capabilities&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Capability is a 16-byte array that represent specific ability of IM client 
+(AIM or ICQ). For example there is RTF-capability meaning that client supports 
+RTF messages. Each client has its own capability list and it use 
+<a href="snac_02_04.html">SNAC(02,04)</a> to send this list to server.
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+All native clients was built using COM technology. So capability is a CLSID - 
+ID of client COM object that handle specific client ability (RTF-messages, 
+buddy icons, chat, crypting, games). Here is the list of known CLSIDs:
+<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=10></td>
+<td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E5E5E5 >
+
+<table width=600 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=46% valign=top nowrap><b><font size=2>&nbsp;
+{09461341-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client supports voice chat
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461343-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client can send files
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461344-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Sign of the ICQ client
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461345-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client supports DirectIM/IMImage
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461347-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+client supports stocks
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461348-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client can receive files
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{09461349-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client can receive type-2 ext messages (tlv2711 based)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{0946134A-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client supports games
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{0946134B-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+Client can send buddy lists
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{0946134E-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+client can handle UTF-8 messages
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{97B12751-243C-4334-AD22-D6ABF73F1492}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+client can handle RTF messages
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{A0E93F37-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+unknown (icq2001, icq2002)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{10CF40D1-4C7F-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+unknown (icq2002)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{2E7A6475-FADF-4DC8-886F-EA3595FDB6DF}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+unknown (icq2001 only)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{563FC809-0B6f-41BD-9F79-422609DFA2F3}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+unknown (ICQ lite, ICQ2go)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{748F2420-6287-11D1-8222-444553540000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+client supports chat service
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{F2E7C7F4-FEAD-4DFB-B235-36798BDF0000}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+client can handle type-2 crypted messages (trillian)
+</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=middle align=center><img src="icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 valign=top nowrap><b><font size=2>&nbsp;
+{97B12751-243C-4334-AD22-D6ABF73F14xx}&nbsp;
+</font></b></td>
+
+<td bgcolor=#f9f9f9 valign=top><font size=2>&nbsp;
+SIM/Kopete sign and version
+</font></td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td><td width=5></td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</body>
+</html>
+

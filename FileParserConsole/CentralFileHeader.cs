@@ -80,7 +80,7 @@ namespace FileParserConsole
             };
         }
 
-        public override void AfterAutomaticRead(FileReader rdr)
+        public override void AfterAutomaticRead(IReader rdr)
         {
             Filename.Length = FilenameLen.Value;
             Filename.Read(rdr);

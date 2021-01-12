@@ -8,5 +8,6 @@ namespace EudoraMbx
     public class TocFile : FileChunk
     {
         public FileHeaderBlock Header = new FileHeaderBlock();
+        public MessageEntryBlock Message = new MessageEntryBlock();
     }
 }

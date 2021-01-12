@@ -10,7 +10,11 @@ namespace EudoraMbx
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.Parsefiles(args[0]);
+            var mbx = "FNA";
+            if (args.Length > 0)
+                mbx = args[0];
+
+            p.Parsefiles(mbx);
         }
 
         public void Parsefiles(string mailboxname)
@@ -36,6 +40,17 @@ namespace EudoraMbx
 
             rdr.Open(tocfilename);
             tocFile.Header.Read(rdr);
+
+            Console.WriteLine("\nNumber of messages: " + tocFile.Header.MessageCount.Value);
+
+            tocFile.Message.Read(rdr);
+
+            tocFile.Message.Read(rdr);
+
+            tocFile.Message.Read(rdr);
+
+            tocFile.Message.Read(rdr);
+
         }
     }
 }

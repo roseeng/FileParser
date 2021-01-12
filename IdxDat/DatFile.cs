@@ -51,7 +51,9 @@ namespace IdxDat
             {
                 rdr.SetMilestone();
                 if (PageHeader.AllocationBitmap[i])
+#pragma warning disable CS0642 // Possible mistaken empty statement
                     ; //console.ColorSpans.Add( new ColorSpan(ConsoleColor.Green, rdr.Position, rdr.Position + 63));
+#pragma warning restore CS0642 // Possible mistaken empty statement
                 else
                     console.ColorSpans.Add(new ColorSpan(ConsoleColor.Gray, rdr.Position, rdr.Position + 63));
 

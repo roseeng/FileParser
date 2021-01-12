@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FileParser;
 
-using System.Linq;
 using System.Diagnostics;
 using DbWriter;
 using System.Runtime.CompilerServices;
@@ -255,8 +254,9 @@ namespace IdxDat
 
                         int mtype = datFile.LongMessage.entrySubtype.Value;
                         messageTypes[mtype] = messageTypes.GetValueOrDefault(mtype) + 1;
-                        if (entry.timestamp.Value < earliest) earliest = entry.timestamp.Value;
-                        if (entry.timestamp.Value > latest) latest = entry.timestamp.Value;
+                        
+                        if (datFile.LongMessage.timestamp.Value < earliest) earliest = datFile.LongMessage.timestamp.Value;
+                        if (datFile.LongMessage.timestamp.Value > latest) latest = datFile.LongMessage.timestamp.Value;
 
                         var msg = ToMessage(datFile.LongMessage);
                         if (_context.Messages.Any(m => m.Hash == msg.Hash))
@@ -494,11 +494,13 @@ namespace IdxDat
             idxFile.Page.Read(reader);
             Parser.Dumper.OnInfo("New page");
             */
-                Console.WriteLine("");
+            
+            /*
+            Console.WriteLine("");
             Console.WriteLine("Entry types:");
             foreach (var entry in IdxListItem.EntryTypes)
                 Console.WriteLine(entry.ToString());
-
+            */
 
             /*
             Chararray dummy = new Chararray();

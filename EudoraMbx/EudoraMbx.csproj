@@ -9,4 +9,13 @@
     <ProjectReference Include="..\FileParser\FileParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="FNA.mbx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="FNA.toc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

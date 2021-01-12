@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-using FileParser;
-
-namespace IdxDat.DatEntries
+namespace FileParser
 {
     /// <summary>
     /// Read a 32 bit unix timestamp
